@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class Egg : MonoBehaviour
 {
-    //0 = neutral, 1 = red, 2 = blue
+    //0 = red, 1 = blue
     public int TeamID;
     
     //Bools

@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     //Public
     public int PlayerNum;
-    public int TeamID; //0=neutral 1=red 2=blue
+    public int TeamID; //0 = red, 1 = blue
     
     //Private
     private Vector3 _leftStickVector;

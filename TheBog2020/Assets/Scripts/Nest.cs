@@ -9,8 +9,9 @@ using UnityEngine;
 /// </summary>
 public class Nest : MonoBehaviour
 {
-    //0 = neutral, 1 = red, 2 = blue
+    //0 = red, 1 = blue
     public int TeamID;
+    public Material EggMaterial;
     
     //Egg list
     public List<Transform> SpawnLocations; //where the eggs spawn on the nest. Set in inspector
@@ -19,13 +20,7 @@ public class Nest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
     }
     
     //Go through the spawn locations and add an egg to each
@@ -35,6 +30,7 @@ public class Nest : MonoBehaviour
         {
             GameObject newEgg = Instantiate(Resources.Load<GameObject>("Prefabs/Egg"));
             newEgg.transform.position = spawn.position;
+            //newEgg.GetComponent<Renderer>().material = EggMaterial;
             Egg eggScript = newEgg.GetComponent<Egg>();
             eggScript.TeamID = TeamID;
             eggScript.IsHeld = false;
