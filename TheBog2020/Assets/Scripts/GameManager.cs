@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     
     //References
     private Nest[] _nests;
-    private PlayerController[] _playerControllers;
+    public PlayerController[] PlayerControllers;
     
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,12 @@ public class GameManager : MonoBehaviour
         _nests[1] = GameObject.Find("NestBlue").GetComponent<Nest>();
         
         //Player array
-        _playerControllers = new PlayerController[4];
+        PlayerControllers = new PlayerController[4];
+
+        PlayerControllers[0] = GameObject.Find("Player1").GetComponent<PlayerController>();
+        PlayerControllers[1] = GameObject.Find("Player2").GetComponent<PlayerController>();
+        PlayerControllers[2] = GameObject.Find("Player3").GetComponent<PlayerController>();
+        PlayerControllers[3] = GameObject.Find("Player4").GetComponent<PlayerController>();
     }
 
     private void GameStart()

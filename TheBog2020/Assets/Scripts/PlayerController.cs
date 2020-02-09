@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     #region General Variables
 
     //Public
-    public int PlayerNum;
+    public int PlayerID;
     public int TeamID; //0 = red, 1 = blue
     
     //Private
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         
         //Initialize rewired
-        _rewiredPlayer = ReInput.players.GetPlayer(PlayerNum);
+        _rewiredPlayer = ReInput.players.GetPlayer(PlayerID);
         
         //Initialize camera
         _cam = GetComponentInChildren<Camera>();
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
             case MoveState.Dead:
                 break;
             default:
-                Debug.Log("state machine broke: " + PlayerNum);
+                Debug.Log("state machine broke: " + PlayerID);
                 break;
         }
         Move();
@@ -128,6 +128,15 @@ public class PlayerController : MonoBehaviour
         //Debugs
         Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
         Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
+    }
+
+    #endregion
+
+    #region Death
+
+    public void KillPlayer()
+    {
+        EventManager.Instance.Fire(new Events.PlayerDeath(TeamID, PlayerID));
     }
 
     #endregion

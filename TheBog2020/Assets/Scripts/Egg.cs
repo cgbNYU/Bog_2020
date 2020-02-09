@@ -14,17 +14,6 @@ public class Egg : MonoBehaviour
     
     //Bools
     public bool IsHeld;
-    public bool InNest;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool OutOfNest;
+    public bool IsSpawning;
 }
