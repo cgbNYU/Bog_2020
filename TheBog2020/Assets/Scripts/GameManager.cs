@@ -32,4 +32,17 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void GameStart()
+    {
+        //Spawn eggs at nests
+        
+        //Reset anglerfish position
+        
+        //Select player spawn eggs
+        
+        //countdown
+        
+        //Start match
+    }
 }
