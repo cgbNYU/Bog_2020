@@ -124,8 +124,12 @@ MonoBehaviour:
   MaxForce: 10
   WingOffset: 1
   Drag: -0.01
-  Gravity: 0
-  Bounce: 0
+  LungeTargetRadius: 2
+  LungeRange: 10
+  LungeForce: 1000
+  LungeTime: 0.2
+  SpitRange: 0
+  SpitTime: 0
   PlayerID: 0
   TeamID: 0
 --- !u!54 &4672241747872929172

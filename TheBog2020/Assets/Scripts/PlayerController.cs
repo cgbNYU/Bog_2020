@@ -10,18 +10,28 @@ using Rewired;
 public class PlayerController : MonoBehaviour
 {
 
-    #region Physics Variables
-
+    #region Movement Variables
+    [Header("Movement Variables")]
     public float MaxForce = 10f;
     public float WingOffset = 1f;
     public float Drag = -0.01f;
-    public float Gravity;
-    public float Bounce;
+
+    #endregion
+
+    #region Attack Variables
+    [Header("Attack Variables")]
+    public float LungeTargetRadius;
+    public float LungeRange;
+    public float LungeForce;
+    public float LungeTime;
+
+    public float SpitRange;
+    public float SpitTime;
 
     #endregion
     
     #region General Variables
-
+    [Header("General Variables")]
     //Public
     public int PlayerID;
     public int TeamID; //0 = red, 1 = blue
@@ -53,6 +63,8 @@ public class PlayerController : MonoBehaviour
 
     private MoveState _moveState;
 
+    private float _stateTimer;
+
     #endregion
     
     // Start is called before the first frame update
@@ -69,6 +81,10 @@ public class PlayerController : MonoBehaviour
         
         //Initialize inputs
         ResetInputs();
+        
+        //Initialize state
+        _moveState = MoveState.Neutral;
+        _stateTimer = 0;
     }
 
     // Update is called once per frame
@@ -82,6 +98,14 @@ public class PlayerController : MonoBehaviour
         switch (_moveState)
         {
             case MoveState.Neutral:
+                Move();
+                Lunge();
+                Spit();
+                break;
+            case MoveState.Lunging:
+                StateRecovery();
+                break;
+            case MoveState.Spitting:
                 break;
             case MoveState.Airborne:
                 break;
@@ -93,7 +117,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("state machine broke: " + PlayerID);
                 break;
         }
-        Move();
     }
 
     #region Movement
@@ -105,7 +128,8 @@ public class PlayerController : MonoBehaviour
         _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
         
         //Attack inputs
-        
+        _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
+        _spitButton = _rewiredPlayer.GetButtonDown("Spit");
     }
 
     private void ResetInputs()
@@ -151,6 +175,62 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Attacks
+    
+    private void Lunge()
+    {
+        if (_lungeButton)
+        {
+            _lungeButton = false;
+            Debug.Log("LungeButton");
+            //Check to see if there is a target in front of the player
+            RaycastHit hit = new RaycastHit();
+            if (Physics.SphereCast(transform.position, LungeTargetRadius, transform.forward, out hit, LungeRange))
+            {
+                if (hit.transform.CompareTag("Player") && hit.transform.GetComponent<PlayerController>().TeamID != TeamID)
+                {
+                    Debug.Log("Lunge at player");
+                    Vector3 targetDir = hit.transform.position - transform.position;
+                    _rb.AddForce(targetDir * LungeForce);
+                }
+                else
+                {
+                    Debug.Log("Raycast player but lunge forward");
+                    _rb.AddForce(transform.forward * LungeForce);
+                }
+            }
+            else
+            {
+                Debug.Log("Lunge forward");
+                _rb.AddForce(transform.forward * LungeForce);
+            }
+
+            _stateTimer = LungeTime;
+            _moveState = MoveState.Lunging;
+        }
+    }
+
+    private void StateRecovery()
+    {
+        _stateTimer -= Time.deltaTime;
+        if (_stateTimer <= 0)
+        {
+            _stateTimer = 0;
+            _moveState = MoveState.Neutral;
+        }
+    }
+
+    private void Spit()
+    {
+        if (_spitButton)
+        {
+            _spitButton = false;
+            
+        }
+    }
+
+    #endregion
+    
     #region Death
 
     public void KillPlayer()
