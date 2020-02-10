@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     //Private
     private Vector3 _leftStickVector;
     private Vector3 _rightStickVector;
+    private bool _lungeButton;
+    private bool _spitButton;
     private Rigidbody _rb;
     private bool _isGrounded;
     private Player _rewiredPlayer;
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviour
     private enum MoveState
     {
         Neutral,
+        Lunging,
+        Spitting,
         Airborne,
         Bouncing,
         Dead
@@ -62,6 +66,9 @@ public class PlayerController : MonoBehaviour
         
         //Initialize camera
         _cam = GetComponentInChildren<Camera>();
+        
+        //Initialize inputs
+        ResetInputs();
     }
 
     // Update is called once per frame
@@ -96,6 +103,18 @@ public class PlayerController : MonoBehaviour
         //Get input from the sticks
         _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
         _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
+        
+        //Attack inputs
+        
+    }
+
+    private void ResetInputs()
+    {
+        _leftStickVector = Vector3.zero;
+        _rightStickVector = Vector3.zero;
+
+        _lungeButton = false;
+        _spitButton = false;
     }
 
     private void Move()
@@ -136,6 +155,7 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        _rb.velocity = Vector3.zero;
         EventManager.Instance.Fire(new Events.PlayerDeath(TeamID, PlayerID));
     }
 

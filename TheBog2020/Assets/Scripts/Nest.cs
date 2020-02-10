@@ -57,6 +57,7 @@ public class Nest : MonoBehaviour
             {
                 hasLost = false;
                 egg.IsSpawning = true;
+                egg.GetComponent<Collider>().isTrigger = true;
                 RespawnPlayer(playerID, EggList.IndexOf(egg));
                 break;
             }
@@ -76,7 +77,6 @@ public class Nest : MonoBehaviour
         //Animate egg hatching
 
         //Respawn/Reactivate player model
-        
 
         //Set player controller to active state
 
@@ -85,7 +85,7 @@ public class Nest : MonoBehaviour
         EggList.RemoveAt(eggID);
 
         //Destroy the egg
-        Destroy(removedEgg);
+        Destroy(removedEgg.gameObject);
     }
     
     #endregion
