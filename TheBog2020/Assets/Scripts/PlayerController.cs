@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float LungeRange;
     public float LungeForce;
     public float LungeTime;
+    public float LungeHitRadius;
 
     public float SpitRange;
     public float SpitTime;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     //Public
     public int PlayerID;
     public int TeamID; //0 = red, 1 = blue
+    public Collider LungeCollider;
     
     //Private
     private Vector3 _leftStickVector;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private Player _rewiredPlayer;
     private Camera _cam;
     private Vector3 _camRelativeVector;
+    
     #endregion
 
     #region State Machine
@@ -85,6 +88,9 @@ public class PlayerController : MonoBehaviour
         //Initialize state
         _moveState = MoveState.Neutral;
         _stateTimer = 0;
+        
+        //Initialize attacks
+        LungeCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -103,7 +109,7 @@ public class PlayerController : MonoBehaviour
                 Spit();
                 break;
             case MoveState.Lunging:
-                StateRecovery();
+                LungeState();
                 break;
             case MoveState.Spitting:
                 break;
@@ -206,18 +212,25 @@ public class PlayerController : MonoBehaviour
             }
 
             _stateTimer = LungeTime;
+            LungeCollider.enabled = true;
             _moveState = MoveState.Lunging;
         }
     }
 
-    private void StateRecovery()
+    private void LungeState()
     {
         _stateTimer -= Time.deltaTime;
         if (_stateTimer <= 0)
         {
             _stateTimer = 0;
+            LungeCollider.enabled = false;
             _moveState = MoveState.Neutral;
         }
+    }
+
+    public void Clash(Vector3 clashDir)
+    {
+        //Knock the player back based on how the hit came in
     }
 
     private void Spit()
@@ -226,6 +239,16 @@ public class PlayerController : MonoBehaviour
         {
             _spitButton = false;
             
+        }
+    }
+    
+    private void SpitState()
+    {
+        _stateTimer -= Time.deltaTime;
+        if (_stateTimer <= 0)
+        {
+            _stateTimer = 0;
+            _moveState = MoveState.Neutral;
         }
     }
 
