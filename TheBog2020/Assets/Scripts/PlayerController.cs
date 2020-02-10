@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public float LungeRange;
     public float LungeForce;
     public float LungeTime;
-    public float LungeHitRadius;
+    public float ClashForce;
 
     public float SpitRange;
     public float SpitTime;
@@ -230,7 +230,8 @@ public class PlayerController : MonoBehaviour
 
     public void Clash(Vector3 clashDir)
     {
-        //Knock the player back based on how the hit came in
+        //Knock the player back based on how the hit came in (this vector is calculated by the hitbox
+        _rb.AddForce(clashDir * ClashForce);
     }
 
     private void Spit()

@@ -33,11 +33,13 @@ public class LungeHitBox : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
-                        //It's a kill   
+                        //It's a kill
+                        EventManager.Instance.Fire(new Events.PlayerDeath(otherPlayer.TeamID, otherPlayer.PlayerID));
                     }
                     else if (hit.transform.CompareTag("HitBox"))
                     {
                         //Its a clash
+                        _pc.Clash(-rayCastDir);
                     }
                 }
             }
