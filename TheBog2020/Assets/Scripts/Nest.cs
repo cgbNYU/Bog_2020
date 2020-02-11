@@ -93,12 +93,12 @@ public class Nest : MonoBehaviour
 
     #region Egg Interactions
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         //
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         //
     }
