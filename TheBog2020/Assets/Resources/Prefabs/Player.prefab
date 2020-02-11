@@ -122,14 +122,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c55f8cd4d7a38e4981759f49ce5b527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxForce: 10
+  MaxForce: 50
   WingOffset: 1
-  Drag: -0.01
+  Drag: -0.03
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000
   LungeTime: 0.2
-  LungeHitRadius: 0
+  ClashForce: 0
   SpitRange: 0
   SpitTime: 0
   PlayerID: 0
