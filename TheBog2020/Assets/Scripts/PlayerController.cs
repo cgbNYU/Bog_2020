@@ -37,12 +37,14 @@ public class PlayerController : MonoBehaviour
     public int PlayerID;
     public int TeamID; //0 = red, 1 = blue
     public Collider LungeCollider;
+    public Transform Spitter;
     
     //Private
     private Vector3 _leftStickVector;
     private Vector3 _rightStickVector;
     private bool _lungeButton;
-    private bool _spitButton;
+    private bool _spitButtonDown;
+    private bool _spitButtonUp;
     private Rigidbody _rb;
     private bool _isGrounded;
     private Player _rewiredPlayer;
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         Neutral,
         Lunging,
+        LockOn,
         Spitting,
         Airborne,
         Bouncing,
@@ -106,12 +109,17 @@ public class PlayerController : MonoBehaviour
             case MoveState.Neutral:
                 Move();
                 Lunge();
-                Spit();
+                LockOn();
                 break;
             case MoveState.Lunging:
                 LungeState();
                 break;
+            case MoveState.LockOn:
+                LockState();
+                Spit();
+                break;
             case MoveState.Spitting:
+                SpitState();
                 break;
             case MoveState.Airborne:
                 break;
@@ -135,7 +143,8 @@ public class PlayerController : MonoBehaviour
         
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
-        _spitButton = _rewiredPlayer.GetButtonDown("Spit");
+        _spitButtonDown = _rewiredPlayer.GetButtonDown("Spit");
+        _spitButtonUp = _rewiredPlayer.GetButtonUp("Spit");
     }
 
     private void ResetInputs()
@@ -144,7 +153,7 @@ public class PlayerController : MonoBehaviour
         _rightStickVector = Vector3.zero;
 
         _lungeButton = false;
-        _spitButton = false;
+        _spitButtonDown = false;
     }
 
     private void Move()
@@ -234,13 +243,26 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(clashDir * ClashForce);
     }
 
+    private void LockOn()
+    {
+        if (_spitButtonDown)
+        {
+            _moveState = MoveState.LockOn;
+        }
+    }
+
+    private void LockState()
+    {
+        
+    }
+
     private void Spit()
     {
-        if (_spitButton)
+        if (_spitButtonUp)
         {
-            _spitButton = false;
-            Instantiate(Resources.Load("Prefabs/Spit"));
-            
+            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
+            spit.transform.position = Spitter.position;
+            _stateTimer = SpitTime;
             _moveState = MoveState.Spitting;
         }
     }

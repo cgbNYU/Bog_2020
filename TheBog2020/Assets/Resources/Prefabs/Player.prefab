@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4672241747872929173}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,6 +258,7 @@ MonoBehaviour:
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}
+  Spitter: {fileID: 4452340028193004561}
 --- !u!54 &4672241747872929172
 Rigidbody:
   m_ObjectHideFlags: 0
