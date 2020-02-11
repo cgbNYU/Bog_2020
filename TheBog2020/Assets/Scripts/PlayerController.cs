@@ -225,7 +225,9 @@ public class PlayerController : MonoBehaviour
         if (_spitButton)
         {
             _spitButton = false;
+            Instantiate(Resources.Load("Prefabs/Spit"));
             
+            _moveState = MoveState.Spitting;
         }
     }
 
