@@ -91,20 +91,6 @@ public class Nest : MonoBehaviour
     
     #endregion
 
-    #region Egg Interactions
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        //
-    }
-
-    #endregion
-    
     #region Events
 
     private void OnPlayerDeath(Events.PlayerDeath evt)
