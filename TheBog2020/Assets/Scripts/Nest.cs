@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -90,6 +91,20 @@ public class Nest : MonoBehaviour
     
     #endregion
 
+    #region Egg Interactions
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        //
+    }
+
+    #endregion
+    
     #region Events
 
     private void OnPlayerDeath(Events.PlayerDeath evt)
