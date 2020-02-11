@@ -12,8 +12,8 @@ public class PlayerEggHolder : MonoBehaviour
 {
     //0 = red, 1 = blue
     private int _teamID;
-    [HideInInspector] 
-    public Egg EggHolder; //null if no egg is held by the player
+    //[HideInInspector] 
+    public Egg EggHolder = null; //null if no egg is held by the player
 
 
     private void Start()
@@ -27,9 +27,9 @@ public class PlayerEggHolder : MonoBehaviour
         // The player moves into a Nest & is holding an egg
         if (other.gameObject.CompareTag("Nest") && EggHolder != null)
         {
-            // If the Nest is the same team as the Egg
-            if (other.gameObject.GetComponent<Nest>().TeamID == EggHolder.TeamID)
-            {
+            // If the Egg is your team
+            if (EggHolder.TeamID == _teamID)
+            { 
                 EggHolder.OutOfNest = false; // The Egg is in the Nest
                 DropEgg(EggHolder); // Drop the Egg
             }
@@ -39,10 +39,17 @@ public class PlayerEggHolder : MonoBehaviour
         if (other.gameObject.CompareTag("Egg") && EggHolder == null)
         {
             Egg eggToPickup = other.gameObject.GetComponent<Egg>();
-            // If the Egg is outside the Nest, pick it up
-            if (eggToPickup.OutOfNest)
+           
+            // If the Egg is your team & outside the nest
+            if (eggToPickup.TeamID == _teamID && eggToPickup.OutOfNest)
             {
-                PickupEgg(eggToPickup); //Pickup the Egg
+                PickupEgg(eggToPickup);
+            }
+            
+            // If the Egg is the other team
+            if (eggToPickup.TeamID != _teamID)
+            {
+                PickupEgg(eggToPickup);
             }
         }
 
@@ -57,14 +64,23 @@ public class PlayerEggHolder : MonoBehaviour
             EggHolder.OutOfNest = true; // The Egg is outside the Nest
         }
     }
+    
+    private void PickupEgg(Egg eggToPickup)
+    {
+        Debug.Log("Pickup egg");
+        EggHolder = eggToPickup;
+        EggHolder.IsHeld = true;
+        EggHolder.GetComponent<Rigidbody>().isKinematic = true;
+        EggHolder.transform.parent = transform;
+    }
 
     private void DropEgg(Egg eggToDrop)
     {
-        //TODO
+        Debug.Log("Dropped egg");
+        EggHolder.transform.parent = null;
+        EggHolder.GetComponent<Rigidbody>().isKinematic = false;
+        EggHolder.IsHeld = false;
+        EggHolder = null;
     }
 
-    private void PickupEgg(Egg eggToPickup)
-    {
-        //TODO
-    }
 }
