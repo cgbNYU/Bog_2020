@@ -466,12 +466,12 @@ PrefabInstance:
     - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: MaxForce
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: Drag
-      value: -0.03
+      value: -0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90c14b2ab98cf114fb9136693ef43bf3, type: 3}
