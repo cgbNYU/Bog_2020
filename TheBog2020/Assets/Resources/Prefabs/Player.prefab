@@ -261,7 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxForce: 100
   WingOffset: 1
-  Drag: -0.075
+  WingDrag: -0.075
+  QuadAngularDrag: -0.01
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000
