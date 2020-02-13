@@ -466,13 +466,28 @@ PrefabInstance:
     - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: MaxForce
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: Drag
-      value: -0.05
+      value: -0.075
       objectReference: {fileID: 0}
+    - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+        type: 3}
+      propertyPath: PlayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+        type: 3}
+      propertyPath: LungeCollider
+      value: 
+      objectReference: {fileID: 511583351}
+    - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+        type: 3}
+      propertyPath: Spitter
+      value: 
+      objectReference: {fileID: 511583350}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90c14b2ab98cf114fb9136693ef43bf3, type: 3}
 --- !u!1001 &511583349
@@ -544,6 +559,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f59729edb81ca8f459bf280ed7495ed9, type: 3}
+--- !u!4 &511583350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5606709356831839676, guid: f59729edb81ca8f459bf280ed7495ed9,
+    type: 3}
+  m_PrefabInstance: {fileID: 511583349}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &511583351 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 6933581514667600134, guid: f59729edb81ca8f459bf280ed7495ed9,
+    type: 3}
+  m_PrefabInstance: {fileID: 511583349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &522494645
 GameObject:
   m_ObjectHideFlags: 0

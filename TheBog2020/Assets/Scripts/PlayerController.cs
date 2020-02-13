@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
 {
 
     #region Movement Variables
-    [Header("Movement Variables")]
-    public float MaxForce = 10f;
-    public float WingOffset = 1f;
-    public float Drag = -0.01f;
+
+    [Header("Movement Variables")] 
+    public float MaxForce;
+    public float WingOffset;
+    public float WingDrag; //MUST BE NEGATIVE
+    public float QuadAngularDrag;
 
     #endregion
 
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion
     
+    #region Start/Updates
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +99,8 @@ public class PlayerController : MonoBehaviour
         //Initialize attacks
         LungeCollider.enabled = false;
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -132,6 +138,8 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    
+    #endregion
 
     #region Movement
 
@@ -173,15 +181,22 @@ public class PlayerController : MonoBehaviour
         _rb.AddForceAtPosition(worldForceVectorLeft, leftWingWorldPoint);
         _rb.AddForceAtPosition(worldForceVectorRight, rightWingWorldPoint);
         
-        //Calculate Quadratic Drag
+        //Calculate Quadratic Wing Drag
         Vector3 leftWingVel = _rb.GetPointVelocity(leftWingWorldPoint);
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
-        Vector3 leftDragForce = leftWingVel.sqrMagnitude * leftWingVel.normalized * Drag;
-        Vector3 rightDragForce = rightWingVel.sqrMagnitude * rightWingVel.normalized * Drag;
+        Vector3 leftDragForce = leftWingVel.sqrMagnitude * leftWingVel.normalized * WingDrag;
+        Vector3 rightDragForce = rightWingVel.sqrMagnitude * rightWingVel.normalized * WingDrag;
         
-        //Apply Quadratic drag
+        //Apply Quadratic Wing drag
         _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
         _rb.AddForceAtPosition(rightDragForce, rightWingWorldPoint);
+        
+        //Calculate Quadratice Angular Drag
+        Vector3 rotationVel = _rb.angularVelocity;
+        Vector3 rotationDragForce = rotationVel.sqrMagnitude * rotationVel.normalized * QuadAngularDrag;
+        
+        //Apply Quadratic Rotational Drag
+        _rb.AddTorque(rotationDragForce);
         
         //Debugs
         Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
