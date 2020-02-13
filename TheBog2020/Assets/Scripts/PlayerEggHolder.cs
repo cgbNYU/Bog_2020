@@ -24,6 +24,7 @@ public class PlayerEggHolder : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TRIGGER");
         // The player moves into a Nest & is holding an egg
         if (other.gameObject.CompareTag("Nest") && EggHolder != null)
         {
@@ -36,25 +37,22 @@ public class PlayerEggHolder : MonoBehaviour
         }
         
         // The player moves into an Egg & is not holding an Egg
-        if (other.gameObject.CompareTag("Egg") && EggHolder)
+        if (other.gameObject.CompareTag("Egg") && EggHolder == null)
         {
+            Debug.Log("EGG");
             Egg eggToPickup = other.gameObject.GetComponent<Egg>();
+            
+            // If the Egg is your team & outside the nest & is not being held by a player
+            if (eggToPickup.TeamID == _teamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld)
+            {
+                PickupEgg(eggToPickup);
+            }
 
-            // If the egg is not being held by another player
-           // if (!eggToPickup.IsHeld)
-            //{
-                // If the Egg is your team & outside the nest
-                if (eggToPickup.TeamID == _teamID && eggToPickup.OutOfNest)
-                {
-                    PickupEgg(eggToPickup);
-                }
-
-                // If the Egg is the other team
-                if (eggToPickup.TeamID != _teamID)
-                {
-                    PickupEgg(eggToPickup);
-                }
-            //}
+            // If the Egg is the other team
+            if (eggToPickup.TeamID != _teamID)
+            {
+                PickupEgg(eggToPickup);
+            }
         }
         
     }
