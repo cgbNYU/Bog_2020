@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamID: 0
-  EggMaterial: {fileID: 0}
+  EggMaterial: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
   SpawnLocations:
   - {fileID: 2986335971260529678}
   - {fileID: 2986335970568522139}
