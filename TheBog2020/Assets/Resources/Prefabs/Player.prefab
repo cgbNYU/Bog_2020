@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8521945425971968734}
   - component: {fileID: 5935696358901827883}
   - component: {fileID: 1170914429112049835}
+  - component: {fileID: 4370628045111334323}
   m_Layer: 0
   m_Name: LungeHitBox
   m_TagString: Untagged
@@ -92,6 +93,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4370628045111334323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828386681827781274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15825d5a58a483c4c895c19eda49ac2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4415441892360522440
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +221,6 @@ GameObject:
   - component: {fileID: 4672241747872929171}
   - component: {fileID: 4672241747872929172}
   - component: {fileID: 4672241747872929173}
-  - component: {fileID: 2789265543051247699}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -246,9 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c55f8cd4d7a38e4981759f49ce5b527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxForce: 5
+  MaxForce: 100
   WingOffset: 1
-  Drag: -1
+  Drag: -0.075
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000
@@ -270,7 +282,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2
   m_Drag: 0
-  m_AngularDrag: 0.075
+  m_AngularDrag: 0.75
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -290,19 +302,6 @@ CapsuleCollider:
   m_Height: 2.142568
   m_Direction: 1
   m_Center: {x: 0, y: 0.78963304, z: 0}
---- !u!114 &2789265543051247699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4672241747872929169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b7165eadb81490da65ef759e127410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EggHolder: {fileID: 0}
 --- !u!1001 &4672241747685881939
 PrefabInstance:
   m_ObjectHideFlags: 0
