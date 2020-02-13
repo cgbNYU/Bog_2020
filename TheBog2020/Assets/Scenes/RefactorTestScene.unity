@@ -1023,6 +1023,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5085401975630276348, guid: d953bfc1a7463c84cb3a8fda740a9cd1,
+        type: 3}
+      propertyPath: EggMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 67f6c8767d90f4578b005994ec63328e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d953bfc1a7463c84cb3a8fda740a9cd1, type: 3}
 --- !u!1001 &1009453901
@@ -1132,6 +1137,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2986335970977160236, guid: 274c4b8bcde32cd4680e50e3468b9ca8,
+        type: 3}
+      propertyPath: EggMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274c4b8bcde32cd4680e50e3468b9ca8, type: 3}
 --- !u!1 &1088310659
