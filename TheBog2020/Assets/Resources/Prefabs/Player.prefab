@@ -269,11 +269,12 @@ MonoBehaviour:
   LungeTime: 0.2
   ClashForce: 0
   SpitRange: 0
-  SpitTime: 0
+  SpitTime: 0.2
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}
   Spitter: {fileID: 4452340028193004561}
+  moveState: 0
 --- !u!54 &4672241747872929172
 Rigidbody:
   m_ObjectHideFlags: 0

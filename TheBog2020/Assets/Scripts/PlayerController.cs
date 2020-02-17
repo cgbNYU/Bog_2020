@@ -112,8 +112,14 @@ public class PlayerController : MonoBehaviour
                 Lunge();
                 Spit();
                 break;
+            case MoveState.Lunging:
+                LungeState();
+                break;
+            case MoveState.Spitting:
+                SpitState();
+                break;
             default:
-                Debug.Log("Update state machine brok: " + PlayerID);
+                Debug.Log("Update state machine broke: " + PlayerID);
                 break;
         }
     }
@@ -127,10 +133,8 @@ public class PlayerController : MonoBehaviour
                 //Lunge();
                 break;
             case MoveState.Lunging:
-                LungeState();
                 break;
             case MoveState.Spitting:
-                SpitState();
                 break;
             case MoveState.Airborne:
                 break;
@@ -278,8 +282,9 @@ public class PlayerController : MonoBehaviour
 
     private void Spit()
     {
-        if (_spitButtonUp)
+        if (_spitButtonDown)
         {
+            _spitButtonDown = false;
             GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
             spit.transform.position = Spitter.position;
             _stateTimer = SpitTime;
