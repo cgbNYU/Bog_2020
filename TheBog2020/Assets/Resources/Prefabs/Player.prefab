@@ -262,7 +262,7 @@ MonoBehaviour:
   MaxForce: 100
   WingOffset: 1
   WingDrag: -0.075
-  QuadAngularDrag: -0.01
+  QuadAngularDrag: -0.05
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000

@@ -72,6 +72,7 @@ public class PlayerEggHolder : MonoBehaviour
         EggHolder = eggToPickup;
         EggHolder.IsHeld = true;
         EggHolder.GetComponent<Rigidbody>().isKinematic = true;
+        EggHolder.GetComponent<Collider>().isTrigger = true;
         EggHolder.transform.parent = transform;
     }
 

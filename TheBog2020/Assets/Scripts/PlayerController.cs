@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     #region State Machine
 
     //Movement State
-    private enum MoveState
+    protected enum MoveState
     {
         Neutral,
         Lunging,
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
-    private MoveState _moveState;
+    protected MoveState moveState;
 
     private float _stateTimer;
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         ResetInputs();
         
         //Initialize state
-        _moveState = MoveState.Neutral;
+        moveState = MoveState.Neutral;
         _stateTimer = 0;
         
         //Initialize attacks
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        switch (_moveState)
+        switch (moveState)
         {
             case MoveState.Neutral:
                 Move();
@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour
 
             _stateTimer = LungeTime;
             LungeCollider.enabled = true;
-            _moveState = MoveState.Lunging;
+            moveState = MoveState.Lunging;
         }
     }
 
@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
         {
             _stateTimer = 0;
             LungeCollider.enabled = false;
-            _moveState = MoveState.Neutral;
+            moveState = MoveState.Neutral;
         }
     }
 
@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_spitButtonDown)
         {
-            _moveState = MoveState.LockOn;
+            moveState = MoveState.LockOn;
         }
     }
 
@@ -278,7 +278,7 @@ public class PlayerController : MonoBehaviour
             GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
             spit.transform.position = Spitter.position;
             _stateTimer = SpitTime;
-            _moveState = MoveState.Spitting;
+            moveState = MoveState.Spitting;
         }
     }
     
@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
         if (_stateTimer <= 0)
         {
             _stateTimer = 0;
-            _moveState = MoveState.Neutral;
+            moveState = MoveState.Neutral;
         }
     }
 
