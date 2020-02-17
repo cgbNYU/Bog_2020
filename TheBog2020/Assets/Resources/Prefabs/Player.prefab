@@ -268,7 +268,7 @@ MonoBehaviour:
   LungeForce: 1000
   LungeTime: 0.2
   ClashForce: 0
-  SpitRange: 0
+  SpitForce: 5000
   SpitTime: 0.2
   PlayerID: 0
   TeamID: 0
