@@ -24,23 +24,19 @@ public class LungeHitBox : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Hit player");
             PlayerController otherPlayer = other.GetComponent<PlayerController>();
             if (otherPlayer.TeamID != _pc.TeamID)
             {
-                RaycastHit hit = new RaycastHit();
-                Vector3 rayCastDir = other.transform.position - transform.position;
-                if (Physics.Raycast(transform.position, rayCastDir, out hit, 10))
+                if (otherPlayer.moveState == PlayerController.MoveState.Lunging)
                 {
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        //It's a kill
-                        EventManager.Instance.Fire(new Events.PlayerDeath(otherPlayer.TeamID, otherPlayer.PlayerID));
-                    }
-                    else if (hit.transform.CompareTag("HitBox"))
-                    {
-                        //Its a clash
-                        _pc.Clash(-rayCastDir);
-                    }
+                    Vector3 clashDir = otherPlayer.transform.position - _pc.transform.position;
+                    _pc.Clash(clashDir);
+                }
+                else
+                {
+                    Debug.Log("Player " + otherPlayer.PlayerID);
+                    otherPlayer.KillPlayer();
                 }
             }
         }

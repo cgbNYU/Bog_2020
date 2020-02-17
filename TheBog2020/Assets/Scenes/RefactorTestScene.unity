@@ -942,7 +942,7 @@ PrefabInstance:
         type: 3}
       propertyPath: LungeCollider
       value: 
-      objectReference: {fileID: 511583351}
+      objectReference: {fileID: 1208732460}
     - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: Spitter
@@ -1112,19 +1112,13 @@ PrefabInstance:
     - target: {fileID: 3517813526579584062, guid: f59729edb81ca8f459bf280ed7495ed9,
         type: 3}
       propertyPath: PlayerID
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f59729edb81ca8f459bf280ed7495ed9, type: 3}
 --- !u!4 &511583350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5606709356831839676, guid: f59729edb81ca8f459bf280ed7495ed9,
-    type: 3}
-  m_PrefabInstance: {fileID: 511583349}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &511583351 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 6933581514667600134, guid: f59729edb81ca8f459bf280ed7495ed9,
     type: 3}
   m_PrefabInstance: {fileID: 511583349}
   m_PrefabAsset: {fileID: 0}
@@ -1382,7 +1376,7 @@ PrefabInstance:
     - target: {fileID: 7670772492807111253, guid: a5d3413677af432429ce7f3383ba08a2,
         type: 3}
       propertyPath: PlayerID
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8718117368619867885, guid: a5d3413677af432429ce7f3383ba08a2,
         type: 3}
@@ -2623,6 +2617,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1208732460 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2980489714373656179, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+    type: 3}
+  m_PrefabInstance: {fileID: 429677365}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1218676727
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     #region State Machine
 
     //Movement State
-    protected enum MoveState
+    public enum MoveState
     {
         Neutral,
         Lunging,
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
-    protected MoveState moveState;
+    public MoveState moveState;
 
     private float _stateTimer;
 
@@ -106,6 +106,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetInputs();
+        switch (moveState)
+        {
+            case MoveState.Neutral:
+                Lunge();
+                Spit();
+                break;
+            default:
+                Debug.Log("Update state machine brok: " + PlayerID);
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -114,15 +124,10 @@ public class PlayerController : MonoBehaviour
         {
             case MoveState.Neutral:
                 Move();
-                Lunge();
-                LockOn();
+                //Lunge();
                 break;
             case MoveState.Lunging:
                 LungeState();
-                break;
-            case MoveState.LockOn:
-                LockState();
-                Spit();
                 break;
             case MoveState.Spitting:
                 SpitState();
