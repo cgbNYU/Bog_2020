@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
     {
         //Find the points on the wings to apply forces
         Vector3 leftWingWorldPoint = transform.TransformPoint(new Vector2(-WingOffset, 0));
-        Vector3 rightWingWorldPoint = transform.TranssformPoint(new Vector2(WingOffset, 0));
+        Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
         Vector3 worldForceVectorLeft = MaxForce * transform.TransformVector(_leftStickVector);
