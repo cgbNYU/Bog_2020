@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public float LungeTime;
     public float ClashForce;
 
-    public float SpitRange;
+    public float SpitForce;
     public float SpitTime;
 
     #endregion
@@ -287,6 +287,9 @@ public class PlayerController : MonoBehaviour
             _spitButtonDown = false;
             GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
             spit.transform.position = Spitter.position;
+            spit.transform.rotation = Spitter.rotation;
+            spit.GetComponent<SpitHitBox>().TeamID = TeamID;
+            spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
             _stateTimer = SpitTime;
             moveState = MoveState.Spitting;
         }
