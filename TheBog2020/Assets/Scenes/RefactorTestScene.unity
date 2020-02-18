@@ -877,7 +877,7 @@ PrefabInstance:
     - target: {fileID: 8769666259678612298, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: 58.4
       objectReference: {fileID: 0}
     - target: {fileID: 8769666259678612298, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
@@ -954,6 +954,11 @@ PrefabInstance:
       propertyPath: Spitter
       value: 
       objectReference: {fileID: 14207489}
+    - target: {fileID: 8769666259678612299, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+        type: 3}
+      propertyPath: BufferFrames
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90c14b2ab98cf114fb9136693ef43bf3, type: 3}
 --- !u!1 &499430190

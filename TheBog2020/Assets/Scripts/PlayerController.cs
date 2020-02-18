@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float WingOffset;
     public float WingDrag; //MUST BE NEGATIVE
     public float QuadAngularDrag;
+    public int BufferFrames;
 
     #endregion
 
@@ -44,6 +45,9 @@ public class PlayerController : MonoBehaviour
     //Private
     private Vector3 _leftStickVector;
     private Vector3 _rightStickVector;
+    private Vector3 _leftStickLast;
+    private Vector3 _rightStickLast;
+    private int _bufferFrames;
     private bool _lungeButton;
     private bool _spitButtonDown;
     private bool _spitButtonUp;
@@ -155,13 +159,154 @@ public class PlayerController : MonoBehaviour
     private void GetInputs()
     {
         //Get input from the sticks
-        _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
-        _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-        
+        BufferedInputs();
+        /*
+        if (InputBuffer())
+        {
+            
+            Debug.Log(InputBuffer());
+            //Set the current frame of input
+            _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+            _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
+            
+            //Set the last frame of input
+            _leftStickLast = _leftStickVector;
+            _rightStickLast = _rightStickVector;
+        }*/
+
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
         _spitButtonDown = _rewiredPlayer.GetButtonDown("Spit");
         _spitButtonUp = _rewiredPlayer.GetButtonUp("Spit");
+    }
+
+    private int leftReleasedFor;
+    private int rightReleasedFor;
+    private int leftHeldFor;
+    private int rightHeldFor;
+    private void BufferedInputs()
+    {
+        Vector3 tempLeftStick = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        Vector3 tempRightStick = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
+        if (tempLeftStick.magnitude == 0 && tempRightStick.magnitude == 0)
+        {
+            leftHeldFor = 0;
+            rightHeldFor = 0;
+            _leftStickVector = tempLeftStick;
+            _rightStickVector = tempRightStick;
+        }
+        else if (tempLeftStick.magnitude > 0 && tempRightStick.magnitude > 0)
+        {
+            leftReleasedFor = 0;
+            rightReleasedFor = 0;
+            _leftStickVector = tempLeftStick;
+            _rightStickVector = tempRightStick;
+        }
+        else
+        {
+            //count instead       
+            if (tempLeftStick.magnitude > 0)
+            {
+                leftHeldFor++;
+                leftReleasedFor = 0;
+            }
+
+            if (tempRightStick.magnitude > 0)
+            {
+                rightHeldFor++;
+                rightReleasedFor = 0;
+            }
+
+            if (tempLeftStick.magnitude == 0)
+            {
+                leftReleasedFor++;
+                leftHeldFor = 0;
+            }
+
+            if (tempRightStick.magnitude == 0)
+            {
+                rightReleasedFor++;
+                rightHeldFor = 0;
+            }
+
+            //if the left stick has been buffering for a while, update it
+            if (leftHeldFor > BufferFrames)
+            {
+                _leftStickVector = tempLeftStick;
+               
+            }
+            else if (leftReleasedFor > BufferFrames)
+            {
+                _leftStickVector = tempLeftStick;
+              
+            }
+            
+            //if the right stick has been buffering for a while, update it
+            if (rightHeldFor > BufferFrames)
+            {
+                _rightStickVector = tempRightStick;
+                
+            }
+            else if (rightReleasedFor > BufferFrames)
+            {
+                _rightStickVector = tempRightStick;
+                
+            }
+            
+        }
+
+    }
+
+    private bool InputBuffer()
+    {
+        bool hasBuffered = false;
+        Vector3 leftInput = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        Vector3 rightInput = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
+        
+        //Check if the sticks have been moved in the last frame
+        if (_leftStickLast.magnitude == 0 && _rightStickLast.magnitude == 0)
+        {
+            //Sticks are at neutral as of last frame
+            
+            //If both sticks are active this frame, start engines
+            if (leftInput.magnitude > 0 && rightInput.magnitude > 0)
+            {
+                hasBuffered = true;
+                _bufferFrames = BufferFrames;
+            }
+            else if (leftInput.magnitude > 0 || rightInput.magnitude > 0)
+            {
+
+                //if frames waited, start engine
+                if (_bufferFrames <= 0)
+                {
+                    _bufferFrames = BufferFrames;
+                    hasBuffered = true;
+                }
+            }
+        }
+        else if (_leftStickLast.magnitude > 0 && _rightStickLast.magnitude > 0)
+        {
+            //Sticks are active as of last frame
+            if (leftInput.magnitude == 0 && rightInput.magnitude == 0)
+            {
+                //If both sticks are neutral this frame, become neutral
+                hasBuffered = true;
+                _bufferFrames = BufferFrames;
+            }
+            else if (leftInput.magnitude == 0 || rightInput.magnitude == 0)
+            {
+                
+                //if frames waited, stop engine
+                if (_bufferFrames <= 0)
+                {
+                    _bufferFrames = BufferFrames;
+                    hasBuffered = true;
+                }
+            }
+        }
+        _bufferFrames--;
+        return hasBuffered;
     }
 
     private void ResetInputs()
@@ -171,15 +316,17 @@ public class PlayerController : MonoBehaviour
 
         _lungeButton = false;
         _spitButtonDown = false;
+
+        _bufferFrames = BufferFrames;
     }
 
     private void Move()
     {
         //Find the points on the wings to apply forces
         Vector3 leftWingWorldPoint = transform.TransformPoint(new Vector2(-WingOffset, 0));
-        Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
+        Vector3 rightWingWorldPoint = transform.TranssformPoint(new Vector2(WingOffset, 0));
 
-        //Get the forces being applied to each wing
+        //Get the forces being applied to each wingw
         Vector3 worldForceVectorLeft = MaxForce * transform.TransformVector(_leftStickVector);
         Vector3 worldForceVectorRight = MaxForce * transform.TransformVector(_rightStickVector);
         
