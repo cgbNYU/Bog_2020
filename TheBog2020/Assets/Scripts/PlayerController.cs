@@ -320,6 +320,10 @@ public class PlayerController : MonoBehaviour
         _bufferFrames = BufferFrames;
     }
 
+    
+    //Taking player input
+    //Applying forces on each side of the player transform
+    //Using a rigidbody.addforce
     private void Move()
     {
         //Find the points on the wings to apply forces
