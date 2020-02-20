@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private Player _rewiredPlayer;
     private Camera _cam;
     private Vector3 _camRelativeVector;
+    private Animator _animator;
     
     #endregion
 
@@ -92,6 +93,9 @@ public class PlayerController : MonoBehaviour
         
         //Initialize camera
         _cam = GetComponentInChildren<Camera>();
+        
+        //Initialize animator
+        _animator = GetComponentInChildren<Animator>();
         
         //Initialize inputs
         ResetInputs();
@@ -459,6 +463,7 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         _rb.velocity = Vector3.zero;
+        _animator.Play("TestAnim_Death");
         EventManager.Instance.Fire(new Events.PlayerDeath(TeamID, PlayerID));
     }
 
