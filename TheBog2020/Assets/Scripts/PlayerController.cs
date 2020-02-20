@@ -384,26 +384,8 @@ public class PlayerController : MonoBehaviour
             _lungeButton = false;
             Debug.Log("LungeButton");
             //Check to see if there is a target in front of the player
-            RaycastHit hit = new RaycastHit();
-            if (Physics.SphereCast(transform.position, LungeTargetRadius, transform.forward, out hit, LungeRange))
-            {
-                if (hit.transform.CompareTag("Player") && hit.transform.GetComponent<PlayerController>().TeamID != TeamID)
-                {
-                    Debug.Log("Lunge at player");
-                    Vector3 targetDir = hit.transform.position - transform.position;
-                    _rb.AddForce(targetDir * LungeForce);
-                }
-                else
-                {
-                    Debug.Log("Raycast player but lunge forward");
-                    _rb.AddForce(transform.forward * LungeForce);
-                }
-            }
-            else
-            {
-                Debug.Log("Lunge forward");
-                _rb.AddForce(transform.forward * LungeForce);
-            }
+            
+            _rb.AddForce(transform.forward * LungeForce);
 
             _stateTimer = LungeTime;
             LungeCollider.enabled = true;
