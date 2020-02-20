@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public float SpitForce;
     public float SpitTime;
 
+    public float DeathTime;
+    
     #endregion
     
     #region General Variables
@@ -117,6 +119,7 @@ public class PlayerController : MonoBehaviour
         switch (moveState)
         {
             case MoveState.Neutral:
+                _animator.Play("TestAnim_Idle");
                 Lunge();
                 Spit();
                 break;
@@ -125,6 +128,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case MoveState.Spitting:
                 SpitState();
+                break;
+            case MoveState.Dead:
+                DeathState();
                 break;
             default:
                 Debug.Log("Update state machine broke: " + PlayerID);
@@ -463,9 +469,20 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         _rb.velocity = Vector3.zero;
+        _stateTimer = DeathTime;
         _animator.Play("TestAnim_Death");
-        EventManager.Instance.Fire(new Events.PlayerDeath(TeamID, PlayerID));
+        moveState = MoveState.Dead;
     }
 
+    public void DeathState()
+    {
+        _stateTimer -= Time.deltaTime;
+        if (_stateTimer <= 0)
+        {
+            _stateTimer = 0;
+            EventManager.Instance.Fire(new Events.PlayerDeath(TeamID, PlayerID));
+        }
+    }
+    
     #endregion
 }

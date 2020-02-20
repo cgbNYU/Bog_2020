@@ -860,6 +860,7 @@ MonoBehaviour:
   ClashForce: 0
   SpitForce: 5000
   SpitTime: 0.2
+  DeathTime: 2
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}
