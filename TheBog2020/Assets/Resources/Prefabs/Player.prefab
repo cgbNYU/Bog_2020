@@ -852,6 +852,7 @@ MonoBehaviour:
   WingOffset: 1
   WingDrag: -0.075
   QuadAngularDrag: -0.05
+  BufferFrames: 0
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000
@@ -964,7 +965,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6269337904961461711}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13, y: 0.04, z: 0}
+  m_LocalPosition: {x: 0.002, y: 0.004, z: -0.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 409150077580907337}
