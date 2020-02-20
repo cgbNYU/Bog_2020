@@ -403,6 +403,7 @@ public class PlayerController : MonoBehaviour
 
             _stateTimer = LungeTime;
             LungeCollider.enabled = true;
+            _animator.Play("TestAnim_Lunge");
             moveState = MoveState.Lunging;
         }
     }

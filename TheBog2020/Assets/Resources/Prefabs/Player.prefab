@@ -856,7 +856,7 @@ MonoBehaviour:
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000
-  LungeTime: 0.2
+  LungeTime: 0.4
   ClashForce: 0
   SpitForce: 5000
   SpitTime: 0.2
