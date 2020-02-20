@@ -72,14 +72,19 @@ public class Nest : MonoBehaviour
 
     private void RespawnPlayer(int playerID, int eggID)
     {
-        //Move player transform to egg
-        GameManager.GM.PlayerControllers[playerID].transform.position = EggList[eggID].transform.position;
+        PlayerController pc = GameManager.GM.PlayerControllers[playerID];
+        
+        //Move player transform to egg and set physics to zero
+        Rigidbody pc_rb = pc.GetComponent<Rigidbody>();
+        pc_rb.velocity = Vector3.zero;
+        pc_rb.transform.position = EggList[eggID].transform.position;
 
         //Animate egg hatching
 
         //Respawn/Reactivate player model
 
         //Set player controller to active state
+        pc.moveState = PlayerController.MoveState.Neutral;
 
         //Pop the egg out of the egglist
         Egg removedEgg = EggList[eggID];
