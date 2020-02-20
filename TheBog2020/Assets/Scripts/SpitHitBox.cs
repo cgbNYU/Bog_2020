@@ -14,6 +14,8 @@ public class SpitHitBox : MonoBehaviour
             if (otherPlayer.TeamID != TeamID)
             {
                 Vector3 knockBackDir = transform.position - other.transform.position;
+                knockBackDir = new Vector3(knockBackDir.x, 0, knockBackDir.z);
+                knockBackDir.Normalize();
                 other.GetComponent<Rigidbody>().AddForce(knockBackDir * KnockBackForce);
                 Destroy(gameObject);
             }
