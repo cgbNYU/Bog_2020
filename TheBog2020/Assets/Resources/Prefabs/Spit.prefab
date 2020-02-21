@@ -122,5 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9825775b36e364aa85a4fcca3de7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KnockBackForce: 1000
+  KnockBackForce: 5000
   TeamID: 0

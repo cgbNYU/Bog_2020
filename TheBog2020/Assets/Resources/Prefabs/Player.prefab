@@ -780,7 +780,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -852,7 +852,7 @@ MonoBehaviour:
   WingOffset: 1
   WingDrag: -0.075
   QuadAngularDrag: -0.05
-  BufferFrames: 0
+  BufferFrames: 3
   LungeTargetRadius: 2
   LungeRange: 10
   LungeForce: 1000
