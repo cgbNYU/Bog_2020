@@ -855,7 +855,7 @@ MonoBehaviour:
   BufferFrames: 3
   LungeTargetRadius: 2
   LungeRange: 10
-  LungeForce: 1000
+  LungeForce: 5000
   LungeTime: 0.4
   ClashForce: 0
   SpitForce: 5000
@@ -871,21 +871,30 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: -0.0023593903
+      inSlope: 3.5392816
+      outSlope: 3.5392816
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.060471
+    - serializedVersion: 3
+      time: 0.32878807
+      value: 0.9967226
+      inSlope: 0.013902397
+      outSlope: 0.013902397
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09847605
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
+      value: 0.9976406
+      inSlope: -0.000016563823
+      outSlope: -0.000016563823
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.080417596
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
