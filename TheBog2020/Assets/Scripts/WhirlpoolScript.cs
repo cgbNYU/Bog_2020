@@ -37,8 +37,18 @@ public class WhirlpoolScript : MonoBehaviour
         }
     }
 
+    //This will be on the center killbox object
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Egg"))
+        {
+            Egg egg = other.GetComponent<Egg>();
+            GameManager.GM.DestroyEgg(egg.TeamID, egg);
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerController pc = other.GetComponent<PlayerController>();
+            pc.KillPlayer();
+        }
     }
 }
