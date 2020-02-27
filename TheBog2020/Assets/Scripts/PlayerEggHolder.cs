@@ -92,6 +92,7 @@ public class PlayerEggHolder : MonoBehaviour
         Debug.Log("Dropped egg");
         EggHolder.transform.parent = null;
         EggHolder.GetComponent<Rigidbody>().isKinematic = false;
+        EggHolder.GetComponent<Collider>().isTrigger = false;
         EggHolder.IsHeld = false;
         EggHolder = null;
     }
