@@ -35,6 +35,16 @@ public class PlayerController : MonoBehaviour
     public float DeathTime;
     
     #endregion
+
+    #region LockOn
+
+    [Header("Lock On Variables")] 
+    public float LockOnRange;
+    public float LockTorque;
+
+    private Transform _lockTargetTransform;
+
+    #endregion
     
     #region General Variables
     [Header("General Variables")]
@@ -120,14 +130,18 @@ public class PlayerController : MonoBehaviour
         {
             case MoveState.Neutral:
                 _animator.Play("TestAnim_Idle");
-                Lunge();
-                Spit();
+                //Lunge();
+                //Spit();
+                LockOnCheck();
                 break;
             case MoveState.Lunging:
                 LungeState();
                 break;
             case MoveState.Spitting:
                 SpitState();
+                break;
+            case MoveState.LockOn:
+                LockReleaseCheck();
                 break;
             case MoveState.Dead:
                 DeathState();
@@ -144,11 +158,14 @@ public class PlayerController : MonoBehaviour
         {
             case MoveState.Neutral:
                 Move();
-                //Lunge();
                 break;
             case MoveState.Lunging:
                 break;
             case MoveState.Spitting:
+                break;
+            case MoveState.LockOn:
+                LockState();
+                Move();
                 break;
             case MoveState.Airborne:
                 break;
@@ -437,17 +454,65 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(clashDir * ClashForce);
     }
 
-    private void LockOn()
+
+    //Iterate through the array of player controllers in GM, ignoring same team
+    //Determine which is the closest within range and return that, otherwise return null
+    private Transform EnemyInRange()
+    {
+
+        Transform closestEnemyTransform = null;
+        float minDist = Mathf.Infinity;
+        foreach (PlayerController pc in GameManager.GM.PlayerControllers)
+        {
+            if (pc.TeamID != TeamID)
+            {
+                float dist = Vector3.Distance(pc.transform.position, transform.position);
+                if (dist <= LockOnRange && dist < minDist)
+                {
+                    closestEnemyTransform = pc.transform;
+                    Debug.Log(closestEnemyTransform.GetComponent<PlayerController>().PlayerID);
+                    minDist = dist;
+                }
+            }
+        }
+        return closestEnemyTransform;
+    }
+    
+    //Checks to see if you press the spit button within range of an enemy, which begins the lockon process
+    private void LockOnCheck()
     {
         if (_spitButtonDown)
         {
-            moveState = MoveState.LockOn;
+            _lockTargetTransform = EnemyInRange();
+            if (_lockTargetTransform != null)
+            {
+                moveState = MoveState.LockOn;
+            }
         }
     }
 
+    //Player will have torque applied to them so that they rotate towards their target
+    //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
-    {
+    {     
+        //Calculate target direction
+        Vector3 targetDirection = _lockTargetTransform.position - transform.position;
+        targetDirection.Normalize();
         
+        //Calculate angle between forward facing and target direction
+        float angleInDegrees = Vector3.Angle(transform.forward, targetDirection);
+        Debug.Log(angleInDegrees);
+
+        //Apply torque, reducing force by the size of the angle
+        _rb.AddTorque(transform.up * LockTorque);
+    }
+
+    private void LockReleaseCheck()
+    {
+        if (_rewiredPlayer.GetButtonUp("Spit")) //when you fire
+        {
+            Spit();
+        }
     }
 
     private void Spit()

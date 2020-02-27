@@ -24,7 +24,6 @@ public class PlayerEggHolder : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TRIGGER");
         // The player is holding an egg
         if (EggHolder != null)
         {
@@ -50,7 +49,6 @@ public class PlayerEggHolder : MonoBehaviour
         // The player moves into an Egg & is not holding an Egg
         if (other.gameObject.CompareTag("Egg") && EggHolder == null)
         {
-            Debug.Log("EGG");
             Egg eggToPickup = other.gameObject.GetComponent<Egg>();
             
             // If the Egg is your team & outside the nest & is not being held by a player
@@ -79,7 +77,6 @@ public class PlayerEggHolder : MonoBehaviour
     
     private void PickupEgg(Egg eggToPickup)
     {
-        Debug.Log("Pickup egg");
         EggHolder = eggToPickup;
         EggHolder.IsHeld = true;
         EggHolder.GetComponent<Rigidbody>().isKinematic = true;
@@ -89,7 +86,6 @@ public class PlayerEggHolder : MonoBehaviour
 
     private void DropEgg(Egg eggToDrop)
     {
-        Debug.Log("Dropped egg");
         EggHolder.transform.parent = null;
         EggHolder.GetComponent<Rigidbody>().isKinematic = false;
         EggHolder.GetComponent<Collider>().isTrigger = false;
