@@ -69,7 +69,7 @@ public class Nest : MonoBehaviour
 
         if (hasLost)
         {
-            Debug.Log("LOSE");
+            GameManager.GM.EndGame(TeamID);
         }
     }
 

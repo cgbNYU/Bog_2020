@@ -84,5 +84,10 @@ public class GameManager : MonoBehaviour
         _nests[teamId].DestroyEgg(egg);
     }
 
+    public void EndGame(int losingTeamId)
+    {
+        UIManager.UM.DisplayEndGameUI(losingTeamId);
+    }
+
     #endregion
 }
