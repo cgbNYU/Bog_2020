@@ -75,4 +75,14 @@ public class GameManager : MonoBehaviour
         
         //Start match
     }
+
+    #region Public Functions
+    
+    //Called from an object that is destroying an egg (eg. the whirlpool)
+    public void DestroyEgg(int teamId, Egg egg)
+    {
+        _nests[teamId].DestroyEgg(egg);
+    }
+
+    #endregion
 }

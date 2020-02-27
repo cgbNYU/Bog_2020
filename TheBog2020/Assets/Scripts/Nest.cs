@@ -16,7 +16,7 @@ public class Nest : MonoBehaviour
     
     //Egg list
     public List<Transform> SpawnLocations; //where the eggs spawn on the nest. Set in inspector
-    public List<Egg> EggList = new List<Egg>(); //holds reference to all of the eggs for this team
+    private List<Egg> _eggList = new List<Egg>(); //holds reference to all of the eggs for this team
     
     // Start is called before the first frame update
     void Start()
@@ -45,21 +45,24 @@ public class Nest : MonoBehaviour
             eggScript.TeamID = TeamID;
             eggScript.IsHeld = false;
             eggScript.OutOfNest = false;
-            EggList.Add(eggScript);
+            _eggList.Add(eggScript);
         }
     }
-
+    
+    //When a player dies, first see if any eggs are available for them to spawn into
+    //If there is, pick the first egg in the list, and call RespawnPlayer using that egg
+    //If there is not, send out info that the team of the player has lost
     public void CheckForSpawnableEgg(int playerID)
     {
         bool hasLost = true;
-        foreach (var egg in EggList)
+        foreach (var egg in _eggList)
         {
             if (!egg.OutOfNest && !egg.IsHeld && !egg.IsSpawning)
             {
                 hasLost = false;
                 egg.IsSpawning = true;
                 egg.GetComponent<Collider>().isTrigger = true;
-                RespawnPlayer(playerID, EggList.IndexOf(egg));
+                RespawnPlayer(playerID, _eggList.IndexOf(egg));
                 break;
             }
         }
@@ -77,7 +80,7 @@ public class Nest : MonoBehaviour
         //Move player transform to egg and set physics to zero
         Rigidbody pc_rb = pc.GetComponent<Rigidbody>();
         pc_rb.velocity = Vector3.zero;
-        pc_rb.transform.position = EggList[eggID].transform.position;
+        pc_rb.transform.position = _eggList[eggID].transform.position;
 
         //Animate egg hatching
 
@@ -87,11 +90,19 @@ public class Nest : MonoBehaviour
         pc.moveState = PlayerController.MoveState.Neutral;
 
         //Pop the egg out of the egglist
-        Egg removedEgg = EggList[eggID];
-        EggList.RemoveAt(eggID);
+        Egg removedEgg = _eggList[eggID];
+        _eggList.RemoveAt(eggID);
 
         //Destroy the egg
         Destroy(removedEgg.gameObject);
+    }
+
+    //Called from the GameManager, which is called from anything that destroys eggs that IS NOT RESPAWNING
+    //Passes in the egg to be destroyed and removes that egg from the list
+    public void DestroyEgg(Egg egg)
+    {
+        _eggList.Remove(egg);
+        Destroy(egg.gameObject);
     }
     
     #endregion
