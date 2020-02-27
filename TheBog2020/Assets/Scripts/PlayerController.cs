@@ -504,7 +504,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(angleInDegrees);
 
         //Apply torque, reducing force by the size of the angle
-        _rb.AddTorque(transform.up * LockTorque);
+        _rb.AddTorque(transform.up * angleInDegrees);
     }
 
     private void LockReleaseCheck()
