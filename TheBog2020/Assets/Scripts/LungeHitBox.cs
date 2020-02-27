@@ -31,6 +31,7 @@ public class LungeHitBox : MonoBehaviour
                 if (otherPlayer.moveState == PlayerController.MoveState.Lunging)
                 {
                     Vector3 clashDir = otherPlayer.transform.position - _pc.transform.position;
+                    clashDir.Normalize();
                     _pc.Clash(clashDir);
                 }
                 else

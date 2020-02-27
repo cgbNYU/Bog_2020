@@ -194,6 +194,11 @@ public class PlayerController : MonoBehaviour
     private int rightReleasedFor;
     private int leftHeldFor;
     private int rightHeldFor;
+
+    private float leftHeldTime;
+    private float rightHeldTime;
+
+    public AnimationCurve WingForceCurve = new AnimationCurve();
     private void BufferedInputs()
     {
         Vector3 tempLeftStick = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
@@ -202,6 +207,9 @@ public class PlayerController : MonoBehaviour
         {
             leftHeldFor = 0;
             rightHeldFor = 0;
+            //Reset stick hold timers
+            leftHeldTime = 0;
+            rightHeldTime = 0;
             _leftStickVector = tempLeftStick;
             _rightStickVector = tempRightStick;
         }
@@ -209,6 +217,9 @@ public class PlayerController : MonoBehaviour
         {
             leftReleasedFor = 0;
             rightReleasedFor = 0;
+            //Set stick held timers to max
+            leftHeldTime = 1;
+            rightHeldTime = 1;
             _leftStickVector = tempLeftStick;
             _rightStickVector = tempRightStick;
         }
@@ -218,24 +229,28 @@ public class PlayerController : MonoBehaviour
             if (tempLeftStick.magnitude > 0)
             {
                 leftHeldFor++;
+                
                 leftReleasedFor = 0;
             }
 
             if (tempRightStick.magnitude > 0)
             {
                 rightHeldFor++;
+                
                 rightReleasedFor = 0;
             }
 
             if (tempLeftStick.magnitude == 0)
             {
                 leftReleasedFor++;
+               
                 leftHeldFor = 0;
             }
 
             if (tempRightStick.magnitude == 0)
             {
                 rightReleasedFor++;
+                
                 rightHeldFor = 0;
             }
 
@@ -243,28 +258,39 @@ public class PlayerController : MonoBehaviour
             if (leftHeldFor > BufferFrames)
             {
                 _leftStickVector = tempLeftStick;
+                leftHeldTime += Time.deltaTime;
                
             }
             else if (leftReleasedFor > BufferFrames)
             {
                 _leftStickVector = tempLeftStick;
-              
+                leftHeldTime = 0;
             }
             
             //if the right stick has been buffering for a while, update it
             if (rightHeldFor > BufferFrames)
             {
                 _rightStickVector = tempRightStick;
+                rightHeldTime += Time.deltaTime;
                 
             }
             else if (rightReleasedFor > BufferFrames)
             {
                 _rightStickVector = tempRightStick;
-                
+                rightHeldTime = 0;
             }
             
         }
 
+    }
+
+    private float WingForceMultiply(float heldTime)
+    {
+        float currentForce = 0;
+        float pointOnCurve = WingForceCurve.Evaluate(heldTime);
+        currentForce = pointOnCurve * MaxForce;
+        
+        return currentForce;
     }
 
     private bool InputBuffer()
@@ -330,6 +356,10 @@ public class PlayerController : MonoBehaviour
         _bufferFrames = BufferFrames;
     }
 
+    
+    //Taking player input
+    //Applying forces on each side of the player transform
+    //Using a rigidbody.addforce
     private void Move()
     {
         //Find the points on the wings to apply forces
@@ -337,8 +367,8 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
-        Vector3 worldForceVectorLeft = MaxForce * transform.TransformVector(_leftStickVector);
-        Vector3 worldForceVectorRight = MaxForce * transform.TransformVector(_rightStickVector);
+        Vector3 worldForceVectorLeft = WingForceMultiply(leftHeldTime) * transform.TransformVector(_leftStickVector);
+        Vector3 worldForceVectorRight = WingForceMultiply(rightHeldTime) * transform.TransformVector(_rightStickVector);
         
         Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft,Color.blue); 
         Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight,Color.cyan); 
@@ -380,26 +410,8 @@ public class PlayerController : MonoBehaviour
             _lungeButton = false;
             Debug.Log("LungeButton");
             //Check to see if there is a target in front of the player
-            RaycastHit hit = new RaycastHit();
-            if (Physics.SphereCast(transform.position, LungeTargetRadius, transform.forward, out hit, LungeRange))
-            {
-                if (hit.transform.CompareTag("Player") && hit.transform.GetComponent<PlayerController>().TeamID != TeamID)
-                {
-                    Debug.Log("Lunge at player");
-                    Vector3 targetDir = hit.transform.position - transform.position;
-                    _rb.AddForce(targetDir * LungeForce);
-                }
-                else
-                {
-                    Debug.Log("Raycast player but lunge forward");
-                    _rb.AddForce(transform.forward * LungeForce);
-                }
-            }
-            else
-            {
-                Debug.Log("Lunge forward");
-                _rb.AddForce(transform.forward * LungeForce);
-            }
+            
+            _rb.AddForce(transform.forward * LungeForce);
 
             _stateTimer = LungeTime;
             LungeCollider.enabled = true;

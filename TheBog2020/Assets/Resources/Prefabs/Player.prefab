@@ -59,8 +59,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828386681827781274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.38, z: 1.615}
-  m_LocalScale: {x: 2.1557, y: 2.1557, z: 2.1557}
+  m_LocalPosition: {x: 0, y: 1.38, z: 1}
+  m_LocalScale: {x: 3.6228695, y: 3.6228695, z: 3.6228695}
   m_Children: []
   m_Father: {fileID: 4672241747872929170}
   m_RootOrder: 3
@@ -780,7 +780,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -852,10 +852,10 @@ MonoBehaviour:
   WingOffset: 1
   WingDrag: -0.075
   QuadAngularDrag: -0.05
-  BufferFrames: 0
+  BufferFrames: 3
   LungeTargetRadius: 2
   LungeRange: 10
-  LungeForce: 1000
+  LungeForce: 5000
   LungeTime: 0.4
   ClashForce: 0
   SpitForce: 5000
@@ -866,6 +866,39 @@ MonoBehaviour:
   LungeCollider: {fileID: 1170914429112049835}
   Spitter: {fileID: 4452340028193004561}
   moveState: 0
+  WingForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.0023593903
+      inSlope: 3.5392816
+      outSlope: 3.5392816
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.060471
+    - serializedVersion: 3
+      time: 0.32878807
+      value: 0.9967226
+      inSlope: 0.013902397
+      outSlope: 0.013902397
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09847605
+    - serializedVersion: 3
+      time: 1
+      value: 0.9976406
+      inSlope: -0.000016563823
+      outSlope: -0.000016563823
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.080417596
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!54 &4672241747872929172
 Rigidbody:
   m_ObjectHideFlags: 0
