@@ -395,31 +395,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3651783578108517943, guid: ee4959b08b37bab44a753225a558bdfd,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 3651783578108517942, guid: ee4959b08b37bab44a753225a558bdfd,
-        type: 3}
-      propertyPath: WhirlpoolRange
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3651783578015402873, guid: ee4959b08b37bab44a753225a558bdfd,
-        type: 3}
-      propertyPath: m_Radius
-      value: 19.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 3651783576865302446, guid: ee4959b08b37bab44a753225a558bdfd,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3651783576865302446, guid: ee4959b08b37bab44a753225a558bdfd,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4959b08b37bab44a753225a558bdfd, type: 3}
 --- !u!1001 &46648709
@@ -3609,7 +3584,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 121.15
+  m_fontSize: 200
   m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 1
