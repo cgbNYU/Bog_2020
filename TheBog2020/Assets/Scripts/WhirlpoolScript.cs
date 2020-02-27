@@ -30,15 +30,25 @@ public class WhirlpoolScript : MonoBehaviour
             Rigidbody rb = col.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 pullDir = col.transform.position - transform.position;
+                Vector3 pullDir = transform.position - col.transform.position;
                 pullDir.Normalize();
                 rb.AddForce(pullDir * PullForce);
             }
         }
     }
 
+    //This will be on the center killbox object
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Egg"))
+        {
+            Egg egg = other.GetComponent<Egg>();
+            GameManager.GM.DestroyEgg(egg.TeamID, egg);
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerController pc = other.GetComponent<PlayerController>();
+            pc.KillPlayer();
+        }
     }
 }

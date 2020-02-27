@@ -25,16 +25,27 @@ public class PlayerEggHolder : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("TRIGGER");
-        // The player moves into a Nest & is holding an egg
-        if (other.gameObject.CompareTag("Nest") && EggHolder != null)
+        // The player is holding an egg
+        if (EggHolder != null)
         {
-            // If the Egg is your team
-            if (EggHolder.TeamID == _teamID)
-            { 
-                EggHolder.OutOfNest = false; // The Egg is in the Nest
-                DropEgg(EggHolder); // Drop the Egg
+            //Nest
+            if (other.gameObject.CompareTag("Nest"))
+            {
+                // If the Egg is your team
+                if (EggHolder.TeamID == _teamID)
+                {
+                    EggHolder.OutOfNest = false; // The Egg is in the Nest
+                    DropEgg(EggHolder); // Drop the Egg
+                }
+            }
+            
+            //Generic drop location
+            if (other.gameObject.CompareTag("DropTrigger"))
+            {
+                DropEgg(EggHolder);
             }
         }
+        
         
         // The player moves into an Egg & is not holding an Egg
         if (other.gameObject.CompareTag("Egg") && EggHolder == null)
