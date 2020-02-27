@@ -30,7 +30,7 @@ public class WhirlpoolScript : MonoBehaviour
             Rigidbody rb = col.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 pullDir = col.transform.position - transform.position;
+                Vector3 pullDir = transform.position - col.transform.position;
                 pullDir.Normalize();
                 rb.AddForce(pullDir * PullForce);
             }
