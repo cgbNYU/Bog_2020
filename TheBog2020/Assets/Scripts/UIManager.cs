@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
     
     //References
     [SerializeField]private TMP_Text _fullScreenTextBox;
-    
+    private TMP_Text[] _eggsTextBox;
+
     void Start()
     {
         //Singleton
@@ -46,6 +47,9 @@ public class UIManager : MonoBehaviour
     private void FindUIReferences()
     {
         _fullScreenTextBox = GameObject.Find("EndGameTextbox").GetComponent<TMP_Text>();
+        _eggsTextBox = new TMP_Text[2];
+        _eggsTextBox[0]= GameObject.Find("RedEggsTextbox").GetComponent<TMP_Text>();
+        _eggsTextBox[1]= GameObject.Find("BlueEggsTextbox").GetComponent<TMP_Text>();
     }
 
     //Clears all the UI elements 
@@ -53,6 +57,8 @@ public class UIManager : MonoBehaviour
     {
         _fullScreenTextBox.color = Color.white;
         _fullScreenTextBox.text = "";
+        _eggsTextBox[0].text = "";
+        _eggsTextBox[1].text = "";
     }
 
     //Displays end game UI
@@ -72,5 +78,10 @@ public class UIManager : MonoBehaviour
     public void DisplayStartGameUI()
     {
         _fullScreenTextBox.text = "Press any key to start.";
+    }
+
+    public void UpdateEggsRemainingUI(int teamID, int eggsRemaining)
+    {
+        _eggsTextBox[teamID].text = "Eggs left: " + eggsRemaining;
     }
 }

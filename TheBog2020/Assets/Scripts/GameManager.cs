@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         //Reset anglerfish position
         
         //Select player spawn eggs
-        
+
         //countdown
         
         //Start match
@@ -125,6 +125,11 @@ public class GameManager : MonoBehaviour
     {
         UIManager.UM.DisplayEndGameUI(losingTeamId);
         _gameState = GameState.MatchEnd;
+    }
+
+    public void UpdateEggsRemainingUI(int teamID, int eggsRemaining)
+    {
+        UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
 
     #endregion
