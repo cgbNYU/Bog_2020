@@ -40,7 +40,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Lock On Variables")] 
     public float LockOnRange;
+    [Range(0.01f, 5f)]
     public float LockTorque;
+    [Range(-0.001f, -2f)]
+    public float LockDrag;
 
     private Transform _lockTargetTransform;
 
@@ -500,11 +503,12 @@ public class PlayerController : MonoBehaviour
         targetDirection.Normalize();
         
         //Calculate angle between forward facing and target direction
-        float angleInDegrees = Vector3.Angle(transform.forward, targetDirection);
+        float angleInDegrees = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
         Debug.Log(angleInDegrees);
 
         //Apply torque, reducing force by the size of the angle
-        _rb.AddTorque(transform.up * angleInDegrees);
+        _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
+        _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
     }
 
     private void LockReleaseCheck()

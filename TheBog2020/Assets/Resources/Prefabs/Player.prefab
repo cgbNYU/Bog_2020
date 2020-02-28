@@ -862,7 +862,8 @@ MonoBehaviour:
   SpitTime: 0.2
   DeathTime: 2
   LockOnRange: 40
-  LockTorque: 100
+  LockTorque: 0.01
+  LockDrag: -1
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}
