@@ -16,14 +16,13 @@ public class UIManager : MonoBehaviour
     public static UIManager UM;
     
     //References
-    private TextMeshProUGUI _endGameTextBox;
+    [SerializeField]private TMP_Text _fullScreenTextBox;
     
     void Start()
     {
         //Singleton
         if (UM == null)
         {
-            DontDestroyOnLoad(gameObject);
             UM = this;
         }
         else
@@ -31,27 +30,47 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
         
+        //Init UI Manager
+        InitializeUIManager();
+    }
+
+    //Finds all the UI object references. To be called from the GameManager at the start of the Match 
+    //and after reloading the Game scene on a new match.
+    public void InitializeUIManager()
+    {
         FindUIReferences();
         ClearAllUIElements();
-        
     }
-    
+
     //Searches for the references to the UI elements
     private void FindUIReferences()
     {
-        _endGameTextBox = GameObject.Find("EndGameTextbox").GetComponent<TextMeshProUGUI>();
+        _fullScreenTextBox = GameObject.Find("EndGameTextbox").GetComponent<TMP_Text>();
     }
 
     //Clears all the UI elements 
-    private void ClearAllUIElements()
+    public void ClearAllUIElements()
     {
-        _endGameTextBox.text = "";
+        _fullScreenTextBox.color = Color.white;
+        _fullScreenTextBox.text = "";
     }
 
     //Displays end game UI
     public void DisplayEndGameUI(int losingTeamId)
     {
-        if (losingTeamId == 0) _endGameTextBox.text = "Blue team wins!";
-        if (losingTeamId == 1) _endGameTextBox.text = "Red team wins!";
+        if (losingTeamId == 0)
+        {
+            _fullScreenTextBox.text = "Blue team wins!\n\nPress the 'R' key to restart.";
+        }
+
+        if (losingTeamId == 1)
+        {
+            _fullScreenTextBox.text = "Red team wins!\n\nPress the 'R' key to restart.";
+        }
+    }
+
+    public void DisplayStartGameUI()
+    {
+        _fullScreenTextBox.text = "Press any key to start.";
     }
 }

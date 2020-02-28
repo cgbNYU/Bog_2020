@@ -378,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 3651783578051117028, guid: ee4959b08b37bab44a753225a558bdfd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3651783578051117028, guid: ee4959b08b37bab44a753225a558bdfd,
         type: 3}
@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 4439169545132129179, guid: 2674245780e31c44e8e758ea608196d2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4439169545132129179, guid: 2674245780e31c44e8e758ea608196d2,
         type: 3}
@@ -606,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 1038674144394885307, guid: e12f18e229655a241b85413138c69aab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1038674144394885307, guid: e12f18e229655a241b85413138c69aab,
         type: 3}
@@ -2459,7 +2459,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0
+  m_padding: 3.05
   m_canvasRenderer: {fileID: 1037593073}
   m_TextComponent: {fileID: 1473694442}
   m_materialReferenceIndex: 1
@@ -2639,7 +2639,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 38, y: 5.71, z: 0}
 --- !u!4 &1127929483 stripped
 Transform:
@@ -2855,7 +2855,7 @@ PrefabInstance:
     - target: {fileID: 2986335970977160237, guid: 274c4b8bcde32cd4680e50e3468b9ca8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2986335970977160237, guid: 274c4b8bcde32cd4680e50e3468b9ca8,
         type: 3}
@@ -3066,7 +3066,7 @@ PrefabInstance:
     - target: {fileID: 7670772492807111252, guid: a5d3413677af432429ce7f3383ba08a2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7670772492807111252, guid: a5d3413677af432429ce7f3383ba08a2,
         type: 3}
@@ -3255,7 +3255,7 @@ PrefabInstance:
     - target: {fileID: 8769666259678612298, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8769666259678612298, guid: 90c14b2ab98cf114fb9136693ef43bf3,
         type: 3}
@@ -3375,7 +3375,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1368907314
 GameObject:
@@ -3555,11 +3555,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Purple team wins!
+  m_text: TEXT BOX
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f89a05bc247814e4297e5af28488177a, type: 2}
-  m_sharedMaterial: {fileID: 9191503474127506944, guid: f89a05bc247814e4297e5af28488177a,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3625,12 +3624,12 @@ MonoBehaviour:
   m_margin: {x: -464.71973, y: -294.29535, z: -463.92932, w: -292.04886}
   m_textInfo:
     textComponent: {fileID: 1473694442}
-    characterCount: 17
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -4031,7 +4030,7 @@ RectTransform:
   m_Children:
   - {fileID: 1473694441}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4192,7 +4191,7 @@ PrefabInstance:
     - target: {fileID: 4854790805807425938, guid: 494b2ed095dd8ae468342099f401756c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4854790805807425938, guid: 494b2ed095dd8ae468342099f401756c,
         type: 3}
@@ -4286,7 +4285,7 @@ PrefabInstance:
     - target: {fileID: 3517813526579584063, guid: f59729edb81ca8f459bf280ed7495ed9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3517813526579584063, guid: f59729edb81ca8f459bf280ed7495ed9,
         type: 3}
@@ -4575,7 +4574,7 @@ Transform:
   - {fileID: 286949953}
   - {fileID: 646283625}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1932624061
 PrefabInstance:
@@ -4712,7 +4711,7 @@ PrefabInstance:
     - target: {fileID: 5085401975630276351, guid: d953bfc1a7463c84cb3a8fda740a9cd1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5085401975630276351, guid: d953bfc1a7463c84cb3a8fda740a9cd1,
         type: 3}
