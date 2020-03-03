@@ -129,13 +129,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetInputs();
+    }
+
+    private void FixedUpdate()
+    {
         switch (moveState)
         {
             case MoveState.Neutral:
                 _animator.Play("TestAnim_Idle");
-                //Lunge();
-                //Spit();
                 LockOnCheck();
+                Move();
                 break;
             case MoveState.Lunging:
                 LungeState();
@@ -145,28 +148,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case MoveState.LockOn:
                 LockReleaseCheck();
-                break;
-            case MoveState.Dead:
-                DeathState();
-                break;
-            default:
-                Debug.Log("Update state machine broke: " + PlayerID);
-                break;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        switch (moveState)
-        {
-            case MoveState.Neutral:
-                Move();
-                break;
-            case MoveState.Lunging:
-                break;
-            case MoveState.Spitting:
-                break;
-            case MoveState.LockOn:
                 LockState();
                 Move();
                 break;
@@ -175,6 +156,7 @@ public class PlayerController : MonoBehaviour
             case MoveState.Bouncing:
                 break;
             case MoveState.Dead:
+                DeathState();
                 break;
             default:
                 Debug.Log("state machine broke: " + PlayerID);
@@ -190,19 +172,6 @@ public class PlayerController : MonoBehaviour
     {
         //Get input from the sticks
         BufferedInputs();
-        /*
-        if (InputBuffer())
-        {
-            
-            Debug.Log(InputBuffer());
-            //Set the current frame of input
-            _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
-            _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-            
-            //Set the last frame of input
-            _leftStickLast = _leftStickVector;
-            _rightStickLast = _rightStickVector;
-        }*/
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
@@ -210,6 +179,7 @@ public class PlayerController : MonoBehaviour
         _spitButtonUp = _rewiredPlayer.GetButtonUp("Spit");
     }
 
+    //Input buffer variables
     private int leftReleasedFor;
     private int rightReleasedFor;
     private int leftHeldFor;
@@ -219,6 +189,7 @@ public class PlayerController : MonoBehaviour
     private float rightHeldTime;
 
     public AnimationCurve WingForceCurve = new AnimationCurve();
+    
     private void BufferedInputs()
     {
         Vector3 tempLeftStick = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
@@ -313,58 +284,6 @@ public class PlayerController : MonoBehaviour
         return currentForce;
     }
 
-    private bool InputBuffer()
-    {
-        bool hasBuffered = false;
-        Vector3 leftInput = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
-        Vector3 rightInput = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-        
-        //Check if the sticks have been moved in the last frame
-        if (_leftStickLast.magnitude == 0 && _rightStickLast.magnitude == 0)
-        {
-            //Sticks are at neutral as of last frame
-            
-            //If both sticks are active this frame, start engines
-            if (leftInput.magnitude > 0 && rightInput.magnitude > 0)
-            {
-                hasBuffered = true;
-                _bufferFrames = BufferFrames;
-            }
-            else if (leftInput.magnitude > 0 || rightInput.magnitude > 0)
-            {
-
-                //if frames waited, start engine
-                if (_bufferFrames <= 0)
-                {
-                    _bufferFrames = BufferFrames;
-                    hasBuffered = true;
-                }
-            }
-        }
-        else if (_leftStickLast.magnitude > 0 && _rightStickLast.magnitude > 0)
-        {
-            //Sticks are active as of last frame
-            if (leftInput.magnitude == 0 && rightInput.magnitude == 0)
-            {
-                //If both sticks are neutral this frame, become neutral
-                hasBuffered = true;
-                _bufferFrames = BufferFrames;
-            }
-            else if (leftInput.magnitude == 0 || rightInput.magnitude == 0)
-            {
-                
-                //if frames waited, stop engine
-                if (_bufferFrames <= 0)
-                {
-                    _bufferFrames = BufferFrames;
-                    hasBuffered = true;
-                }
-            }
-        }
-        _bufferFrames--;
-        return hasBuffered;
-    }
-
     private void ResetInputs()
     {
         _leftStickVector = Vector3.zero;
@@ -372,6 +291,7 @@ public class PlayerController : MonoBehaviour
 
         _lungeButton = false;
         _spitButtonDown = false;
+        _spitButtonUp = false;
 
         _bufferFrames = BufferFrames;
     }
