@@ -95,6 +95,9 @@ public class Nest : MonoBehaviour
 
         //Destroy the egg
         Destroy(removedEgg.gameObject);
+        
+        //Update the remaining eggs UI
+        GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);
     }
 
     //Called from the GameManager, which is called from anything that destroys eggs that IS NOT RESPAWNING
@@ -103,6 +106,9 @@ public class Nest : MonoBehaviour
     {
         _eggList.Remove(egg);
         Destroy(egg.gameObject);
+        
+        //Update the remaining Eggs UI
+        GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);
     }
     
     #endregion

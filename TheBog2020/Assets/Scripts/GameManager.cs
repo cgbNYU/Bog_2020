@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Game Manager tracks the arc of each game
@@ -16,7 +17,17 @@ public class GameManager : MonoBehaviour
     private Nest[] _nests;
     public PlayerController[] PlayerControllers;
     
-    // Start is called before the first frame update
+    //State Machine
+    private enum GameState
+    {
+        Title,
+        MatchInProgress,
+        MatchEnd
+    }
+
+    [SerializeField]private GameState _gameState;
+    
+    
     void Start()
     {
         //Singleton
@@ -29,17 +40,43 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        InitializeArrays();
-        GameStart();
+        //Initialize State
+        _gameState = GameState.Title;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backslash))
+        switch (_gameState)
         {
-            PlayerControllers[0].KillPlayer();
+            case GameState.Title:
+                UIManager.UM.DisplayStartGameUI();
+                if (Input.anyKey)
+                {
+                    InitializeArrays();
+                    GameStart();
+                    UIManager.UM.ClearAllUIElements();
+                    _gameState = GameState.MatchInProgress;
+                }
+                break;
+            case GameState.MatchInProgress:
+                //TODO:remove when done. Debug kill player one for testing
+                if (Input.GetKeyDown(KeyCode.Backslash))
+                {
+                    PlayerControllers[0].KillPlayer();
+                }
+                break;
+            case GameState.MatchEnd:
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    //TODO: Reset the game. temp: reloading scene
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    _gameState = GameState.Title;
+                }
+                break;
+            default: 
+                Debug.Log("Game Manager State Machine broke.");
+                break;
         }
     }
 
@@ -70,7 +107,7 @@ public class GameManager : MonoBehaviour
         //Reset anglerfish position
         
         //Select player spawn eggs
-        
+
         //countdown
         
         //Start match
@@ -87,6 +124,12 @@ public class GameManager : MonoBehaviour
     public void EndGame(int losingTeamId)
     {
         UIManager.UM.DisplayEndGameUI(losingTeamId);
+        _gameState = GameState.MatchEnd;
+    }
+
+    public void UpdateEggsRemainingUI(int teamID, int eggsRemaining)
+    {
+        UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
 
     #endregion
