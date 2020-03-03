@@ -64,8 +64,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _rightStickLast;
     private int _bufferFrames;
     private bool _lungeButton;
-    private bool _spitButtonDown;
-    private bool _spitButtonUp;
+    private bool _spitButtonHeld;
     private Rigidbody _rb;
     private bool _isGrounded;
     private Player _rewiredPlayer;
@@ -175,8 +174,7 @@ public class PlayerController : MonoBehaviour
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
-        _spitButtonDown = _rewiredPlayer.GetButtonDown("Spit");
-        _spitButtonUp = _rewiredPlayer.GetButtonUp("Spit");
+        _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
     }
 
     //Input buffer variables
@@ -290,8 +288,7 @@ public class PlayerController : MonoBehaviour
         _rightStickVector = Vector3.zero;
 
         _lungeButton = false;
-        _spitButtonDown = false;
-        _spitButtonUp = false;
+        _spitButtonHeld = false;
 
         _bufferFrames = BufferFrames;
     }
@@ -404,13 +401,10 @@ public class PlayerController : MonoBehaviour
     //Checks to see if you press the spit button within range of an enemy, which begins the lockon process
     private void LockOnCheck()
     {
-        if (_spitButtonDown)
+        if (_spitButtonHeld)
         {
-            _lockTargetTransform = EnemyInRange();
-            if (_lockTargetTransform != null)
-            {
-                moveState = MoveState.LockOn;
-            }
+            Debug.Log("Button down  = " + _spitButtonHeld);
+            moveState = MoveState.LockOn;
         }
     }
 
@@ -418,22 +412,28 @@ public class PlayerController : MonoBehaviour
     //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
     {     
-        //Calculate target direction
-        Vector3 targetDirection = _lockTargetTransform.position - transform.position;
-        targetDirection.Normalize();
+        _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
+        if (_lockTargetTransform != null) //if yes
+        {
+            //Calculate target direction
+            Vector3 targetDirection = _lockTargetTransform.position - transform.position;
+            targetDirection.Normalize();
         
-        //Calculate angle between forward facing and target direction
-        float angleInDegrees = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
-        Debug.Log(angleInDegrees);
+            //Calculate angle between forward facing and target direction
+            float angleInDegrees = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
 
-        //Apply torque, reducing force by the size of the angle
-        _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
-        _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
+            //Apply torque, reducing force by the size of the angle
+            _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
+            _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
+        }
+        
+        //Check if you release the button
+        LockReleaseCheck();
     }
 
     private void LockReleaseCheck()
     {
-        if (_rewiredPlayer.GetButtonUp("Spit")) //when you fire
+        if (!_spitButtonHeld) //when you fire
         {
             Spit();
         }
@@ -441,17 +441,13 @@ public class PlayerController : MonoBehaviour
 
     private void Spit()
     {
-        if (_spitButtonDown)
-        {
-            _spitButtonDown = false;
-            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
-            spit.transform.position = Spitter.position;
-            spit.transform.rotation = Spitter.rotation;
-            spit.GetComponent<SpitHitBox>().TeamID = TeamID;
-            spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
-            _stateTimer = SpitTime;
-            moveState = MoveState.Spitting;
-        }
+        GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
+        spit.transform.position = Spitter.position;
+        spit.transform.rotation = Spitter.rotation;
+        spit.GetComponent<SpitHitBox>().TeamID = TeamID;
+        spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
+        _stateTimer = SpitTime;
+        moveState = MoveState.Spitting;
     }
     
     private void SpitState()
