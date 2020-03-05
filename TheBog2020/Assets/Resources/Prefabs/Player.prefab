@@ -859,11 +859,11 @@ MonoBehaviour:
   LungeTime: 0.4
   ClashForce: 0
   SpitForce: 5000
-  SpitTime: 0.2
+  SpitTime: 0.56
   DeathTime: 2
   LockOnRange: 40
-  LockTorque: 0.01
-  LockDrag: -1
+  LockTorque: 3.1
+  LockDrag: -1.51
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}

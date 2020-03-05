@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     private Camera _cam;
     private Vector3 _camRelativeVector;
     private Animator _animator;
+    private PlayerEggHolder _eggHolder;
     
     #endregion
 
@@ -120,6 +121,9 @@ public class PlayerController : MonoBehaviour
         
         //Initialize attacks
         LungeCollider.enabled = false;
+        
+        //Initialize egg holder
+        _eggHolder = GetComponent<PlayerEggHolder>();
     }
 
     
@@ -470,6 +474,7 @@ public class PlayerController : MonoBehaviour
         _stateTimer = DeathTime;
         _animator.Play("TestAnim_Death");
         moveState = MoveState.Dead;
+        _eggHolder.DropEgg();
     }
 
     public void DeathState()

@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.MatchEnd:
-                if (Input.GetKeyDown(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.Backspace))
                 {
                     //TODO: Reset the game. temp: reloading scene
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
