@@ -849,9 +849,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 100
-  WingOffset: 1
+  WingOffset: 0.5
   WingDrag: -0.075
-  QuadAngularDrag: -0.05
+  QuadAngularDrag: -1
   BufferFrames: 3
   LungeTargetRadius: 2
   LungeRange: 10
@@ -874,30 +874,21 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: -0.0023593903
-      inSlope: 3.5392816
-      outSlope: 3.5392816
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.060471
-    - serializedVersion: 3
-      time: 0.32878807
-      value: 0.9967226
-      inSlope: 0.013902397
-      outSlope: 0.013902397
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.09847605
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0.9976406
-      inSlope: -0.000016563823
-      outSlope: -0.000016563823
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.080417596
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -912,7 +903,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2
   m_Drag: 0
-  m_AngularDrag: 0.75
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
