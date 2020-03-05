@@ -90,11 +90,14 @@ public class PlayerEggHolder : MonoBehaviour
 
     public void DropEgg()
     {
-        EggHolder.transform.parent = null;
-        EggHolder.GetComponent<Rigidbody>().isKinematic = false;
-        EggHolder.GetComponent<Collider>().isTrigger = false;
-        EggHolder.IsHeld = false;
-        EggHolder = null;
+        if (EggHolder != null)
+        {
+            EggHolder.transform.parent = null;
+            EggHolder.GetComponent<Rigidbody>().isKinematic = false;
+            EggHolder.GetComponent<Collider>().isTrigger = false;
+            EggHolder.IsHeld = false;
+            EggHolder = null;
+        }
     }
 
 }
