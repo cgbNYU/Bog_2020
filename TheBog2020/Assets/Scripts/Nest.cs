@@ -17,7 +17,20 @@ public class Nest : MonoBehaviour
     //Egg list
     public List<Transform> SpawnLocations; //where the eggs spawn on the nest. Set in inspector
     private List<Egg> _eggList = new List<Egg>(); //holds reference to all of the eggs for this team
-    
+
+    private void OnDrawGizmos()
+    {
+        SphereCollider sphereCollider = GetComponent<SphereCollider>();
+        Gizmos.color = Color.green;
+        if(sphereCollider != null)
+        {
+            float maxScale = Math.Max(gameObject.transform.localScale.x,
+                Math.Max(gameObject.transform.localScale.y, gameObject.transform.localScale.z));
+            Gizmos.DrawWireSphere(sphereCollider.bounds.center, sphereCollider.radius * maxScale);
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
