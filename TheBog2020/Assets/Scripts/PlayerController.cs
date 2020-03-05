@@ -35,6 +35,19 @@ public class PlayerController : MonoBehaviour
     public float DeathTime;
     
     #endregion
+
+    #region LockOn
+
+    [Header("Lock On Variables")] 
+    public float LockOnRange;
+    [Range(0.01f, 5f)]
+    public float LockTorque;
+    [Range(-0.001f, -2f)]
+    public float LockDrag;
+
+    private Transform _lockTargetTransform;
+
+    #endregion
     
     #region General Variables
     [Header("General Variables")]
@@ -51,8 +64,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _rightStickLast;
     private int _bufferFrames;
     private bool _lungeButton;
-    private bool _spitButtonDown;
-    private bool _spitButtonUp;
+    private bool _spitButtonHeld;
     private Rigidbody _rb;
     private bool _isGrounded;
     private Player _rewiredPlayer;
@@ -116,26 +128,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetInputs();
-        switch (moveState)
-        {
-            case MoveState.Neutral:
-                _animator.Play("TestAnim_Idle");
-                Lunge();
-                Spit();
-                break;
-            case MoveState.Lunging:
-                LungeState();
-                break;
-            case MoveState.Spitting:
-                SpitState();
-                break;
-            case MoveState.Dead:
-                DeathState();
-                break;
-            default:
-                Debug.Log("Update state machine broke: " + PlayerID);
-                break;
-        }
     }
 
     private void FixedUpdate()
@@ -143,18 +135,27 @@ public class PlayerController : MonoBehaviour
         switch (moveState)
         {
             case MoveState.Neutral:
+                _animator.Play("TestAnim_Idle");
+                LockOnCheck();
                 Move();
-                //Lunge();
                 break;
             case MoveState.Lunging:
+                LungeState();
                 break;
             case MoveState.Spitting:
+                SpitState();
+                break;
+            case MoveState.LockOn:
+                LockReleaseCheck();
+                LockState();
+                Move();
                 break;
             case MoveState.Airborne:
                 break;
             case MoveState.Bouncing:
                 break;
             case MoveState.Dead:
+                DeathState();
                 break;
             default:
                 Debug.Log("state machine broke: " + PlayerID);
@@ -170,26 +171,13 @@ public class PlayerController : MonoBehaviour
     {
         //Get input from the sticks
         BufferedInputs();
-        /*
-        if (InputBuffer())
-        {
-            
-            Debug.Log(InputBuffer());
-            //Set the current frame of input
-            _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
-            _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-            
-            //Set the last frame of input
-            _leftStickLast = _leftStickVector;
-            _rightStickLast = _rightStickVector;
-        }*/
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
-        _spitButtonDown = _rewiredPlayer.GetButtonDown("Spit");
-        _spitButtonUp = _rewiredPlayer.GetButtonUp("Spit");
+        _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
     }
 
+    //Input buffer variables
     private int leftReleasedFor;
     private int rightReleasedFor;
     private int leftHeldFor;
@@ -199,6 +187,7 @@ public class PlayerController : MonoBehaviour
     private float rightHeldTime;
 
     public AnimationCurve WingForceCurve = new AnimationCurve();
+    
     private void BufferedInputs()
     {
         Vector3 tempLeftStick = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
@@ -293,65 +282,13 @@ public class PlayerController : MonoBehaviour
         return currentForce;
     }
 
-    private bool InputBuffer()
-    {
-        bool hasBuffered = false;
-        Vector3 leftInput = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
-        Vector3 rightInput = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-        
-        //Check if the sticks have been moved in the last frame
-        if (_leftStickLast.magnitude == 0 && _rightStickLast.magnitude == 0)
-        {
-            //Sticks are at neutral as of last frame
-            
-            //If both sticks are active this frame, start engines
-            if (leftInput.magnitude > 0 && rightInput.magnitude > 0)
-            {
-                hasBuffered = true;
-                _bufferFrames = BufferFrames;
-            }
-            else if (leftInput.magnitude > 0 || rightInput.magnitude > 0)
-            {
-
-                //if frames waited, start engine
-                if (_bufferFrames <= 0)
-                {
-                    _bufferFrames = BufferFrames;
-                    hasBuffered = true;
-                }
-            }
-        }
-        else if (_leftStickLast.magnitude > 0 && _rightStickLast.magnitude > 0)
-        {
-            //Sticks are active as of last frame
-            if (leftInput.magnitude == 0 && rightInput.magnitude == 0)
-            {
-                //If both sticks are neutral this frame, become neutral
-                hasBuffered = true;
-                _bufferFrames = BufferFrames;
-            }
-            else if (leftInput.magnitude == 0 || rightInput.magnitude == 0)
-            {
-                
-                //if frames waited, stop engine
-                if (_bufferFrames <= 0)
-                {
-                    _bufferFrames = BufferFrames;
-                    hasBuffered = true;
-                }
-            }
-        }
-        _bufferFrames--;
-        return hasBuffered;
-    }
-
     private void ResetInputs()
     {
         _leftStickVector = Vector3.zero;
         _rightStickVector = Vector3.zero;
 
         _lungeButton = false;
-        _spitButtonDown = false;
+        _spitButtonHeld = false;
 
         _bufferFrames = BufferFrames;
     }
@@ -437,32 +374,80 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(clashDir * ClashForce);
     }
 
-    private void LockOn()
+
+    //Iterate through the array of player controllers in GM, ignoring same team
+    //Determine which is the closest within range and return that, otherwise return null
+    private Transform EnemyInRange()
     {
-        if (_spitButtonDown)
+
+        Transform closestEnemyTransform = null;
+        float minDist = Mathf.Infinity;
+        foreach (PlayerController pc in GameManager.GM.PlayerControllers)
         {
+            if (pc.TeamID != TeamID)
+            {
+                float dist = Vector3.Distance(pc.transform.position, transform.position);
+                if (dist <= LockOnRange && dist < minDist)
+                {
+                    closestEnemyTransform = pc.transform;
+                    Debug.Log(closestEnemyTransform.GetComponent<PlayerController>().PlayerID);
+                    minDist = dist;
+                }
+            }
+        }
+        return closestEnemyTransform;
+    }
+    
+    //Checks to see if you press the spit button within range of an enemy, which begins the lockon process
+    private void LockOnCheck()
+    {
+        if (_spitButtonHeld)
+        {
+            Debug.Log("Button down  = " + _spitButtonHeld);
             moveState = MoveState.LockOn;
         }
     }
 
+    //Player will have torque applied to them so that they rotate towards their target
+    //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
-    {
+    {     
+        _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
+        if (_lockTargetTransform != null) //if yes
+        {
+            //Calculate target direction
+            Vector3 targetDirection = _lockTargetTransform.position - transform.position;
+            targetDirection.Normalize();
         
+            //Calculate angle between forward facing and target direction
+            float angleInDegrees = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
+
+            //Apply torque, reducing force by the size of the angle
+            _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
+            _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
+        }
+        
+        //Check if you release the button
+        LockReleaseCheck();
+    }
+
+    private void LockReleaseCheck()
+    {
+        if (!_spitButtonHeld) //when you fire
+        {
+            Spit();
+        }
     }
 
     private void Spit()
     {
-        if (_spitButtonDown)
-        {
-            _spitButtonDown = false;
-            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
-            spit.transform.position = Spitter.position;
-            spit.transform.rotation = Spitter.rotation;
-            spit.GetComponent<SpitHitBox>().TeamID = TeamID;
-            spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
-            _stateTimer = SpitTime;
-            moveState = MoveState.Spitting;
-        }
+        GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
+        spit.transform.position = Spitter.position;
+        spit.transform.rotation = Spitter.rotation;
+        spit.GetComponent<SpitHitBox>().TeamID = TeamID;
+        spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
+        _stateTimer = SpitTime;
+        moveState = MoveState.Spitting;
     }
     
     private void SpitState()
