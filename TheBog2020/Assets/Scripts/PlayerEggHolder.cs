@@ -78,7 +78,7 @@ public class PlayerEggHolder : MonoBehaviour
     
     private void PickupEgg(Egg eggToPickup)
     {
-        if (_pc.moveState != PlayerController.MoveState.Dead)
+        if (_pc.moveState != PlayerController.MoveState.Dead && !eggToPickup.IsHeld)
         {
             EggHolder = eggToPickup;
             EggHolder.IsHeld = true;
