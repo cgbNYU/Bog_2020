@@ -7,7 +7,7 @@ public class Dev_QuitandReload : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Tilde))
         {
             Scene loadedLevel = SceneManager.GetActiveScene ();
             SceneManager.LoadScene (loadedLevel.buildIndex);
