@@ -29,6 +29,7 @@ Transform:
   m_Children:
   - {fileID: 8499621277539130413}
   - {fileID: 3913203390790314020}
+  - {fileID: 1743101087413770927}
   m_Father: {fileID: 8375742667501328730}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -992,6 +993,7 @@ MonoBehaviour:
   LockDrag: -1.51
   _antennaeStalkPivot: {fileID: 3913203390790314020}
   _antennaeBulb: {fileID: 8211216679174522755}
+  _antennaeStalkReset: {fileID: 1743101087413770927}
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}
@@ -1188,6 +1190,36 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1 &6065716355492643609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743101087413770927}
+  m_Layer: 0
+  m_Name: AntennaeStalk_ResetRotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1743101087413770927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065716355492643609}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.006, y: 0.25199997, z: 0.306}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 363568333028816130}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6269337904961461711
 GameObject:
   m_ObjectHideFlags: 0

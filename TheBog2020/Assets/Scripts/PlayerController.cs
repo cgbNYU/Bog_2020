@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private Transform _lockTargetTransform;
     public Transform _antennaeStalkPivot;
     public GameObject _antennaeBulb;
+    public Transform _antennaeStalkReset;
         
     #endregion
     
@@ -142,6 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             case MoveState.Neutral:
                 _animator.Play("TestAnim_Idle");
+                AntennaeRadar();
                 LockOnCheck();
                 Move();
                 break;
@@ -380,6 +382,13 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(clashDir * ClashForce);
     }
 
+    private void AntennaeRadar()
+    {
+        if (EnemyInRange() != null) _antennaeStalkPivot.LookAt(EnemyInRange());
+        else _antennaeStalkPivot.LookAt(_antennaeStalkReset);
+        //TODO: add bulb changing color
+    }
+
 
     //Iterate through the array of player controllers in GM, ignoring same team
     //Determine which is the closest within range and return that, otherwise return null
@@ -395,7 +404,6 @@ public class PlayerController : MonoBehaviour
                 if (dist <= LockOnRange && dist < minDist && pc.moveState != MoveState.Dead)
                 {
                     closestEnemyTransform = pc.transform;
-                    _antennaeStalkPivot.LookAt(closestEnemyTransform);
                     minDist = dist;
                 }
             }
