@@ -46,7 +46,9 @@ public class PlayerController : MonoBehaviour
     public float LockDrag;
 
     private Transform _lockTargetTransform;
-
+    public Transform _antennaeStalkPivot;
+    public GameObject _antennaeBulb;
+        
     #endregion
     
     #region General Variables

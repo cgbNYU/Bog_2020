@@ -958,6 +958,8 @@ MonoBehaviour:
   LockOnRange: 40
   LockTorque: 3.1
   LockDrag: -1.51
+  _antennaeStalkPivot: {fileID: 3913203390790314020}
+  _antennaeBulb: {fileID: 8211216679174522755}
   PlayerID: 0
   TeamID: 0
   LungeCollider: {fileID: 1170914429112049835}
@@ -1355,7 +1357,7 @@ GameObject:
   - component: {fileID: 7940423857141241687}
   - component: {fileID: 1359828110396760395}
   m_Layer: 0
-  m_Name: Antennae
+  m_Name: AntennaeBulb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
