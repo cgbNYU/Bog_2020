@@ -391,7 +391,7 @@ public class PlayerController : MonoBehaviour
             if (pc.TeamID != TeamID)
             {
                 float dist = Vector3.Distance(pc.transform.position, transform.position);
-                if (dist <= LockOnRange && dist < minDist)
+                if (dist <= LockOnRange && dist < minDist && pc.moveState != MoveState.Dead)
                 {
                     closestEnemyTransform = pc.transform;
                     Debug.Log(closestEnemyTransform.GetComponent<PlayerController>().PlayerID);
