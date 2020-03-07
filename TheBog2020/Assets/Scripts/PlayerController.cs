@@ -385,7 +385,6 @@ public class PlayerController : MonoBehaviour
     //Determine which is the closest within range and return that, otherwise return null
     private Transform EnemyInRange()
     {
-
         Transform closestEnemyTransform = null;
         float minDist = Mathf.Infinity;
         foreach (PlayerController pc in GameManager.GM.PlayerControllers)
@@ -396,7 +395,7 @@ public class PlayerController : MonoBehaviour
                 if (dist <= LockOnRange && dist < minDist && pc.moveState != MoveState.Dead)
                 {
                     closestEnemyTransform = pc.transform;
-                    Debug.Log(closestEnemyTransform.GetComponent<PlayerController>().PlayerID);
+                    _antennaeStalkPivot.LookAt(closestEnemyTransform);
                     minDist = dist;
                 }
             }

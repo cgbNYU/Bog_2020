@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &176730403972840480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 363568333028816130}
+  m_Layer: 0
+  m_Name: AntennaeBody_Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &363568333028816130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176730403972840480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8499621277539130413}
+  - {fileID: 3913203390790314020}
+  m_Father: {fileID: 8375742667501328730}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660510868578569182
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +540,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8499621277539130413}
+  - {fileID: 363568333028816130}
   m_Father: {fileID: 409150077580907337}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1090,11 +1122,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5425625664536900026}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.903, z: 0}
+  m_LocalPosition: {x: 0, y: 0.062999964, z: 0}
   m_LocalScale: {x: 0.02, y: 0.2, z: 0.02}
-  m_Children:
-  - {fileID: 3913203390790314020}
-  m_Father: {fileID: 8375742667501328730}
+  m_Children: []
+  m_Father: {fileID: 363568333028816130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5422733818417068126
@@ -1538,11 +1569,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9064827071822181948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 0.94500005, z: -0.1}
-  m_LocalScale: {x: 50, y: 5, z: 50}
+  m_LocalPosition: {x: -0.006, y: 0.25199997, z: -0.002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7134723456355612025}
   - {fileID: 8447766035858102541}
-  m_Father: {fileID: 8499621277539130413}
-  m_RootOrder: 0
+  m_Father: {fileID: 363568333028816130}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
