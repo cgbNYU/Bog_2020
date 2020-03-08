@@ -38,5 +38,10 @@ public class PlayerControllerTuning : ScriptableObject
     public float LockTorque;
     [Range(-0.001f, -2f)]
     public float LockDrag;
+
+    //Section for phased out/archived tuning vars so it doesnt break when using old tuning sets.
+    [Tooltip("These variables are unused in later versions of the player controller.")]
+    [Header("Archived Tuning Variables")]
+    public int ExampleArchivedTuningVar;
     
 }

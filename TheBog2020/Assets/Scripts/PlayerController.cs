@@ -10,6 +10,8 @@ using Rewired;
 public class PlayerController : MonoBehaviour
 {
 
+    public PlayerControllerTuning _pcTune;
+    
     #region Movement Variables
 
     [Header("Movement Variables")] 
@@ -127,8 +129,38 @@ public class PlayerController : MonoBehaviour
         
         //Initialize egg holder
         _eggHolder = GetComponent<PlayerEggHolder>();
+        
+        //Initialize PC tuning variables
+        InitializePCTuning(_pcTune);
+        
     }
-
+    
+    // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
+    private void InitializePCTuning(PlayerControllerTuning _tune)
+    {
+        //Movement vars
+        MaxForce = _tune.MaxForce;
+        WingOffset = _tune.WingOffset;
+        WingDrag = _tune.WingDrag;
+        QuadAngularDrag = _tune.QuadAngularDrag;
+        BufferFrames = _tune.BufferFrames;
+        WingForceCurve = _tune.WingForceCurve;
+        
+        //Attack vars
+        LungeTargetRadius = _tune.LungeTargetRadius;
+        LungeRange = _tune.LungeRange;
+        LungeForce = _tune.LungeForce;
+        LungeTime = _tune.LungeTime;
+        ClashForce = _tune.ClashForce;
+        SpitForce = _tune.SpitForce;
+        SpitTime = _tune.SpitTime;
+        DeathTime = _tune.DeathTime;
+        
+        //Lock-on vars
+        LockOnRange = _tune.LockOnRange;
+        LockTorque = _tune.LockTorque;
+        LockDrag = _tune.LockDrag;
+    }
     
 
     // Update is called once per frame
