@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         _eggHolder = GetComponent<PlayerEggHolder>();
         
         //Initialize PC tuning variables
-        Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
+        //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
         
     }
@@ -407,6 +407,11 @@ public class PlayerController : MonoBehaviour
             LungeCollider.enabled = false;
             moveState = MoveState.Neutral;
         }
+    }
+
+    private void LungeRecovery()
+    {
+        
     }
 
     public void Clash(Vector3 clashDir)
