@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54f256b7c13448fdba7c7f3f8aba4d0, type: 3}
+  m_Name: PCTune_Mar7_SpeedyTurn
+  m_EditorClassIdentifier: 
+  TuningNotes: 'This is our tuning from March 7th after putting in Lock On mechanics.
+
+    We tried making the turning less speedy but it currently is still very fast.'
+  MaxForce: 100
+  WingOffset: 0.5
+  WingDrag: -0.075
+  QuadAngularDrag: -1
+  BufferFrames: 3
+  WingForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LungeTargetRadius: 2
+  LungeRange: 10
+  LungeForce: 5000
+  LungeTime: 0.4
+  ClashForce: 0
+  SpitForce: 5000
+  SpitTime: 0.56
+  DeathTime: 2
+  LockOnRange: 40
+  LockTorque: 3.1
+  LockDrag: -1.51

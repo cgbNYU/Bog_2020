@@ -10,6 +10,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New PC Tuning",menuName = "Player Controller Tuning")]
 public class PlayerControllerTuning : ScriptableObject
 {
+    [Tooltip("Dev description and details of this tuning.")]
+    [TextArea(3,10)]
+    public string TuningNotes;
     [Header("Movement Variables")] 
     public float MaxForce;
     public float WingOffset;
@@ -27,6 +30,7 @@ public class PlayerControllerTuning : ScriptableObject
 
     public float SpitForce;
     public float SpitTime;
+    public float DeathTime;
     
     [Header("Lock On Variables")] 
     public float LockOnRange;
