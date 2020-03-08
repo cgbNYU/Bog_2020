@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
         _eggHolder = GetComponent<PlayerEggHolder>();
         
         //Initialize PC tuning variables
+        Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
         
     }

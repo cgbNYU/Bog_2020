@@ -975,6 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c55f8cd4d7a38e4981759f49ce5b527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pcTune: {fileID: 11400000, guid: 7f5703825d4944c48a7f9d4f7dd88c4c, type: 2}
   MaxForce: 100
   WingOffset: 0.5
   WingDrag: -0.075
