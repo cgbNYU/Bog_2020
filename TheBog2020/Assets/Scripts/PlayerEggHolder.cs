@@ -10,16 +10,17 @@ using UnityEngine;
 /// </summary>
 public class PlayerEggHolder : MonoBehaviour
 {
-    //0 = red, 1 = blue
-    private int _teamID;
     //[HideInInspector] 
     public Egg EggHolder = null; //null if no egg is held by the player
+    
+    //Reference to player controller
+    private PlayerController _pc;
 
 
     private void Start()
     {
         //Get the Team ID from the Player Controller at Start
-        _teamID = GetComponent<PlayerController>().TeamID;
+        _pc = GetComponent<PlayerController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,17 +32,17 @@ public class PlayerEggHolder : MonoBehaviour
             if (other.gameObject.CompareTag("Nest"))
             {
                 // If the Egg is your team
-                if (EggHolder.TeamID == _teamID)
+                if (EggHolder.TeamID == _pc.TeamID)
                 {
                     EggHolder.OutOfNest = false; // The Egg is in the Nest
-                    DropEgg(EggHolder); // Drop the Egg
+                    DropEgg(); // Drop the Egg
                 }
             }
             
             //Generic drop location
             if (other.gameObject.CompareTag("DropTrigger"))
             {
-                DropEgg(EggHolder);
+                DropEgg();
             }
         }
         
@@ -52,13 +53,13 @@ public class PlayerEggHolder : MonoBehaviour
             Egg eggToPickup = other.gameObject.GetComponent<Egg>();
             
             // If the Egg is your team & outside the nest & is not being held by a player
-            if (eggToPickup.TeamID == _teamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld)
+            if (eggToPickup.TeamID == _pc.TeamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld)
             {
                 PickupEgg(eggToPickup);
             }
 
             // If the Egg is the other team
-            if (eggToPickup.TeamID != _teamID)
+            if (eggToPickup.TeamID != _pc.TeamID)
             {
                 PickupEgg(eggToPickup);
             }
@@ -77,20 +78,26 @@ public class PlayerEggHolder : MonoBehaviour
     
     private void PickupEgg(Egg eggToPickup)
     {
-        EggHolder = eggToPickup;
-        EggHolder.IsHeld = true;
-        EggHolder.GetComponent<Rigidbody>().isKinematic = true;
-        EggHolder.GetComponent<Collider>().isTrigger = true;
-        EggHolder.transform.parent = transform;
+        if (_pc.moveState != PlayerController.MoveState.Dead && !eggToPickup.IsHeld)
+        {
+            EggHolder = eggToPickup;
+            EggHolder.IsHeld = true;
+            EggHolder.GetComponent<Rigidbody>().isKinematic = true;
+            EggHolder.GetComponent<Collider>().isTrigger = true;
+            EggHolder.transform.parent = transform;
+        }
     }
 
-    private void DropEgg(Egg eggToDrop)
+    public void DropEgg()
     {
-        EggHolder.transform.parent = null;
-        EggHolder.GetComponent<Rigidbody>().isKinematic = false;
-        EggHolder.GetComponent<Collider>().isTrigger = false;
-        EggHolder.IsHeld = false;
-        EggHolder = null;
+        if (EggHolder != null)
+        {
+            EggHolder.transform.parent = null;
+            EggHolder.GetComponent<Rigidbody>().isKinematic = false;
+            EggHolder.GetComponent<Collider>().isTrigger = false;
+            EggHolder.IsHeld = false;
+            EggHolder = null;
+        }
     }
 
 }

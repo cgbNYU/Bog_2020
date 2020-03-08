@@ -66,12 +66,12 @@ public class UIManager : MonoBehaviour
     {
         if (losingTeamId == 0)
         {
-            _fullScreenTextBox.text = "Blue team wins!\n\nPress the 'R' key to restart.";
+            _fullScreenTextBox.text = "Blue team wins!\n\nPress the 'Backspace' key to restart.";
         }
 
         if (losingTeamId == 1)
         {
-            _fullScreenTextBox.text = "Red team wins!\n\nPress the 'R' key to restart.";
+            _fullScreenTextBox.text = "Red team wins!\n\nPress the 'Backspace' key to restart.";
         }
     }
 

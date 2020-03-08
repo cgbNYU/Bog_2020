@@ -10,6 +10,8 @@ using Rewired;
 public class PlayerController : MonoBehaviour
 {
 
+    public PlayerControllerTuning _pcTune;
+    
     #region Movement Variables
 
     [Header("Movement Variables")] 
@@ -46,7 +48,10 @@ public class PlayerController : MonoBehaviour
     public float LockDrag;
 
     private Transform _lockTargetTransform;
-
+    public Transform _antennaeStalkPivot;
+    public GameObject _antennaeBulb;
+    public Transform _antennaeStalkReset;
+        
     #endregion
     
     #region General Variables
@@ -71,6 +76,7 @@ public class PlayerController : MonoBehaviour
     private Camera _cam;
     private Vector3 _camRelativeVector;
     private Animator _animator;
+    private PlayerEggHolder _eggHolder;
     
     #endregion
 
@@ -120,8 +126,42 @@ public class PlayerController : MonoBehaviour
         
         //Initialize attacks
         LungeCollider.enabled = false;
+        
+        //Initialize egg holder
+        _eggHolder = GetComponent<PlayerEggHolder>();
+        
+        //Initialize PC tuning variables
+        Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
+        InitializePCTuning(_pcTune);
+        
     }
-
+    
+    // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
+    private void InitializePCTuning(PlayerControllerTuning _tune)
+    {
+        //Movement vars
+        MaxForce = _tune.MaxForce;
+        WingOffset = _tune.WingOffset;
+        WingDrag = _tune.WingDrag;
+        QuadAngularDrag = _tune.QuadAngularDrag;
+        BufferFrames = _tune.BufferFrames;
+        WingForceCurve = _tune.WingForceCurve;
+        
+        //Attack vars
+        LungeTargetRadius = _tune.LungeTargetRadius;
+        LungeRange = _tune.LungeRange;
+        LungeForce = _tune.LungeForce;
+        LungeTime = _tune.LungeTime;
+        ClashForce = _tune.ClashForce;
+        SpitForce = _tune.SpitForce;
+        SpitTime = _tune.SpitTime;
+        DeathTime = _tune.DeathTime;
+        
+        //Lock-on vars
+        LockOnRange = _tune.LockOnRange;
+        LockTorque = _tune.LockTorque;
+        LockDrag = _tune.LockDrag;
+    }
     
 
     // Update is called once per frame
@@ -136,6 +176,7 @@ public class PlayerController : MonoBehaviour
         {
             case MoveState.Neutral:
                 _animator.Play("TestAnim_Idle");
+                AntennaeRadar();
                 LockOnCheck();
                 Move();
                 break;
@@ -374,12 +415,18 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(clashDir * ClashForce);
     }
 
+    private void AntennaeRadar()
+    {
+        if (EnemyInRange() != null) _antennaeStalkPivot.LookAt(EnemyInRange());
+        else _antennaeStalkPivot.LookAt(_antennaeStalkReset);
+        //TODO: add bulb changing color
+    }
+
 
     //Iterate through the array of player controllers in GM, ignoring same team
     //Determine which is the closest within range and return that, otherwise return null
     private Transform EnemyInRange()
     {
-
         Transform closestEnemyTransform = null;
         float minDist = Mathf.Infinity;
         foreach (PlayerController pc in GameManager.GM.PlayerControllers)
@@ -387,10 +434,9 @@ public class PlayerController : MonoBehaviour
             if (pc.TeamID != TeamID)
             {
                 float dist = Vector3.Distance(pc.transform.position, transform.position);
-                if (dist <= LockOnRange && dist < minDist)
+                if (dist <= LockOnRange && dist < minDist && pc.moveState != MoveState.Dead)
                 {
                     closestEnemyTransform = pc.transform;
-                    Debug.Log(closestEnemyTransform.GetComponent<PlayerController>().PlayerID);
                     minDist = dist;
                 }
             }
@@ -470,6 +516,7 @@ public class PlayerController : MonoBehaviour
         _stateTimer = DeathTime;
         _animator.Play("TestAnim_Death");
         moveState = MoveState.Dead;
+        _eggHolder.DropEgg();
     }
 
     public void DeathState()
