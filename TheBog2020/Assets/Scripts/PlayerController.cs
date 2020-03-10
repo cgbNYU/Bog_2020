@@ -178,7 +178,8 @@ public class PlayerController : MonoBehaviour
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
-                Move();
+                //Move();
+                MoveOneStick();
                 break;
             case MoveState.Lunging:
                 LungeState();
@@ -189,7 +190,8 @@ public class PlayerController : MonoBehaviour
             case MoveState.LockOn:
                 LockReleaseCheck();
                 LockState();
-                Move();
+                //Move();
+                MoveOneStick();
                 break;
             case MoveState.Airborne:
                 break;
@@ -208,10 +210,16 @@ public class PlayerController : MonoBehaviour
 
     #region Movement
 
+    private bool _isForward = false;
+    private bool _isBackward = false;
+    private bool _isLeft = false;
+    private bool _isRight = false;
+    
     private void GetInputs()
     {
         //Get input from the sticks
-        BufferedInputs();
+        //BufferedInputs();
+        _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
@@ -375,6 +383,29 @@ public class PlayerController : MonoBehaviour
         //Debugs
         Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
         Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
+    }
+
+    private void MoveOneStick()
+    {
+        //Go forward or back
+        _rb.AddForce(transform.forward * _leftStickVector.z * MaxForce);
+        
+        //Rotate
+        _rb.AddTorque(transform.up * _leftStickVector.x * MaxForce);
+        
+        //Calculate standard quadratic drag
+        Vector3 moveVel = _rb.velocity;
+        Vector3 moveDragForce = moveVel.sqrMagnitude * moveVel.normalized * WingDrag;
+        
+        //Apply quadratic drag
+        _rb.AddForce(moveDragForce);
+        
+        //Calculate Quadratice Angular Drag
+        Vector3 rotationVel = _rb.angularVelocity;
+        Vector3 rotationDragForce = rotationVel.sqrMagnitude * rotationVel.normalized * QuadAngularDrag;
+        
+        //Apply Quadratic Rotational Drag
+        _rb.AddTorque(rotationDragForce);
     }
 
     #endregion
