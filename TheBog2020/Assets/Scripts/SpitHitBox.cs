@@ -1,11 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpitHitBox : MonoBehaviour
 {
+    public float spitLifeTime;
     public float KnockBackForce;
     public int TeamID;
+
+    private void Start()
+    {
+        StartCoroutine(destroySelfAfterLifeTime(spitLifeTime));
+    }
+
+    IEnumerator destroySelfAfterLifeTime(float t)
+    {
+        yield return new WaitForSeconds(t);
+        Destroy(gameObject);
+    }
+
+        
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
