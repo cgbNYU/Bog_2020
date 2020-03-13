@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float WingOffset;
     public float WingDrag; //MUST BE NEGATIVE
     public float QuadAngularDrag;
+    public float MaxTorque;
     public int BufferFrames;
 
     #endregion
@@ -143,6 +144,7 @@ public class PlayerController : MonoBehaviour
         MaxForce = _tune.MaxForce;
         WingOffset = _tune.WingOffset;
         WingDrag = _tune.WingDrag;
+        MaxTorque = _tune.MaxTorque;
         QuadAngularDrag = _tune.QuadAngularDrag;
         BufferFrames = _tune.BufferFrames;
         WingForceCurve = _tune.WingForceCurve;
@@ -391,7 +393,7 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(transform.forward * _leftStickVector.z * MaxForce);
         
         //Rotate
-        _rb.AddTorque(transform.up * _leftStickVector.x * MaxForce);
+        _rb.AddTorque(transform.up * _leftStickVector.x * MaxTorque);
         
         //Calculate standard quadratic drag
         Vector3 moveVel = _rb.velocity;
