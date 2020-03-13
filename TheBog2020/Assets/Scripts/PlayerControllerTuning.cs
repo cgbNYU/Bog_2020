@@ -17,6 +17,7 @@ public class PlayerControllerTuning : ScriptableObject
     public float MaxForce;
     public float WingOffset;
     public float WingDrag; //MUST BE NEGATIVE
+    public float MaxTorque;
     public float QuadAngularDrag;
     public int BufferFrames;
     public AnimationCurve WingForceCurve = new AnimationCurve();
