@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     #region Movement Variables
 
     [Header("Movement Variables")] 
+    private float _leftForce;
+    private float _rightForce;
+    public float ForceIncrease;
+    public float ForceDecrease;
     public float MaxForce;
     public float WingOffset;
     public float WingDrag; //MUST BE NEGATIVE
@@ -147,7 +151,7 @@ public class PlayerController : MonoBehaviour
         MaxTorque = _tune.MaxTorque;
         QuadAngularDrag = _tune.QuadAngularDrag;
         BufferFrames = _tune.BufferFrames;
-        WingForceCurve = _tune.WingForceCurve;
+        ForceOnCurve = _tune.WingForceCurve;
         
         //Attack vars
         LungeTargetRadius = _tune.LungeTargetRadius;
@@ -180,6 +184,7 @@ public class PlayerController : MonoBehaviour
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
+                RampedForce();
                 Move();
                 //MoveOneStick();
                 break;
@@ -192,6 +197,7 @@ public class PlayerController : MonoBehaviour
             case MoveState.LockOn:
                 LockReleaseCheck();
                 LockState();
+                RampedForce();
                 Move();
                 //MoveOneStick();
                 break;
@@ -219,9 +225,9 @@ public class PlayerController : MonoBehaviour
     
     private void GetInputs()
     {
-        //Get input from the sticks
-        BufferedInputs();
-        //_leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        //Grab the input vectors from the sticks
+        _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
@@ -235,9 +241,38 @@ public class PlayerController : MonoBehaviour
     private int rightHeldFor;
 
     private float leftHeldTime;
+    private float leftReleasedTime;
     private float rightHeldTime;
+    private float rightReleasedTime;
 
-    public AnimationCurve WingForceCurve = new AnimationCurve();
+    public AnimationCurve ForceOnCurve = new AnimationCurve();
+    public AnimationCurve ForceOffCurve = new AnimationCurve();
+
+    private void RampedForce()
+    {
+        //Check to see if the sticks are being pushed or not
+        if (_leftStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp force towards zero
+            _leftForce = Mathf.Lerp(_leftForce, 0, ForceDecrease);
+        }
+
+        if (_rightStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _rightForce = Mathf.Lerp(_rightForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp towards zero
+            _rightForce = Mathf.Lerp(_rightForce, 0, ForceDecrease);
+        }
+    }
     
     private void BufferedInputs()
     {
@@ -327,7 +362,7 @@ public class PlayerController : MonoBehaviour
     private float WingForceMultiply(float heldTime)
     {
         float currentForce = 0;
-        float pointOnCurve = WingForceCurve.Evaluate(heldTime);
+        float pointOnCurve = ForceOnCurve.Evaluate(heldTime);
         currentForce = pointOnCurve * MaxForce;
         
         return currentForce;
@@ -355,8 +390,8 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
-        Vector3 worldForceVectorLeft = WingForceMultiply(leftHeldTime) * transform.TransformVector(_leftStickVector);
-        Vector3 worldForceVectorRight = WingForceMultiply(rightHeldTime) * transform.TransformVector(_rightStickVector);
+        Vector3 worldForceVectorLeft = _leftForce * transform.TransformVector(_leftStickVector);
+        Vector3 worldForceVectorRight = _rightForce * transform.TransformVector(_rightStickVector);
         
         Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft,Color.blue); 
         Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight,Color.cyan); 
