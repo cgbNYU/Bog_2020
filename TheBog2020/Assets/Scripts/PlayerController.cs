@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
-    private void InitializePCTuning(PlayerControllerTuning _tune)
+    public void InitializePCTuning(PlayerControllerTuning _tune)
     {
         //Movement vars
         MaxForce = _tune.MaxForce;
@@ -180,8 +180,8 @@ public class PlayerController : MonoBehaviour
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
-                //Move();
-                MoveOneStick();
+                Move();
+                //MoveOneStick();
                 break;
             case MoveState.Lunging:
                 LungeState();
@@ -192,8 +192,8 @@ public class PlayerController : MonoBehaviour
             case MoveState.LockOn:
                 LockReleaseCheck();
                 LockState();
-                //Move();
-                MoveOneStick();
+                Move();
+                //MoveOneStick();
                 break;
             case MoveState.Airborne:
                 break;
@@ -220,8 +220,8 @@ public class PlayerController : MonoBehaviour
     private void GetInputs()
     {
         //Get input from the sticks
-        //BufferedInputs();
-        _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        BufferedInputs();
+        //_leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");

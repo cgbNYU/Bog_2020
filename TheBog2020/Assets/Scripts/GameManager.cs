@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     private Nest[] _nests;
     public PlayerController[] PlayerControllers;
     
+    //Tuning
+    public PlayerControllerTuning NewTune;
+    
     //State Machine
     private enum GameState
     {
@@ -64,6 +67,16 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Backslash))
                 {
                     PlayerControllers[0].KillPlayer();
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {
+                    Debug.Log("Tuning updated");
+                        foreach (PlayerController pc in PlayerControllers)
+                        {
+                            pc.InitializePCTuning(NewTune);
+                        }
+                    
                 }
                 break;
             case GameState.MatchEnd:
@@ -131,6 +144,12 @@ public class GameManager : MonoBehaviour
     {
         UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
+    
+    
+
+    #endregion
+
+    #region Inspector
 
     #endregion
 }
