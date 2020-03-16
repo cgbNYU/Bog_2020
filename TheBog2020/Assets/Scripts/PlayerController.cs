@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     #region Movement Variables
 
     [Header("Movement Variables")] 
+    private float _leftForce;
+    private float _rightForce;
+    public float ForceIncrease;
+    public float ForceDecrease;
     public float MaxForce;
     public float WingOffset;
     public float WingDrag; //MUST BE NEGATIVE
@@ -141,13 +145,14 @@ public class PlayerController : MonoBehaviour
     public void InitializePCTuning(PlayerControllerTuning _tune)
     {
         //Movement vars
+        ForceIncrease = _tune.ForceIncrease;
+        ForceDecrease = _tune.ForceDecrease;
         MaxForce = _tune.MaxForce;
         WingOffset = _tune.WingOffset;
         WingDrag = _tune.WingDrag;
         MaxTorque = _tune.MaxTorque;
         QuadAngularDrag = _tune.QuadAngularDrag;
         BufferFrames = _tune.BufferFrames;
-        WingForceCurve = _tune.WingForceCurve;
         
         //Attack vars
         LungeTargetRadius = _tune.LungeTargetRadius;
@@ -180,8 +185,8 @@ public class PlayerController : MonoBehaviour
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
+                RampedForce();
                 Move();
-                //MoveOneStick();
                 break;
             case MoveState.Lunging:
                 LungeState();
@@ -192,8 +197,8 @@ public class PlayerController : MonoBehaviour
             case MoveState.LockOn:
                 LockReleaseCheck();
                 LockState();
+                RampedForce();
                 Move();
-                //MoveOneStick();
                 break;
             case MoveState.Airborne:
                 break;
@@ -211,126 +216,42 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Movement
-
-    private bool _isForward = false;
-    private bool _isBackward = false;
-    private bool _isLeft = false;
-    private bool _isRight = false;
     
     private void GetInputs()
     {
-        //Get input from the sticks
-        BufferedInputs();
-        //_leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        //Grab the input vectors from the sticks
+        _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
         _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
     }
 
-    //Input buffer variables
-    private int leftReleasedFor;
-    private int rightReleasedFor;
-    private int leftHeldFor;
-    private int rightHeldFor;
-
-    private float leftHeldTime;
-    private float rightHeldTime;
-
-    public AnimationCurve WingForceCurve = new AnimationCurve();
-    
-    private void BufferedInputs()
+    private void RampedForce()
     {
-        Vector3 tempLeftStick = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
-        Vector3 tempRightStick = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-        if (tempLeftStick.magnitude == 0 && tempRightStick.magnitude == 0)
+        //Check to see if the sticks are being pushed or not
+        if (_leftStickVector.magnitude > 0)
         {
-            leftHeldFor = 0;
-            rightHeldFor = 0;
-            //Reset stick hold timers
-            leftHeldTime = 0;
-            rightHeldTime = 0;
-            _leftStickVector = tempLeftStick;
-            _rightStickVector = tempRightStick;
-        }
-        else if (tempLeftStick.magnitude > 0 && tempRightStick.magnitude > 0)
-        {
-            leftReleasedFor = 0;
-            rightReleasedFor = 0;
-            //Set stick held timers to max
-            leftHeldTime = 1;
-            rightHeldTime = 1;
-            _leftStickVector = tempLeftStick;
-            _rightStickVector = tempRightStick;
+            //lerp towards max force
+            _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
         }
         else
         {
-            //count instead       
-            if (tempLeftStick.magnitude > 0)
-            {
-                leftHeldFor++;
-                
-                leftReleasedFor = 0;
-            }
-
-            if (tempRightStick.magnitude > 0)
-            {
-                rightHeldFor++;
-                
-                rightReleasedFor = 0;
-            }
-
-            if (tempLeftStick.magnitude == 0)
-            {
-                leftReleasedFor++;
-               
-                leftHeldFor = 0;
-            }
-
-            if (tempRightStick.magnitude == 0)
-            {
-                rightReleasedFor++;
-                
-                rightHeldFor = 0;
-            }
-
-            //if the left stick has been buffering for a while, update it
-            if (leftHeldFor > BufferFrames)
-            {
-                _leftStickVector = tempLeftStick;
-                leftHeldTime += Time.deltaTime;
-               
-            }
-            else if (leftReleasedFor > BufferFrames)
-            {
-                _leftStickVector = tempLeftStick;
-                leftHeldTime = 0;
-            }
-            
-            //if the right stick has been buffering for a while, update it
-            if (rightHeldFor > BufferFrames)
-            {
-                _rightStickVector = tempRightStick;
-                rightHeldTime += Time.deltaTime;
-                
-            }
-            else if (rightReleasedFor > BufferFrames)
-            {
-                _rightStickVector = tempRightStick;
-                rightHeldTime = 0;
-            }
-            
+            //lerp force towards zero
+            _leftForce = Mathf.Lerp(_leftForce, 0, ForceDecrease);
         }
 
-    }
-
-    private float WingForceMultiply(float heldTime)
-    {
-        float currentForce = 0;
-        float pointOnCurve = WingForceCurve.Evaluate(heldTime);
-        currentForce = pointOnCurve * MaxForce;
-        
-        return currentForce;
+        if (_rightStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _rightForce = Mathf.Lerp(_rightForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp towards zero
+            _rightForce = Mathf.Lerp(_rightForce, 0, ForceDecrease);
+        }
     }
 
     private void ResetInputs()
@@ -355,8 +276,8 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
-        Vector3 worldForceVectorLeft = WingForceMultiply(leftHeldTime) * transform.TransformVector(_leftStickVector);
-        Vector3 worldForceVectorRight = WingForceMultiply(rightHeldTime) * transform.TransformVector(_rightStickVector);
+        Vector3 worldForceVectorLeft = _leftForce * transform.TransformVector(_leftStickVector);
+        Vector3 worldForceVectorRight = _rightForce * transform.TransformVector(_rightStickVector);
         
         Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft,Color.blue); 
         Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight,Color.cyan); 
@@ -387,28 +308,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
     }
 
-    private void MoveOneStick()
-    {
-        //Go forward or back
-        _rb.AddForce(transform.forward * _leftStickVector.z * MaxForce);
-        
-        //Rotate
-        _rb.AddTorque(transform.up * _leftStickVector.x * MaxTorque);
-        
-        //Calculate standard quadratic drag
-        Vector3 moveVel = _rb.velocity;
-        Vector3 moveDragForce = moveVel.sqrMagnitude * moveVel.normalized * WingDrag;
-        
-        //Apply quadratic drag
-        _rb.AddForce(moveDragForce);
-        
-        //Calculate Quadratice Angular Drag
-        Vector3 rotationVel = _rb.angularVelocity;
-        Vector3 rotationDragForce = rotationVel.sqrMagnitude * rotationVel.normalized * QuadAngularDrag;
-        
-        //Apply Quadratic Rotational Drag
-        _rb.AddTorque(rotationDragForce);
-    }
+    
 
     #endregion
 
@@ -567,5 +467,132 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    #endregion
+
+    #region Archived Functions
+
+    /*
+     
+     
+     private void BufferedInputs()
+    {
+        Vector3 tempLeftStick = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
+        Vector3 tempRightStick = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
+        if (tempLeftStick.magnitude == 0 && tempRightStick.magnitude == 0)
+        {
+            leftHeldFor = 0;
+            rightHeldFor = 0;
+            //Reset stick hold timers
+            leftHeldTime = 0;
+            rightHeldTime = 0;
+            _leftStickVector = tempLeftStick;
+            _rightStickVector = tempRightStick;
+        }
+        else if (tempLeftStick.magnitude > 0 && tempRightStick.magnitude > 0)
+        {
+            leftReleasedFor = 0;
+            rightReleasedFor = 0;
+            //Set stick held timers to max
+            leftHeldTime = 1;
+            rightHeldTime = 1;
+            _leftStickVector = tempLeftStick;
+            _rightStickVector = tempRightStick;
+        }
+        else
+        {
+            //count instead       
+            if (tempLeftStick.magnitude > 0)
+            {
+                leftHeldFor++;
+                
+                leftReleasedFor = 0;
+            }
+
+            if (tempRightStick.magnitude > 0)
+            {
+                rightHeldFor++;
+                
+                rightReleasedFor = 0;
+            }
+
+            if (tempLeftStick.magnitude == 0)
+            {
+                leftReleasedFor++;
+               
+                leftHeldFor = 0;
+            }
+
+            if (tempRightStick.magnitude == 0)
+            {
+                rightReleasedFor++;
+                
+                rightHeldFor = 0;
+            }
+
+            //if the left stick has been buffering for a while, update it
+            if (leftHeldFor > BufferFrames)
+            {
+                _leftStickVector = tempLeftStick;
+                leftHeldTime += Time.deltaTime;
+               
+            }
+            else if (leftReleasedFor > BufferFrames)
+            {
+                _leftStickVector = tempLeftStick;
+                leftHeldTime = 0;
+            }
+            
+            //if the right stick has been buffering for a while, update it
+            if (rightHeldFor > BufferFrames)
+            {
+                _rightStickVector = tempRightStick;
+                rightHeldTime += Time.deltaTime;
+                
+            }
+            else if (rightReleasedFor > BufferFrames)
+            {
+                _rightStickVector = tempRightStick;
+                rightHeldTime = 0;
+            }
+            
+        }
+
+    }
+
+    private float WingForceMultiply(float heldTime)
+    {
+        float currentForce = 0;
+        float pointOnCurve = ForceOnCurve.Evaluate(heldTime);
+        currentForce = pointOnCurve * MaxForce;
+        
+        return currentForce;
+    }
+    
+    
+    private void MoveOneStick()
+    {
+        //Go forward or back
+        _rb.AddForce(transform.forward * _leftStickVector.z * MaxForce);
+        
+        //Rotate
+        _rb.AddTorque(transform.up * _leftStickVector.x * MaxTorque);
+        
+        //Calculate standard quadratic drag
+        Vector3 moveVel = _rb.velocity;
+        Vector3 moveDragForce = moveVel.sqrMagnitude * moveVel.normalized * WingDrag;
+        
+        //Apply quadratic drag
+        _rb.AddForce(moveDragForce);
+        
+        //Calculate Quadratice Angular Drag
+        Vector3 rotationVel = _rb.angularVelocity;
+        Vector3 rotationDragForce = rotationVel.sqrMagnitude * rotationVel.normalized * QuadAngularDrag;
+        
+        //Apply Quadratic Rotational Drag
+        _rb.AddTorque(rotationDragForce);
+    }
+    
+    */
+
     #endregion
 }

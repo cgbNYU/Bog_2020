@@ -13,7 +13,10 @@ public class PlayerControllerTuning : ScriptableObject
     [Tooltip("Dev description and details of this tuning.")]
     [TextArea(3,10)]
     public string TuningNotes;
+
     [Header("Movement Variables")] 
+    public float ForceIncrease;
+    public float ForceDecrease;
     public float MaxForce;
     public float WingOffset;
     public float WingDrag; //MUST BE NEGATIVE
