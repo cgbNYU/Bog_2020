@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     //References
     [SerializeField]private TMP_Text _fullScreenTextBox;
     private TMP_Text[] _eggsTextBox;
+    
+    //Tutorial images
+    public Sprite[] tutorialPages;
 
     void Start()
     {
