@@ -99,9 +99,24 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
-    public MoveState moveState;
+    private MoveState _moveState;
 
     private float _stateTimer;
+    
+    //Functions
+    public void StateTransition(MoveState newState, float time) //handles ALL state transitions
+    {
+        //Set the state timer
+        _stateTimer = time;
+        
+        //Change to the new state
+        _moveState = newState;
+    }
+
+    public MoveState CheckState() //Called from ANYWHERE to check what the current state is
+    {
+        return _moveState;
+    }
 
     #endregion
     
@@ -126,7 +141,7 @@ public class PlayerController : MonoBehaviour
         ResetInputs();
         
         //Initialize state
-        moveState = MoveState.Neutral;
+        _moveState = MoveState.Neutral;
         _stateTimer = 0;
         
         //Initialize attacks
@@ -152,8 +167,7 @@ public class PlayerController : MonoBehaviour
         WingDrag = _tune.WingDrag;
         MaxTorque = _tune.MaxTorque;
         QuadAngularDrag = _tune.QuadAngularDrag;
-        BufferFrames = _tune.BufferFrames;
-        
+        BufferFrames = _tune.BufferFrames; 
         //Attack vars
         LungeTargetRadius = _tune.LungeTargetRadius;
         LungeRange = _tune.LungeRange;
@@ -179,7 +193,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        switch (moveState)
+        switch (_moveState)
         {
             case MoveState.Neutral:
                 _animator.Play("TestAnim_Idle");
@@ -327,7 +341,7 @@ public class PlayerController : MonoBehaviour
             _stateTimer = LungeTime;
             LungeCollider.enabled = true;
             _animator.Play("TestAnim_Lunge");
-            moveState = MoveState.Lunging;
+            _moveState = MoveState.Lunging;
         }
     }
 
@@ -338,7 +352,7 @@ public class PlayerController : MonoBehaviour
         {
             _stateTimer = 0;
             LungeCollider.enabled = false;
-            moveState = MoveState.Neutral;
+            _moveState = MoveState.Neutral;
         }
     }
 
@@ -372,7 +386,7 @@ public class PlayerController : MonoBehaviour
             if (pc.TeamID != TeamID)
             {
                 float dist = Vector3.Distance(pc.transform.position, transform.position);
-                if (dist <= LockOnRange && dist < minDist && pc.moveState != MoveState.Dead)
+                if (dist <= LockOnRange && dist < minDist && pc._moveState != MoveState.Dead)
                 {
                     closestEnemyTransform = pc.transform;
                     minDist = dist;
@@ -388,7 +402,7 @@ public class PlayerController : MonoBehaviour
         if (_spitButtonHeld)
         {
             Debug.Log("Button down  = " + _spitButtonHeld);
-            moveState = MoveState.LockOn;
+            _moveState = MoveState.LockOn;
         }
     }
 
@@ -431,7 +445,7 @@ public class PlayerController : MonoBehaviour
         spit.GetComponent<SpitHitBox>().TeamID = TeamID;
         spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
         _stateTimer = SpitTime;
-        moveState = MoveState.Spitting;
+        _moveState = MoveState.Spitting;
     }
     
     private void SpitState()
@@ -440,7 +454,7 @@ public class PlayerController : MonoBehaviour
         if (_stateTimer <= 0)
         {
             _stateTimer = 0;
-            moveState = MoveState.Neutral;
+            _moveState = MoveState.Neutral;
         }
     }
 
@@ -453,7 +467,7 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = Vector3.zero;
         _stateTimer = DeathTime;
         _animator.Play("TestAnim_Death");
-        moveState = MoveState.Dead;
+        _moveState = MoveState.Dead;
         _eggHolder.DropEgg();
     }
 
