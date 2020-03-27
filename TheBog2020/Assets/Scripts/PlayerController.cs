@@ -111,6 +111,19 @@ public class PlayerController : MonoBehaviour
         
         //Change to the new state
         _moveState = newState;
+        
+        //Check for state specific things
+        if (newState == MoveState.Lunging)
+        {
+            LungeCollider.enabled = true;
+            _animator.Play("TestAnim_Lunge");
+            _rb.AddForce(transform.forward * LungeForce);
+        }
+        else if (newState == MoveState.Neutral)
+        {
+            _stateTimer = 0;
+            LungeCollider.enabled = false;
+        }
     }
 
     public MoveState CheckState() //Called from ANYWHERE to check what the current state is
@@ -141,7 +154,7 @@ public class PlayerController : MonoBehaviour
         ResetInputs();
         
         //Initialize state
-        _moveState = MoveState.Neutral;
+        StateTransition(MoveState.Neutral, 0);
         _stateTimer = 0;
         
         //Initialize attacks
@@ -336,12 +349,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("LungeButton");
             //Check to see if there is a target in front of the player
             
-            _rb.AddForce(transform.forward * LungeForce);
-
-            _stateTimer = LungeTime;
-            LungeCollider.enabled = true;
-            _animator.Play("TestAnim_Lunge");
-            _moveState = MoveState.Lunging;
+            StateTransition(MoveState.Lunging, LungeTime);
         }
     }
 
@@ -350,8 +358,7 @@ public class PlayerController : MonoBehaviour
         _stateTimer -= Time.deltaTime;
         if (_stateTimer <= 0)
         {
-            _stateTimer = 0;
-            LungeCollider.enabled = false;
+            
             _moveState = MoveState.Neutral;
         }
     }
