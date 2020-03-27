@@ -7478,5 +7478,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5817280794126806305, guid: 2fcf151a325c24243b3752563ad31410,
+        type: 3}
+      propertyPath: tutorialPages.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817280794126806305, guid: 2fcf151a325c24243b3752563ad31410,
+        type: 3}
+      propertyPath: tutorialPages.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 22cd0cd8227df4e5394add3c548353b2,
+        type: 3}
+    - target: {fileID: 5817280794126806305, guid: 2fcf151a325c24243b3752563ad31410,
+        type: 3}
+      propertyPath: tutorialPages.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c52b94229c4e40179a11ed35fc67667,
+        type: 3}
+    - target: {fileID: 5817280794126806305, guid: 2fcf151a325c24243b3752563ad31410,
+        type: 3}
+      propertyPath: tutorialPages.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 648bd2e3dffc446608df0f1aa29138d0,
+        type: 3}
+    - target: {fileID: 5817280794126806305, guid: 2fcf151a325c24243b3752563ad31410,
+        type: 3}
+      propertyPath: tutorialPages.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 9e017592940a6487bae68bb3ecd96965,
+        type: 3}
+    - target: {fileID: 5817280794126806305, guid: 2fcf151a325c24243b3752563ad31410,
+        type: 3}
+      propertyPath: tutorialPages.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: acbe00e6a224e40c6b6567b82aa391ff,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fcf151a325c24243b3752563ad31410, type: 3}

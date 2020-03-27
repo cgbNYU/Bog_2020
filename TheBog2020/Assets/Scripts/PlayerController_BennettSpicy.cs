@@ -7,7 +7,7 @@ using Rewired;
 /// Takes the player input and manages the positions, states, and current stats of each player
 /// Placed on each player object
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController_BennettSpicy : MonoBehaviour
 {
 
     public PlayerControllerTuning _pcTune;
@@ -312,15 +312,21 @@ public class PlayerController : MonoBehaviour
         //Calculate Quadratic Wing Drag
         Vector3 leftWingVel = _rb.GetPointVelocity(leftWingWorldPoint);
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
-        Vector3 leftDragForce = leftWingVel.sqrMagnitude * leftWingVel.normalized * WingDrag;
-        Vector3 rightDragForce = rightWingVel.sqrMagnitude * rightWingVel.normalized * WingDrag;
+        float leftWingVelFwd = Vector3.Dot(leftWingVel, transform.right*1);
+        float rightWingVelFwd = Vector3.Dot(rightWingVel, transform.right*-1);
+
+
+        Vector3 leftDragForce = transform.forward * leftWingVelFwd  * -0.2f;
+        Vector3 rightDragForce = transform.forward * rightWingVelFwd * -0.2f;
     
         //Apply Quadratic Wing drag
-      //  _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
-      //  _rb.AddForceAtPosition(rightDragForce, rightWingWorldPoint);
+        _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
+        _rb.AddForceAtPosition(rightDragForce, rightWingWorldPoint);
+        Debug.DrawLine(leftWingWorldPoint, leftWingWorldPoint + leftDragForce * 1.4f, Color.red);
+        Debug.DrawLine(rightWingWorldPoint, rightWingWorldPoint + rightDragForce * 1.4f, Color.red);
         
         //the wing drag forces were fighting each other, so I turned them off. But that means we need a linear drag
-        _rb.AddForce(_rb.velocity.sqrMagnitude * _rb.velocity.normalized *WingDrag);
+        _rb.AddForce(_rb.velocity.sqrMagnitude * _rb.velocity.normalized * WingDrag);
       
         //Calculate *Linear* Angular Drag
         Vector3 rotationVel = _rb.angularVelocity;

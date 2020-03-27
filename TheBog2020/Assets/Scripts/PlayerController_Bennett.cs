@@ -7,7 +7,7 @@ using Rewired;
 /// Takes the player input and manages the positions, states, and current stats of each player
 /// Placed on each player object
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController_Bennett : MonoBehaviour
 {
 
     public PlayerControllerTuning _pcTune;
