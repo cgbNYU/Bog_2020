@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54f256b7c13448fdba7c7f3f8aba4d0, type: 3}
-  m_Name: PCTune_Mar26_Bennett
+  m_Name: PCTune_Mar26_Bennett_Spicy
   m_EditorClassIdentifier: 
   TuningNotes: 'This is our tuning from March 7th after putting in Lock On mechanics.
 

@@ -252,11 +252,11 @@ public class PlayerController : MonoBehaviour
         if (_leftStickVector.magnitude > 0)
         {
             //lerp towards max force
-            Debug.Log("force increase var is " + ForceIncrease);
-            Debug.Log("left force starts at: " + _leftForce);
+            //Debug.Log("force increase var is " + ForceIncrease);
+            //Debug.Log("left force starts at: " + _leftForce);
             _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
              
-            Debug.Log("left force ends at: " + _leftForce);
+            //Debug.Log("left force ends at: " + _leftForce);
         }
         else
         {

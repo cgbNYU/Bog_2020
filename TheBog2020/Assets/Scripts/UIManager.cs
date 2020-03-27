@@ -19,9 +19,6 @@ public class UIManager : MonoBehaviour
     [SerializeField]private TMP_Text _fullScreenTextBox;
     private TMP_Text[] _eggsTextBox;
     
-    //Tutorial images
-    public Sprite[] tutorialPages;
-
     void Start()
     {
         //Singleton
@@ -44,6 +41,9 @@ public class UIManager : MonoBehaviour
     {
         FindUIReferences();
         ClearAllUIElements();
+        
+        //TODO: find refs to all the tutorial objects in the scene 
+        //TODO: the tutorial object should have a player id so it knows which player is controlling it 
     }
 
     //Searches for the references to the UI elements
