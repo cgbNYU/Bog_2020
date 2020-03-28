@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     //References
     [SerializeField]private TMP_Text _fullScreenTextBox;
     private TMP_Text[] _eggsTextBox;
+
+    private GameObject[] TutorialPopups;
     
     void Start()
     {
@@ -41,16 +43,29 @@ public class UIManager : MonoBehaviour
     {
         FindUIReferences();
         ClearAllUIElements();
-        FindTutorialPopups();
-        //TODO: find refs to all the tutorial objects in the scene 
-        //TODO: the tutorial object should have a player id so it knows which player is controlling it 
+        
+       //Find all Tutorial Popups and store a reference to them
+       TutorialPopups = GameObject.FindGameObjectsWithTag("TutorialPopup");
     }
 
-    void FindTutorialPopups()
+    public bool AllPlayersReady()
     {
-        GameObject[] TutorialPopups = GameObject.FindGameObjectsWithTag("");
+        if (TutorialPopups.Length == 0) return true;
+        foreach (var popup in TutorialPopups)
+        {
+            if (popup.GetComponent<TutorialPopup>().PlayerReady == false) return false;
+        }
+        return true;
     }
 
+    public void CloseTutorialPopups()
+    {
+        foreach (var popup in TutorialPopups)
+        {
+            popup.gameObject.SetActive(false);
+        }
+    }
+    
     //Searches for the references to the UI elements
     private void FindUIReferences()
     {

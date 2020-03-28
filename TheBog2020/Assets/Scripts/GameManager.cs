@@ -53,11 +53,11 @@ public class GameManager : MonoBehaviour
         switch (_gameState)
         {
             case GameState.Title:
-                
-                if (Input.anyKey)
+                if (UIManager.UM.AllPlayersReady())
                 {
                     InitializeArrays();
-                    GameStart();
+                    GameStart(); 
+                    UIManager.UM.CloseTutorialPopups();
                     UIManager.UM.ClearAllUIElements();
                     _gameState = GameState.MatchInProgress;
                 }
