@@ -5633,7 +5633,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 648bd2e3dffc446608df0f1aa29138d0, type: 3}
   - {fileID: 21300000, guid: 9e017592940a6487bae68bb3ecd96965, type: 3}
   - {fileID: 21300000, guid: acbe00e6a224e40c6b6567b82aa391ff, type: 3}
+  readyPage: {fileID: 21300000, guid: 37244d9029b4d4cc1bfe225789b230f6, type: 3}
   playerID: 0
+  PlayerReady: 0
 --- !u!4 &1557638998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ab60e3fe9b3dd41708d1953282301464,

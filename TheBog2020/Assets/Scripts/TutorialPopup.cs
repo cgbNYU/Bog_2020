@@ -8,12 +8,16 @@ using Rewired;
 public class TutorialPopup : MonoBehaviour
 {
     public Sprite[] tutorialPages;
+    public Sprite readyPage;
     private Image displayedPage;
     private int _pageIndex = 0;
     
     public int playerID;
     private Player _rewiredPlayer;
     private bool _buttonPressed;
+
+    public bool PlayerReady;
+    
     void Start()
     {
         //Initialize rewired player
@@ -27,7 +31,8 @@ public class TutorialPopup : MonoBehaviour
         //Move left through the tutorial
         if (_rewiredPlayer.GetAxis("L_Horz") < 0 && !_buttonPressed)
         {
-            _buttonPressed = true; 
+            PlayerReady = false;
+            _buttonPressed = true;
             _pageIndex--;
             CheckIndexWithinBounds();
             DisplayTutorialPage(_pageIndex);
@@ -36,6 +41,7 @@ public class TutorialPopup : MonoBehaviour
         //Move right through the tutorial
         if (_rewiredPlayer.GetAxis("L_Horz") > 0 && !_buttonPressed)
         {
+            PlayerReady = false;
             _buttonPressed = true;
             _pageIndex++; 
             CheckIndexWithinBounds();
@@ -43,9 +49,13 @@ public class TutorialPopup : MonoBehaviour
         }
         
         //Reset button pressed when the stick returns to neutral
-        if (_rewiredPlayer.GetAxis("L_Horz") == 0)
+        if (_rewiredPlayer.GetAxis("L_Horz") == 0) _buttonPressed = false;
+        
+        //Press down to confirm ready for match
+        if (_rewiredPlayer.GetAxis("L_Vert") < 0)
         {
-            _buttonPressed = false;
+            PlayerReady = true;
+            DisplayReadyPage();
         }
     }
 
@@ -58,5 +68,10 @@ public class TutorialPopup : MonoBehaviour
     private void DisplayTutorialPage(int pageIndex)
     {
         displayedPage.sprite = tutorialPages[pageIndex];
+    }
+
+    private void DisplayReadyPage()
+    {
+        displayedPage.sprite = readyPage;
     }
 }
