@@ -41,9 +41,14 @@ public class UIManager : MonoBehaviour
     {
         FindUIReferences();
         ClearAllUIElements();
-        
+        FindTutorialPopups();
         //TODO: find refs to all the tutorial objects in the scene 
         //TODO: the tutorial object should have a player id so it knows which player is controlling it 
+    }
+
+    void FindTutorialPopups()
+    {
+        GameObject[] TutorialPopups = GameObject.FindGameObjectsWithTag("");
     }
 
     //Searches for the references to the UI elements
@@ -76,11 +81,6 @@ public class UIManager : MonoBehaviour
         {
             _fullScreenTextBox.text = "Red team wins!\n\nPress the 'Backspace' key to restart.";
         }
-    }
-
-    public void DisplayStartGameUI()
-    {
-        _fullScreenTextBox.text = "Press any key to start.";
     }
 
     public void UpdateEggsRemainingUI(int teamID, int eggsRemaining)

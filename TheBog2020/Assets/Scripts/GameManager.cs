@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         switch (_gameState)
         {
             case GameState.Title:
-                UIManager.UM.DisplayStartGameUI();
+                
                 if (Input.anyKey)
                 {
                     InitializeArrays();
