@@ -124,6 +124,10 @@ public class PlayerController : MonoBehaviour
             _stateTimer = 0;
             LungeCollider.enabled = false;
         }
+        else if (newState == MoveState.Dead)
+        {
+            ResetInputs();
+        }
     }
 
     public MoveState CheckState() //Called from ANYWHERE to check what the current state is
@@ -212,7 +216,6 @@ public class PlayerController : MonoBehaviour
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
-                RampedForce();
                 Move();
                 break;
             case MoveState.Lunging:
@@ -224,7 +227,6 @@ public class PlayerController : MonoBehaviour
             case MoveState.LockOn:
                 LockReleaseCheck();
                 LockState();
-                RampedForce();
                 Move();
                 break;
             case MoveState.Airborne:
@@ -244,42 +246,33 @@ public class PlayerController : MonoBehaviour
 
     #region Movement
     
+    private Vector3 _leftStickHeadingVector, _rightStickHeadingVector;
+    private Vector3 _leftStickRefVel, _rightStickRefVel;
+
+    private Vector3 _leftStickForceVector, _rightStickForceVector;
+    private Vector3 _leftStickForceRefVel, _rightStickForceRefVel;
+    
     private void GetInputs()
     {
         //Grab the input vectors from the sticks
         _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
         _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
+        
+        //smooth the input vectors
+        
+        _leftStickHeadingVector = Vector3.SmoothDamp(_leftStickHeadingVector, _leftStickVector.normalized,
+            ref _leftStickRefVel, 0.14f, 12.0f);
+        
+       
+        _rightStickHeadingVector = Vector3.SmoothDamp(_rightStickHeadingVector, _rightStickVector.normalized,
+            ref _rightStickRefVel, 0.14f, 12.0f);
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
         _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
     }
 
-    private void RampedForce()
-    {
-        //Check to see if the sticks are being pushed or not
-        if (_leftStickVector.magnitude > 0)
-        {
-            //lerp towards max force
-            _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
-        }
-        else
-        {
-            //lerp force towards zero
-            _leftForce = Mathf.Lerp(_leftForce, 0, ForceDecrease);
-        }
-
-        if (_rightStickVector.magnitude > 0)
-        {
-            //lerp towards max force
-            _rightForce = Mathf.Lerp(_rightForce, MaxForce, ForceIncrease);
-        }
-        else
-        {
-            //lerp towards zero
-            _rightForce = Mathf.Lerp(_rightForce, 0, ForceDecrease);
-        }
-    }
+    
 
     private void ResetInputs()
     {
@@ -303,8 +296,8 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
-        Vector3 worldForceVectorLeft = _leftForce * transform.TransformVector(_leftStickVector);
-        Vector3 worldForceVectorRight = _rightForce * transform.TransformVector(_rightStickVector);
+        Vector3 worldForceVectorLeft = MaxForce * transform.TransformVector(_leftStickHeadingVector);
+        Vector3 worldForceVectorRight = MaxForce * transform.TransformVector(_rightStickHeadingVector);
         
         Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft,Color.blue); 
         Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight,Color.cyan); 
@@ -316,23 +309,27 @@ public class PlayerController : MonoBehaviour
         //Calculate Quadratic Wing Drag
         Vector3 leftWingVel = _rb.GetPointVelocity(leftWingWorldPoint);
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
-        Vector3 leftDragForce = leftWingVel.sqrMagnitude * leftWingVel.normalized * WingDrag;
-        Vector3 rightDragForce = rightWingVel.sqrMagnitude * rightWingVel.normalized * WingDrag;
+        float leftWingVelFwd = Vector3.Dot(leftWingVel, transform.right*1);
+        float rightWingVelFwd = Vector3.Dot(rightWingVel, transform.right*-1);
+        
+        Vector3 leftDragForce = transform.forward * leftWingVelFwd  * -0.2f;
+        Vector3 rightDragForce = transform.forward * rightWingVelFwd * -0.2f;
         
         //Apply Quadratic Wing drag
         _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
         _rb.AddForceAtPosition(rightDragForce, rightWingWorldPoint);
+        Debug.DrawLine(leftWingWorldPoint, leftWingWorldPoint + leftDragForce * 1.4f, Color.red);
+        Debug.DrawLine(rightWingWorldPoint, rightWingWorldPoint + rightDragForce * 1.4f, Color.red);
         
-        //Calculate Quadratice Angular Drag
+        //the wing drag forces were fighting each other, so I turned them off. But that means we need a linear drag
+        _rb.AddForce(_rb.velocity.sqrMagnitude * _rb.velocity.normalized * WingDrag);
+        
+        //Calculate *Linear* Angular Drag
         Vector3 rotationVel = _rb.angularVelocity;
-        Vector3 rotationDragForce = rotationVel.sqrMagnitude * rotationVel.normalized * QuadAngularDrag;
+        Vector3 rotationDragForce = rotationVel * QuadAngularDrag;
         
-        //Apply Quadratic Rotational Drag
+        //Apply Linear Rotational Drag
         _rb.AddTorque(rotationDragForce);
-        
-        //Debugs
-        Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
-        Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
     }
 
     
@@ -494,6 +491,31 @@ public class PlayerController : MonoBehaviour
 
     /*
      
+     private void RampedForce()
+    {
+        //Check to see if the sticks are being pushed or not
+        if (_leftStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp force towards zero
+            _leftForce = Mathf.Lerp(_leftForce, 0, ForceDecrease);
+        }
+
+        if (_rightStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _rightForce = Mathf.Lerp(_rightForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp towards zero
+            _rightForce = Mathf.Lerp(_rightForce, 0, ForceDecrease);
+        }
+    }
      
      private void BufferedInputs()
     {
