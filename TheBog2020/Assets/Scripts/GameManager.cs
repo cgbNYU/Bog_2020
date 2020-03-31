@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     //State Machine
     private enum GameState
     {
+        AttractScreen,
         Title,
         MatchInProgress,
         MatchEnd
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         //Initialize State
-        _gameState = GameState.Title;
+        _gameState = GameState.AttractScreen;
     }
 
     // Update is called once per frame
@@ -52,6 +53,15 @@ public class GameManager : MonoBehaviour
     {
         switch (_gameState)
         {
+            case GameState.AttractScreen:
+                if (Input.anyKey)
+                {
+                    GameObject.Find("AttractScreen_Player").GetComponent<AttractScreen>().StopVideo();
+                    //Play bgm
+                    AudioManager.AM.GetComponent<AudioSource>().Play(); 
+                    _gameState = GameState.Title;
+                }
+                break;
             case GameState.Title:
                 if (UIManager.UM.AllPlayersReady())
                 {

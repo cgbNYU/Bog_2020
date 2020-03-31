@@ -25,4 +25,11 @@ public class AttractScreen: MonoBehaviour {
         videoPlayer.Play();
         audioSource.Play();
     }
+
+    public void StopVideo()
+    {
+        rawImage.CrossFadeAlpha(0f,3f,true);
+        videoPlayer.Stop();
+        audioSource.Stop();
+    }
 }
