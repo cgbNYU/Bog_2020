@@ -720,7 +720,7 @@ PrefabInstance:
         type: 3}
       propertyPath: NewTune
       value: 
-      objectReference: {fileID: 11400000, guid: 843c94812c7c1bf4994aa452819c98ca,
+      objectReference: {fileID: 11400000, guid: edb5c8e93104bdd4da31a8e120535b4a,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e12f18e229655a241b85413138c69aab, type: 3}
@@ -6408,7 +6408,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 341c72ed3bc388d448d35589bc82de8a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.321
   m_Pitch: 1
   Loop: 1
   Mute: 0
