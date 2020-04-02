@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]private TMP_Text _fullScreenTextBox;
     private TMP_Text[] _eggsTextBox;
 
+    private GameObject[] TutorialPopups;
+    
     void Start()
     {
         //Singleton
@@ -41,8 +43,29 @@ public class UIManager : MonoBehaviour
     {
         FindUIReferences();
         ClearAllUIElements();
+        
+       //Find all Tutorial Popups and store a reference to them
+       TutorialPopups = GameObject.FindGameObjectsWithTag("TutorialPopup");
     }
 
+    public bool AllPlayersReady()
+    {
+        if (TutorialPopups.Length == 0) return true;
+        foreach (var popup in TutorialPopups)
+        {
+            if (popup.GetComponent<TutorialPopup>().PlayerReady == false) return false;
+        }
+        return true;
+    }
+
+    public void CloseTutorialPopups()
+    {
+        foreach (var popup in TutorialPopups)
+        {
+            popup.gameObject.SetActive(false);
+        }
+    }
+    
     //Searches for the references to the UI elements
     private void FindUIReferences()
     {
@@ -73,11 +96,6 @@ public class UIManager : MonoBehaviour
         {
             _fullScreenTextBox.text = "Red team wins!\n\nPress the 'Backspace' key to restart.";
         }
-    }
-
-    public void DisplayStartGameUI()
-    {
-        _fullScreenTextBox.text = "Press any key to start.";
     }
 
     public void UpdateEggsRemainingUI(int teamID, int eggsRemaining)
