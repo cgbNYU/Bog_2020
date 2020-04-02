@@ -100,7 +100,7 @@ public class Nest : MonoBehaviour
         //Respawn/Reactivate player model
 
         //Set player controller to active state
-        pc.moveState = PlayerController.MoveState.Neutral;
+        pc.StateTransition(PlayerController.MoveState.Neutral, 0);
 
         //Pop the egg out of the egglist
         Egg removedEgg = _eggList[eggID];

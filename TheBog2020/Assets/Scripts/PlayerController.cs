@@ -99,9 +99,41 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
-    public MoveState moveState;
+    private MoveState _moveState;
 
     private float _stateTimer;
+    
+    //Functions
+    public void StateTransition(MoveState newState, float time) //handles ALL state transitions
+    {
+        //Set the state timer
+        _stateTimer = time;
+        
+        //Change to the new state
+        _moveState = newState;
+        
+        //Check for state specific things
+        if (newState == MoveState.Lunging)
+        {
+            LungeCollider.enabled = true;
+            _animator.Play("TestAnim_Lunge");
+            _rb.AddForce(transform.forward * LungeForce);
+        }
+        else if (newState == MoveState.Neutral)
+        {
+            _stateTimer = 0;
+            LungeCollider.enabled = false;
+        }
+        else if (newState == MoveState.Dead)
+        {
+            ResetInputs();
+        }
+    }
+
+    public MoveState CheckState() //Called from ANYWHERE to check what the current state is
+    {
+        return _moveState;
+    }
 
     #endregion
     
@@ -126,7 +158,7 @@ public class PlayerController : MonoBehaviour
         ResetInputs();
         
         //Initialize state
-        moveState = MoveState.Neutral;
+        StateTransition(MoveState.Neutral, 0);
         _stateTimer = 0;
         
         //Initialize attacks
@@ -152,8 +184,7 @@ public class PlayerController : MonoBehaviour
         WingDrag = _tune.WingDrag;
         MaxTorque = _tune.MaxTorque;
         QuadAngularDrag = _tune.QuadAngularDrag;
-        BufferFrames = _tune.BufferFrames;
-        
+        BufferFrames = _tune.BufferFrames; 
         //Attack vars
         LungeTargetRadius = _tune.LungeTargetRadius;
         LungeRange = _tune.LungeRange;
@@ -179,13 +210,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        switch (moveState)
+        switch (_moveState)
         {
             case MoveState.Neutral:
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
-                RampedForce();
                 Move();
                 break;
             case MoveState.Lunging:
@@ -197,7 +227,6 @@ public class PlayerController : MonoBehaviour
             case MoveState.LockOn:
                 LockReleaseCheck();
                 LockState();
-                RampedForce();
                 Move();
                 break;
             case MoveState.Airborne:
@@ -216,65 +245,34 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Movement
-
+    
     private Vector3 _leftStickHeadingVector, _rightStickHeadingVector;
     private Vector3 _leftStickRefVel, _rightStickRefVel;
 
     private Vector3 _leftStickForceVector, _rightStickForceVector;
     private Vector3 _leftStickForceRefVel, _rightStickForceRefVel;
+    
     private void GetInputs()
     {
         //Grab the input vectors from the sticks
         _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
         _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
-
+        
         //smooth the input vectors
         
-            _leftStickHeadingVector = Vector3.SmoothDamp(_leftStickHeadingVector, _leftStickVector.normalized,
-                ref _leftStickRefVel, 0.14f, 12.0f);
+        _leftStickHeadingVector = Vector3.SmoothDamp(_leftStickHeadingVector, _leftStickVector.normalized,
+            ref _leftStickRefVel, 0.14f, 12.0f);
         
        
-            _rightStickHeadingVector = Vector3.SmoothDamp(_rightStickHeadingVector, _rightStickVector.normalized,
-                ref _rightStickRefVel, 0.14f, 12.0f);
-        
+        _rightStickHeadingVector = Vector3.SmoothDamp(_rightStickHeadingVector, _rightStickVector.normalized,
+            ref _rightStickRefVel, 0.14f, 12.0f);
 
-
-//Attack inputs
+        //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
         _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
     }
 
-    private void RampedForce()
-    {
-        
-        
-        //Check to see if the sticks are being pushed or not
-        if (_leftStickVector.magnitude > 0)
-        {
-            //lerp towards max force
-            //Debug.Log("force increase var is " + ForceIncrease);
-            //Debug.Log("left force starts at: " + _leftForce);
-            _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
-             
-            //Debug.Log("left force ends at: " + _leftForce);
-        }
-        else
-        {
-            //lerp force towards zero
-            _leftForce = Mathf.SmoothStep(_leftForce, 0, ForceDecrease);
-        }
-
-        if (_rightStickVector.magnitude > 0)
-        {
-            //lerp towards max force
-            _rightForce = Mathf.Lerp(_rightForce, MaxForce, ForceIncrease);
-        }
-        else
-        {
-            //lerp towards zero
-            _rightForce = Mathf.SmoothStep(_rightForce, 0, ForceDecrease);
-        }
-    }
+    
 
     private void ResetInputs()
     {
@@ -298,12 +296,11 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
-        //BF NOTE: this is unfortunately gonna be zero if the stick's heading is zero
         Vector3 worldForceVectorLeft = MaxForce * transform.TransformVector(_leftStickHeadingVector);
         Vector3 worldForceVectorRight = MaxForce * transform.TransformVector(_rightStickHeadingVector);
         
-        Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft*0.03f,Color.blue); 
-        Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight*0.03f,Color.cyan); 
+        Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft,Color.blue); 
+        Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight,Color.cyan); 
         
         //Apply wing forces
         _rb.AddForceAtPosition(worldForceVectorLeft, leftWingWorldPoint);
@@ -314,11 +311,10 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
         float leftWingVelFwd = Vector3.Dot(leftWingVel, transform.right*1);
         float rightWingVelFwd = Vector3.Dot(rightWingVel, transform.right*-1);
-
-
+        
         Vector3 leftDragForce = transform.forward * leftWingVelFwd  * -0.2f;
         Vector3 rightDragForce = transform.forward * rightWingVelFwd * -0.2f;
-    
+        
         //Apply Quadratic Wing drag
         _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
         _rb.AddForceAtPosition(rightDragForce, rightWingWorldPoint);
@@ -327,17 +323,13 @@ public class PlayerController : MonoBehaviour
         
         //the wing drag forces were fighting each other, so I turned them off. But that means we need a linear drag
         _rb.AddForce(_rb.velocity.sqrMagnitude * _rb.velocity.normalized * WingDrag);
-      
+        
         //Calculate *Linear* Angular Drag
         Vector3 rotationVel = _rb.angularVelocity;
         Vector3 rotationDragForce = rotationVel * QuadAngularDrag;
-
+        
         //Apply Linear Rotational Drag
         _rb.AddTorque(rotationDragForce);
-        
-        //Debugs
-     //   Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
-       // Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
     }
 
     
@@ -354,12 +346,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("LungeButton");
             //Check to see if there is a target in front of the player
             
-            _rb.AddForce(transform.forward * LungeForce);
-
-            _stateTimer = LungeTime;
-            LungeCollider.enabled = true;
-            _animator.Play("TestAnim_Lunge");
-            moveState = MoveState.Lunging;
+            StateTransition(MoveState.Lunging, LungeTime);
         }
     }
 
@@ -368,9 +355,8 @@ public class PlayerController : MonoBehaviour
         _stateTimer -= Time.deltaTime;
         if (_stateTimer <= 0)
         {
-            _stateTimer = 0;
-            LungeCollider.enabled = false;
-            moveState = MoveState.Neutral;
+            
+            _moveState = MoveState.Neutral;
         }
     }
 
@@ -404,7 +390,7 @@ public class PlayerController : MonoBehaviour
             if (pc.TeamID != TeamID)
             {
                 float dist = Vector3.Distance(pc.transform.position, transform.position);
-                if (dist <= LockOnRange && dist < minDist && pc.moveState != MoveState.Dead)
+                if (dist <= LockOnRange && dist < minDist && pc._moveState != MoveState.Dead)
                 {
                     closestEnemyTransform = pc.transform;
                     minDist = dist;
@@ -420,7 +406,7 @@ public class PlayerController : MonoBehaviour
         if (_spitButtonHeld)
         {
             Debug.Log("Button down  = " + _spitButtonHeld);
-            moveState = MoveState.LockOn;
+            _moveState = MoveState.LockOn;
         }
     }
 
@@ -463,7 +449,7 @@ public class PlayerController : MonoBehaviour
         spit.GetComponent<SpitHitBox>().TeamID = TeamID;
         spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
         _stateTimer = SpitTime;
-        moveState = MoveState.Spitting;
+        _moveState = MoveState.Spitting;
     }
     
     private void SpitState()
@@ -472,7 +458,7 @@ public class PlayerController : MonoBehaviour
         if (_stateTimer <= 0)
         {
             _stateTimer = 0;
-            moveState = MoveState.Neutral;
+            _moveState = MoveState.Neutral;
         }
     }
 
@@ -485,7 +471,7 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = Vector3.zero;
         _stateTimer = DeathTime;
         _animator.Play("TestAnim_Death");
-        moveState = MoveState.Dead;
+        _moveState = MoveState.Dead;
         _eggHolder.DropEgg();
     }
 
@@ -505,6 +491,31 @@ public class PlayerController : MonoBehaviour
 
     /*
      
+     private void RampedForce()
+    {
+        //Check to see if the sticks are being pushed or not
+        if (_leftStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp force towards zero
+            _leftForce = Mathf.Lerp(_leftForce, 0, ForceDecrease);
+        }
+
+        if (_rightStickVector.magnitude > 0)
+        {
+            //lerp towards max force
+            _rightForce = Mathf.Lerp(_rightForce, MaxForce, ForceIncrease);
+        }
+        else
+        {
+            //lerp towards zero
+            _rightForce = Mathf.Lerp(_rightForce, 0, ForceDecrease);
+        }
+    }
      
      private void BufferedInputs()
     {
