@@ -216,30 +216,52 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Movement
-    
+
+    private Vector3 _leftStickHeadingVector, _rightStickHeadingVector;
+    private Vector3 _leftStickRefVel, _rightStickRefVel;
+
+    private Vector3 _leftStickForceVector, _rightStickForceVector;
+    private Vector3 _leftStickForceRefVel, _rightStickForceRefVel;
     private void GetInputs()
     {
         //Grab the input vectors from the sticks
         _leftStickVector = new Vector3(_rewiredPlayer.GetAxis("L_Horz"), 0, _rewiredPlayer.GetAxis("L_Vert"));
         _rightStickVector = new Vector3(_rewiredPlayer.GetAxis("R_Horz"), 0, _rewiredPlayer.GetAxis("R_Vert"));
 
-        //Attack inputs
+        //smooth the input vectors
+        
+            _leftStickHeadingVector = Vector3.SmoothDamp(_leftStickHeadingVector, _leftStickVector.normalized,
+                ref _leftStickRefVel, 0.14f, 12.0f);
+        
+       
+            _rightStickHeadingVector = Vector3.SmoothDamp(_rightStickHeadingVector, _rightStickVector.normalized,
+                ref _rightStickRefVel, 0.14f, 12.0f);
+        
+
+
+//Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
         _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
     }
 
     private void RampedForce()
     {
+        
+        
         //Check to see if the sticks are being pushed or not
         if (_leftStickVector.magnitude > 0)
         {
             //lerp towards max force
+            //Debug.Log("force increase var is " + ForceIncrease);
+            //Debug.Log("left force starts at: " + _leftForce);
             _leftForce = Mathf.Lerp(_leftForce, MaxForce, ForceIncrease);
+             
+            //Debug.Log("left force ends at: " + _leftForce);
         }
         else
         {
             //lerp force towards zero
-            _leftForce = Mathf.Lerp(_leftForce, 0, ForceDecrease);
+            _leftForce = Mathf.SmoothStep(_leftForce, 0, ForceDecrease);
         }
 
         if (_rightStickVector.magnitude > 0)
@@ -250,7 +272,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             //lerp towards zero
-            _rightForce = Mathf.Lerp(_rightForce, 0, ForceDecrease);
+            _rightForce = Mathf.SmoothStep(_rightForce, 0, ForceDecrease);
         }
     }
 
@@ -276,11 +298,12 @@ public class PlayerController : MonoBehaviour
         Vector3 rightWingWorldPoint = transform.TransformPoint(new Vector2(WingOffset, 0));
 
         //Get the forces being applied to each wingw
-        Vector3 worldForceVectorLeft = _leftForce * transform.TransformVector(_leftStickVector);
-        Vector3 worldForceVectorRight = _rightForce * transform.TransformVector(_rightStickVector);
+        //BF NOTE: this is unfortunately gonna be zero if the stick's heading is zero
+        Vector3 worldForceVectorLeft = MaxForce * transform.TransformVector(_leftStickHeadingVector);
+        Vector3 worldForceVectorRight = MaxForce * transform.TransformVector(_rightStickHeadingVector);
         
-        Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft,Color.blue); 
-        Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight,Color.cyan); 
+        Debug.DrawLine(leftWingWorldPoint,leftWingWorldPoint + worldForceVectorLeft*0.03f,Color.blue); 
+        Debug.DrawLine(rightWingWorldPoint,rightWingWorldPoint + worldForceVectorRight*0.03f,Color.cyan); 
         
         //Apply wing forces
         _rb.AddForceAtPosition(worldForceVectorLeft, leftWingWorldPoint);
@@ -289,23 +312,32 @@ public class PlayerController : MonoBehaviour
         //Calculate Quadratic Wing Drag
         Vector3 leftWingVel = _rb.GetPointVelocity(leftWingWorldPoint);
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
-        Vector3 leftDragForce = leftWingVel.sqrMagnitude * leftWingVel.normalized * WingDrag;
-        Vector3 rightDragForce = rightWingVel.sqrMagnitude * rightWingVel.normalized * WingDrag;
-        
+        float leftWingVelFwd = Vector3.Dot(leftWingVel, transform.right*1);
+        float rightWingVelFwd = Vector3.Dot(rightWingVel, transform.right*-1);
+
+
+        Vector3 leftDragForce = transform.forward * leftWingVelFwd  * -0.2f;
+        Vector3 rightDragForce = transform.forward * rightWingVelFwd * -0.2f;
+    
         //Apply Quadratic Wing drag
         _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
         _rb.AddForceAtPosition(rightDragForce, rightWingWorldPoint);
+        Debug.DrawLine(leftWingWorldPoint, leftWingWorldPoint + leftDragForce * 1.4f, Color.red);
+        Debug.DrawLine(rightWingWorldPoint, rightWingWorldPoint + rightDragForce * 1.4f, Color.red);
         
-        //Calculate Quadratice Angular Drag
+        //the wing drag forces were fighting each other, so I turned them off. But that means we need a linear drag
+        _rb.AddForce(_rb.velocity.sqrMagnitude * _rb.velocity.normalized * WingDrag);
+      
+        //Calculate *Linear* Angular Drag
         Vector3 rotationVel = _rb.angularVelocity;
-        Vector3 rotationDragForce = rotationVel.sqrMagnitude * rotationVel.normalized * QuadAngularDrag;
-        
-        //Apply Quadratic Rotational Drag
+        Vector3 rotationDragForce = rotationVel * QuadAngularDrag;
+
+        //Apply Linear Rotational Drag
         _rb.AddTorque(rotationDragForce);
         
         //Debugs
-        Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
-        Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
+     //   Debug.DrawRay(leftWingWorldPoint, transform.InverseTransformVector(_leftStickVector));
+       // Debug.DrawRay(rightWingWorldPoint, transform.InverseTransformVector(_rightStickVector));
     }
 
     
