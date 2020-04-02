@@ -111,12 +111,13 @@ public class GameManager : MonoBehaviour
         _nests[1] = GameObject.Find("NestBlue").GetComponent<Nest>();
         
         //Player array
-        PlayerControllers = new PlayerController[4];
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        PlayerControllers = new PlayerController[players.Length];
 
-        PlayerControllers[0] = GameObject.Find("Player1").GetComponent<PlayerController>();
-        PlayerControllers[1] = GameObject.Find("Player2").GetComponent<PlayerController>();
-        PlayerControllers[2] = GameObject.Find("Player3").GetComponent<PlayerController>();
-        PlayerControllers[3] = GameObject.Find("Player4").GetComponent<PlayerController>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            PlayerControllers[i] = players[i].GetComponent<PlayerController>();
+        }
     }
 
     private void GameStart()
