@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     public float SpitForce;
     public float SpitTime;
+    private float _spitTimer;
 
     public float DeathTime;
     
@@ -75,7 +76,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _rightStickLast;
     private int _bufferFrames;
     private bool _lungeButton;
-    private bool _spitButtonHeld;
+    private bool _spitButton;
+    private bool _lockButtonHeld;
     private Rigidbody _rb;
     private bool _isGrounded;
     private Player _rewiredPlayer;
@@ -162,6 +164,7 @@ public class PlayerController : MonoBehaviour
         //Initialize state
         StateTransition(MoveState.Neutral, 0);
         _stateTimer = 0;
+        _spitTimer = 0;
         
         //Initialize attacks
         LungeCollider.enabled = false;
@@ -219,12 +222,14 @@ public class PlayerController : MonoBehaviour
                 AntennaeRadar();
                 LockOnCheck();
                 Move();
+                Spit();
                 break;
             case MoveState.Invulnerable:
                 _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
                 Move();
+                Spit();
                 ReturnToNeutralCountdown();
                 break;
             case MoveState.Lunging:
@@ -237,6 +242,7 @@ public class PlayerController : MonoBehaviour
                 LockReleaseCheck();
                 LockState();
                 Move();
+                Spit();
                 break;
             case MoveState.Airborne:
                 break;
@@ -278,7 +284,8 @@ public class PlayerController : MonoBehaviour
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
-        _spitButtonHeld = _rewiredPlayer.GetButton("Spit");
+        _spitButton = _rewiredPlayer.GetButtonDown("Spit");
+        _lockButtonHeld = _rewiredPlayer.GetButton("Lock");
     }
 
     
@@ -289,7 +296,8 @@ public class PlayerController : MonoBehaviour
         _rightStickVector = Vector3.zero;
 
         _lungeButton = false;
-        _spitButtonHeld = false;
+        _spitButton = false;
+        _lockButtonHeld = false;
 
         _bufferFrames = BufferFrames;
     }
@@ -420,9 +428,8 @@ public class PlayerController : MonoBehaviour
     //Checks to see if you press the spit button within range of an enemy, which begins the lockon process
     private void LockOnCheck()
     {
-        if (_spitButtonHeld)
+        if (_lockButtonHeld)
         {
-            Debug.Log("Button down  = " + _spitButtonHeld);
             _moveState = MoveState.LockOn;
         }
     }
@@ -452,21 +459,28 @@ public class PlayerController : MonoBehaviour
 
     private void LockReleaseCheck()
     {
-        if (!_spitButtonHeld) //when you fire
+        if (!_lockButtonHeld) //release to return to Neutral
         {
-            Spit();
+            StateTransition(MoveState.Neutral, 0);
         }
     }
 
     private void Spit()
     {
-        GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
-        spit.transform.position = Spitter.position;
-        spit.transform.rotation = Spitter.rotation;
-        spit.GetComponent<SpitHitBox>().TeamID = TeamID;
-        spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
-        _stateTimer = SpitTime;
-        _moveState = MoveState.Spitting;
+        _spitTimer -= Time.deltaTime;
+        if (_spitButton && _spitTimer <= 0)
+        {
+            //Reset input and timer
+            _spitButton = false;
+            _spitTimer = SpitTime;
+            
+            //Instantiate spit and fire it
+            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
+            spit.transform.position = Spitter.position;
+            spit.transform.rotation = Spitter.rotation;
+            spit.GetComponent<SpitHitBox>().TeamID = TeamID;
+            spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
+        }
     }
     
     private void SpitState()

@@ -339,6 +339,15 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 14
+      _name: Lock
+      _type: 1
+      _descriptiveName: Lock On
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Default
@@ -348,7 +357,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 08000000090000000a0000000b0000000c0000000d000000
+        actionIds: 08000000090000000a0000000b0000000c0000000d0000000e000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -522,7 +531,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 14
         _elementType: 1
         _elementIdentifierId: 11
         _axisRange: 0
@@ -533,7 +542,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 12
+        _actionId: 13
         _elementType: 1
         _elementIdentifierId: 13
         _axisRange: 0
@@ -1018,7 +1027,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 5
-    actionIdCounter: 14
+    actionIdCounter: 15
     actionCategoryIdCounter: 1
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 5
