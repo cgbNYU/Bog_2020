@@ -88,7 +88,14 @@ public class Nest : MonoBehaviour
 
     private void RespawnPlayer(int playerID, int eggID)
     {
-        PlayerController pc = GameManager.GM.PlayerControllers[playerID];
+        PlayerController pc = null;
+        foreach (var playerController in GameManager.GM.PlayerControllers)
+        {
+            if (playerController.PlayerID == playerID)
+            {
+                pc = playerController;
+            }
+        }
         
         //Move player transform to egg and set physics to zero
         Rigidbody pc_rb = pc.GetComponent<Rigidbody>();

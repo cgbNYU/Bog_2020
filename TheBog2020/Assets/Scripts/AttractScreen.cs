@@ -29,6 +29,7 @@ public class AttractScreen: MonoBehaviour {
     public void StopVideo()
     {
         rawImage.CrossFadeAlpha(0f,3f,true);
+        rawImage.color = Color.black;
         videoPlayer.Stop();
         audioSource.Stop();
     }
