@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     public int TeamID; //0 = red, 1 = blue
     public Collider LungeCollider;
     public Transform Spitter;
+    public float InvulnerableTime;
     
     //Private
     private Vector3 _leftStickVector;
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
     public enum MoveState
     {
         Neutral,
+        Invulnerable,
         Lunging,
         LockOn,
         Spitting,
@@ -218,6 +220,13 @@ public class PlayerController : MonoBehaviour
                 LockOnCheck();
                 Move();
                 break;
+            case MoveState.Invulnerable:
+                _animator.Play("TestAnim_Idle");
+                AntennaeRadar();
+                LockOnCheck();
+                Move();
+                ReturnToNeutralCountdown();
+                break;
             case MoveState.Lunging:
                 LungeState();
                 break;
@@ -332,7 +341,15 @@ public class PlayerController : MonoBehaviour
         _rb.AddTorque(rotationDragForce);
     }
 
-    
+    private void ReturnToNeutralCountdown()
+    {
+        _stateTimer -= Time.deltaTime;
+        if (_stateTimer <= 0)
+        {
+            
+            _moveState = MoveState.Neutral;
+        }
+    }
 
     #endregion
 
@@ -468,11 +485,14 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
-        _rb.velocity = Vector3.zero;
-        _stateTimer = DeathTime;
-        _animator.Play("TestAnim_Death");
-        _moveState = MoveState.Dead;
-        _eggHolder.DropEgg();
+        if (CheckState() != MoveState.Invulnerable)
+        {
+            _rb.velocity = Vector3.zero;
+            _stateTimer = DeathTime;
+            _animator.Play("TestAnim_Death");
+            _moveState = MoveState.Dead;
+            _eggHolder.DropEgg();
+        }
     }
 
     public void DeathState()
