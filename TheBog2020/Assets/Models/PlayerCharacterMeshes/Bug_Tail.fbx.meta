@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 74635834c050f436a8e5e5fce861c354
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      74: 3856927224295365556
+    second: Tail|Antennae_LeftAction
+  - first:
+      74: -2241195785919524548
+    second: Tail|Antennae_RightAction
+  - first:
+      74: 2299473564671759716
+    second: Tail|Antennae_Top_LeftAction
+  - first:
+      74: 6659358925222658254
+    second: Tail|Antennae_Top_RightAction
+  - first:
+      74: 1265254866337863635
+    second: Tail|BodyAction
+  - first:
+      74: 643276368142531649
+    second: Tail|Eye CenterAction
+  - first:
+      74: 8738449285700402696
+    second: Tail|Eye RightAction
+  - first:
+      74: 1793113986230098807
+    second: Tail|Eye RightAction.001
+  - first:
+      74: -7920246809142005563
+    second: Tail|HeadAction
+  - first:
+      74: -5399506250128814842
+    second: Tail|Left_Leg_MiddleAction
+  - first:
+      74: -1904775577331192918
+    second: Tail|LLB_ElbowAction
+  - first:
+      74: -747187247223228736
+    second: Tail|LLB_HandAction
+  - first:
+      74: -3780609226313292785
+    second: Tail|LLB_HumerusAction
+  - first:
+      74: 7957393026059228167
+    second: Tail|LLB_PhalangesAction
+  - first:
+      74: 8518585682833016510
+    second: Tail|LLB_ShoulderAction
+  - first:
+      74: 2720373020064642564
+    second: Tail|LLB_UlnaAction
+  - first:
+      74: 9153752165901704142
+    second: Tail|LLB_WristAction
+  - first:
+      74: -7299274654233576304
+    second: Tail|LLF_Hand.001Action
+  - first:
+      74: 2281968358944590553
+    second: Tail|LLF_Phalanges.001Action
+  - first:
+      74: 6673765435645384572
+    second: Tail|LLF_Ulna.001Action
+  - first:
+      74: 8256895316369852146
+    second: Tail|LLF_Wrist.001Action
+  - first:
+      74: -5043079594347666057
+    second: Tail|LLM_ElbowAction
+  - first:
+      74: 6009557995289864854
+    second: Tail|LLM_HandAction
+  - first:
+      74: -2395277048081373617
+    second: Tail|LLM_HumerusAction
+  - first:
+      74: 1439288277358125752
+    second: Tail|LLM_PhalangesAction
+  - first:
+      74: -1351116693796270017
+    second: Tail|LLM_UlnaAction
+  - first:
+      74: -8155603733910931788
+    second: Tail|LLM_WristAction
+  - first:
+      74: -2449393401092629362
+    second: Tail|NeckAction
+  - first:
+      74: 2488724869324043058
+    second: Tail|Right_Wing_Back.002Action.001
+  - first:
+      74: 80698404665388209
+    second: Tail|Right_Wing_Back.002Action.002
+  - first:
+      74: -8528913596160328373
+    second: Tail|Right_Wing_BackAction.003
+  - first:
+      74: 4600770970921378556
+    second: Tail|Right_Wing_BackAction.004
+  - first:
+      74: 3847514366064695939
+    second: Tail|SphereAction
+  - first:
+      74: -1441341962646636864
+    second: Tail|SphereAction.001
+  - first:
+      74: -4000906475703881441
+    second: Tail|SphereAction.002
+  - first:
+      74: 8993404091984281910
+    second: Tail|SphereAction.003
+  - first:
+      74: 1992204918273120305
+    second: Tail|Tail_BallAction
+  - first:
+      74: 8791024487959501415
+    second: Tail|TailAction
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
