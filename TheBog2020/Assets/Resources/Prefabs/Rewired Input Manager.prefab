@@ -195,7 +195,7 @@ MonoBehaviour:
       _defaultMouseMaps: []
       _defaultKeyboardMaps:
       - _enabled: 1
-        _categoryId: 1
+        _categoryId: 3
         _layoutId: 0
       _defaultCustomControllerMaps: []
       _startingCustomControllers: []
@@ -245,7 +245,7 @@ MonoBehaviour:
       _defaultMouseMaps: []
       _defaultKeyboardMaps:
       - _enabled: 1
-        _categoryId: 3
+        _categoryId: 1
         _layoutId: 0
       _defaultCustomControllerMaps: []
       _startingCustomControllers: []
@@ -339,6 +339,15 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 14
+      _name: Lock
+      _type: 1
+      _descriptiveName: Lock On
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Default
@@ -348,7 +357,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 08000000090000000a0000000b0000000c0000000d000000
+        actionIds: 08000000090000000a0000000b0000000c0000000d0000000e000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -522,7 +531,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 13
+        _actionId: 14
         _elementType: 1
         _elementIdentifierId: 11
         _axisRange: 0
@@ -533,7 +542,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 12
+        _actionId: 13
         _elementType: 1
         _elementIdentifierId: 13
         _axisRange: 0
@@ -640,7 +649,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 12
+        _actionId: 14
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
@@ -763,7 +772,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 99
+        _keyboardKeyCode: 57
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -774,7 +783,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 118
+        _keyboardKeyCode: 61
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -880,7 +889,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 98
+        _keyboardKeyCode: 91
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -891,7 +900,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 110
+        _keyboardKeyCode: 44
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -997,7 +1006,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 109
+        _keyboardKeyCode: 98
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -1008,7 +1017,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 44
+        _keyboardKeyCode: 109
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -1018,7 +1027,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 5
-    actionIdCounter: 14
+    actionIdCounter: 15
     actionCategoryIdCounter: 1
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 5

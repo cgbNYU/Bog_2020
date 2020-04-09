@@ -959,6 +959,11 @@ PrefabInstance:
       propertyPath: BufferFrames
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8747040569963851985, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90c14b2ab98cf114fb9136693ef43bf3, type: 3}
 --- !u!1 &499430190
@@ -1123,6 +1128,11 @@ PrefabInstance:
     - target: {fileID: 3517813526579584062, guid: f59729edb81ca8f459bf280ed7495ed9,
         type: 3}
       propertyPath: PlayerID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460575622133737380, guid: f59729edb81ca8f459bf280ed7495ed9,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1412,6 +1422,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684171219387840975, guid: a5d3413677af432429ce7f3383ba08a2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d3413677af432429ce7f3383ba08a2, type: 3}
@@ -3722,6 +3737,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866149800732824073, guid: 494b2ed095dd8ae468342099f401756c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 494b2ed095dd8ae468342099f401756c, type: 3}

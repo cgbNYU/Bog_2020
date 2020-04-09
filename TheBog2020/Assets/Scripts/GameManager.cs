@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Game Manager tracks the arc of each game
@@ -16,7 +17,21 @@ public class GameManager : MonoBehaviour
     private Nest[] _nests;
     public PlayerController[] PlayerControllers;
     
-    // Start is called before the first frame update
+    //Tuning
+    public PlayerControllerTuning NewTune;
+    
+    //State Machine
+    private enum GameState
+    {
+        AttractScreen,
+        Title,
+        MatchInProgress,
+        MatchEnd
+    }
+
+    [SerializeField]private GameState _gameState;
+    
+    
     void Start()
     {
         //Singleton
@@ -29,17 +44,62 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        InitializeArrays();
-        GameStart();
+        //Initialize State
+        _gameState = GameState.AttractScreen;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backslash))
+        switch (_gameState)
         {
-            PlayerControllers[0].KillPlayer();
+            case GameState.AttractScreen:
+                if (Input.anyKey)
+                {
+                    GameObject.Find("AttractScreen_Player").GetComponent<AttractScreen>().StopVideo();
+                    //Play bgm
+                    AudioManager.AM.GetComponent<AudioSource>().Play(); 
+                    _gameState = GameState.Title;
+                }
+                break;
+            case GameState.Title:
+                if (UIManager.UM.AllPlayersReady())
+                {
+                    InitializeArrays();
+                    GameStart(); 
+                    UIManager.UM.CloseTutorialPopups();
+                    UIManager.UM.ClearAllUIElements();
+                    _gameState = GameState.MatchInProgress;
+                }
+                break;
+            case GameState.MatchInProgress:
+                //TODO:remove when done. Debug kill player one for testing
+                if (Input.GetKeyDown(KeyCode.Backslash))
+                {
+                    PlayerControllers[0].KillPlayer();
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {
+                    Debug.Log("Tuning updated");
+                        foreach (PlayerController pc in PlayerControllers)
+                        {
+                            pc.InitializePCTuning(NewTune);
+                        }
+                    
+                }
+                break;
+            case GameState.MatchEnd:
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    //TODO: Reset the game. temp: reloading scene
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    _gameState = GameState.Title;
+                }
+                break;
+            default: 
+                Debug.Log("Game Manager State Machine broke.");
+                break;
         }
     }
 
@@ -51,12 +111,13 @@ public class GameManager : MonoBehaviour
         _nests[1] = GameObject.Find("NestBlue").GetComponent<Nest>();
         
         //Player array
-        PlayerControllers = new PlayerController[4];
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        PlayerControllers = new PlayerController[players.Length];
 
-        PlayerControllers[0] = GameObject.Find("Player1").GetComponent<PlayerController>();
-        PlayerControllers[1] = GameObject.Find("Player2").GetComponent<PlayerController>();
-        PlayerControllers[2] = GameObject.Find("Player3").GetComponent<PlayerController>();
-        PlayerControllers[3] = GameObject.Find("Player4").GetComponent<PlayerController>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            PlayerControllers[i] = players[i].GetComponent<PlayerController>();
+        }
     }
 
     private void GameStart()
@@ -70,9 +131,36 @@ public class GameManager : MonoBehaviour
         //Reset anglerfish position
         
         //Select player spawn eggs
-        
+
         //countdown
         
         //Start match
     }
+
+    #region Public Functions
+    
+    //Called from an object that is destroying an egg (eg. the whirlpool)
+    public void DestroyEgg(int teamId, Egg egg)
+    {
+        _nests[teamId].DestroyEgg(egg);
+    }
+
+    public void EndGame(int losingTeamId)
+    {
+        UIManager.UM.DisplayEndGameUI(losingTeamId);
+        _gameState = GameState.MatchEnd;
+    }
+
+    public void UpdateEggsRemainingUI(int teamID, int eggsRemaining)
+    {
+        UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
+    }
+    
+    
+
+    #endregion
+
+    #region Inspector
+
+    #endregion
 }
