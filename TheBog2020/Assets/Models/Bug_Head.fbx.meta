@@ -1,0 +1,872 @@
+fileFormatVersion: 2
+guid: 37ff6f6541d864a3d831e365c9fab693
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      74: -4018995767397831410
+    second: Eye Center|Antennae_LeftAction
+  - first:
+      74: -8550271238553955120
+    second: Eye Center|Antennae_RightAction
+  - first:
+      74: 4174082660434825696
+    second: Eye Center|Antennae_Top_LeftAction
+  - first:
+      74: 5404093955766021932
+    second: Eye Center|Antennae_Top_RightAction
+  - first:
+      74: 1319788763816250836
+    second: Eye Center|BodyAction
+  - first:
+      74: -1245539485648942527
+    second: Eye Center|Eye CenterAction
+  - first:
+      74: 5332027879188808097
+    second: Eye Center|Eye RightAction
+  - first:
+      74: 4939970378256878808
+    second: Eye Center|Eye RightAction.001
+  - first:
+      74: 7439970070443474268
+    second: Eye Center|HeadAction
+  - first:
+      74: -799474526648591922
+    second: Eye Center|Left_Leg_MiddleAction
+  - first:
+      74: -4012396037867366719
+    second: Eye Center|LLB_ElbowAction
+  - first:
+      74: 1278057442559860343
+    second: Eye Center|LLB_HandAction
+  - first:
+      74: 6497061221560848477
+    second: Eye Center|LLB_HumerusAction
+  - first:
+      74: 4339287969551897549
+    second: Eye Center|LLB_PhalangesAction
+  - first:
+      74: 867138181976996280
+    second: Eye Center|LLB_ShoulderAction
+  - first:
+      74: -4593624622813051174
+    second: Eye Center|LLB_UlnaAction
+  - first:
+      74: -5716597032297386385
+    second: Eye Center|LLB_WristAction
+  - first:
+      74: -3869892538520783071
+    second: Eye Center|LLF_Hand.001Action
+  - first:
+      74: -4881279532629650695
+    second: Eye Center|LLF_Phalanges.001Action
+  - first:
+      74: -8958302023778532244
+    second: Eye Center|LLF_Ulna.001Action
+  - first:
+      74: -493121683569120139
+    second: Eye Center|LLF_Wrist.001Action
+  - first:
+      74: -5257893021541187101
+    second: Eye Center|LLM_ElbowAction
+  - first:
+      74: 3061343595698835273
+    second: Eye Center|LLM_HandAction
+  - first:
+      74: -8031088143702199579
+    second: Eye Center|LLM_HumerusAction
+  - first:
+      74: -7834214452020451752
+    second: Eye Center|LLM_PhalangesAction
+  - first:
+      74: 5421305868010435890
+    second: Eye Center|LLM_UlnaAction
+  - first:
+      74: 6857207989521499059
+    second: Eye Center|LLM_WristAction
+  - first:
+      74: -4801053872673121043
+    second: Eye Center|NeckAction
+  - first:
+      74: -8767366373701409409
+    second: Eye Center|Right_Wing_Back.002Action.001
+  - first:
+      74: 6232456099768668098
+    second: Eye Center|Right_Wing_Back.002Action.002
+  - first:
+      74: 4603471668754910228
+    second: Eye Center|Right_Wing_BackAction.003
+  - first:
+      74: 2893380305500519445
+    second: Eye Center|Right_Wing_BackAction.004
+  - first:
+      74: 8373113474967873666
+    second: Eye Center|SphereAction
+  - first:
+      74: -3925637631417784871
+    second: Eye Center|SphereAction.001
+  - first:
+      74: -5773822070911102412
+    second: Eye Center|SphereAction.002
+  - first:
+      74: -8691415597515025440
+    second: Eye Center|SphereAction.003
+  - first:
+      74: 4291802169580470862
+    second: Eye Center|TailAction
+  - first:
+      74: -6845015631397143086
+    second: Eye Right|Antennae_LeftAction
+  - first:
+      74: -2236145897555372498
+    second: Eye Right|Antennae_RightAction
+  - first:
+      74: -411373638716766133
+    second: Eye Right|Antennae_Top_LeftAction
+  - first:
+      74: 8410769640053791281
+    second: Eye Right|Antennae_Top_RightAction
+  - first:
+      74: -2587638137597210204
+    second: Eye Right|BodyAction
+  - first:
+      74: 7736172546942847042
+    second: Eye Right|Eye CenterAction
+  - first:
+      74: -648781141719805171
+    second: Eye Right|Eye RightAction
+  - first:
+      74: -5705896591619936064
+    second: Eye Right|Eye RightAction.001
+  - first:
+      74: -1320519377198697337
+    second: Eye Right|HeadAction
+  - first:
+      74: -1668730809146591104
+    second: Eye Right|Left_Leg_MiddleAction
+  - first:
+      74: -3096047356904277829
+    second: Eye Right|LLB_ElbowAction
+  - first:
+      74: 7901886366036370442
+    second: Eye Right|LLB_HandAction
+  - first:
+      74: 5566114392084603555
+    second: Eye Right|LLB_HumerusAction
+  - first:
+      74: -6342156175539025535
+    second: Eye Right|LLB_PhalangesAction
+  - first:
+      74: -2156190270702071381
+    second: Eye Right|LLB_ShoulderAction
+  - first:
+      74: -3206801201437011074
+    second: Eye Right|LLB_UlnaAction
+  - first:
+      74: 3132562945808050819
+    second: Eye Right|LLB_WristAction
+  - first:
+      74: -1723105505152147341
+    second: Eye Right|LLF_Hand.001Action
+  - first:
+      74: 4647929239004787557
+    second: Eye Right|LLF_Phalanges.001Action
+  - first:
+      74: -215719617764330322
+    second: Eye Right|LLF_Ulna.001Action
+  - first:
+      74: -2595533900759854660
+    second: Eye Right|LLF_Wrist.001Action
+  - first:
+      74: -4642091834439393191
+    second: Eye Right|LLM_ElbowAction
+  - first:
+      74: 6003512319341476834
+    second: Eye Right|LLM_HandAction
+  - first:
+      74: 3154257280864987379
+    second: Eye Right|LLM_HumerusAction
+  - first:
+      74: -286758247660865654
+    second: Eye Right|LLM_PhalangesAction
+  - first:
+      74: -887024642293026458
+    second: Eye Right|LLM_UlnaAction
+  - first:
+      74: -7746480484223873462
+    second: Eye Right|LLM_WristAction
+  - first:
+      74: 3332260576803039123
+    second: Eye Right|NeckAction
+  - first:
+      74: -2298806500809692578
+    second: Eye Right|Right_Wing_Back.002Action.001
+  - first:
+      74: 215660056164381764
+    second: Eye Right|Right_Wing_Back.002Action.002
+  - first:
+      74: -4405094162068691288
+    second: Eye Right|Right_Wing_BackAction.003
+  - first:
+      74: 7851469682289585200
+    second: Eye Right|Right_Wing_BackAction.004
+  - first:
+      74: -5779176443879691859
+    second: Eye Right|SphereAction
+  - first:
+      74: -777384996175407060
+    second: Eye Right|SphereAction.001
+  - first:
+      74: -6616236993203724751
+    second: Eye Right|SphereAction.002
+  - first:
+      74: 9055480591713244060
+    second: Eye Right|SphereAction.003
+  - first:
+      74: -1564800220458343315
+    second: Eye Right|TailAction
+  - first:
+      74: 3941527288949534423
+    second: Antennae_Top_Right|Antennae_LeftAction
+  - first:
+      74: 5875600257204842384
+    second: Antennae_Top_Right|Antennae_RightAction
+  - first:
+      74: 7374849059933821292
+    second: Antennae_Top_Right|Antennae_Top_LeftAction
+  - first:
+      74: 509052615856191846
+    second: Antennae_Top_Right|Antennae_Top_RightAction
+  - first:
+      74: -1843982146895897117
+    second: Antennae_Top_Right|BodyAction
+  - first:
+      74: -1168865658075582040
+    second: Antennae_Top_Right|Eye CenterAction
+  - first:
+      74: 1829090522379528202
+    second: Antennae_Top_Right|Eye RightAction
+  - first:
+      74: -8913296005160436746
+    second: Antennae_Top_Right|Eye RightAction.001
+  - first:
+      74: -1942431992984846291
+    second: Antennae_Top_Right|HeadAction
+  - first:
+      74: -5196196195726888066
+    second: Antennae_Top_Right|Left_Leg_MiddleAction
+  - first:
+      74: 6645300016968043475
+    second: Antennae_Top_Right|LLB_ElbowAction
+  - first:
+      74: 8960011691749339730
+    second: Antennae_Top_Right|LLB_HandAction
+  - first:
+      74: -6904569860495287944
+    second: Antennae_Top_Right|LLB_HumerusAction
+  - first:
+      74: -8585088151189453496
+    second: Antennae_Top_Right|LLB_PhalangesAction
+  - first:
+      74: -6673110096680027110
+    second: Antennae_Top_Right|LLB_ShoulderAction
+  - first:
+      74: 7499674939611422145
+    second: Antennae_Top_Right|LLB_UlnaAction
+  - first:
+      74: -8732183303968904596
+    second: Antennae_Top_Right|LLB_WristAction
+  - first:
+      74: -5390135529416526957
+    second: Antennae_Top_Right|LLF_Hand.001Action
+  - first:
+      74: -4578645649849147381
+    second: Antennae_Top_Right|LLF_Phalanges.001Action
+  - first:
+      74: -281291327067325758
+    second: Antennae_Top_Right|LLF_Ulna.001Action
+  - first:
+      74: -5569733500368394253
+    second: Antennae_Top_Right|LLF_Wrist.001Action
+  - first:
+      74: -4989773927099318825
+    second: Antennae_Top_Right|LLM_ElbowAction
+  - first:
+      74: 4531917119779954745
+    second: Antennae_Top_Right|LLM_HandAction
+  - first:
+      74: 725390392350737032
+    second: Antennae_Top_Right|LLM_HumerusAction
+  - first:
+      74: 1439567167821864339
+    second: Antennae_Top_Right|LLM_PhalangesAction
+  - first:
+      74: -4760362136959460964
+    second: Antennae_Top_Right|LLM_UlnaAction
+  - first:
+      74: -527386182939573096
+    second: Antennae_Top_Right|LLM_WristAction
+  - first:
+      74: 1792963006044268929
+    second: Antennae_Top_Right|NeckAction
+  - first:
+      74: 5923832842603776561
+    second: Antennae_Top_Right|Right_Wing_Back.002Action.001
+  - first:
+      74: -3062046658812183417
+    second: Antennae_Top_Right|Right_Wing_Back.002Action.002
+  - first:
+      74: 5756334040126006258
+    second: Antennae_Top_Right|Right_Wing_BackAction.003
+  - first:
+      74: 5513640629922612505
+    second: Antennae_Top_Right|Right_Wing_BackAction.004
+  - first:
+      74: 4759340451884128287
+    second: Antennae_Top_Right|SphereAction
+  - first:
+      74: -5321374592317507265
+    second: Antennae_Top_Right|SphereAction.001
+  - first:
+      74: 7330811408598661800
+    second: Antennae_Top_Right|SphereAction.002
+  - first:
+      74: -3122955735967456332
+    second: Antennae_Top_Right|SphereAction.003
+  - first:
+      74: -2013549293974995764
+    second: Antennae_Top_Right|TailAction
+  - first:
+      74: 3962768900770518792
+    second: Antennae_Top_Left|Antennae_LeftAction
+  - first:
+      74: -8505956973783937839
+    second: Antennae_Top_Left|Antennae_RightAction
+  - first:
+      74: -6241696275152434306
+    second: Antennae_Top_Left|Antennae_Top_LeftAction
+  - first:
+      74: 8428154576334054378
+    second: Antennae_Top_Left|Antennae_Top_RightAction
+  - first:
+      74: -5202287342694518527
+    second: Antennae_Top_Left|BodyAction
+  - first:
+      74: -4049442910022637509
+    second: Antennae_Top_Left|Eye CenterAction
+  - first:
+      74: 7110549679838873142
+    second: Antennae_Top_Left|Eye RightAction
+  - first:
+      74: 8757345159561742827
+    second: Antennae_Top_Left|Eye RightAction.001
+  - first:
+      74: 3123258877055512856
+    second: Antennae_Top_Left|HeadAction
+  - first:
+      74: 8402971362866139776
+    second: Antennae_Top_Left|Left_Leg_MiddleAction
+  - first:
+      74: -1412386765592686339
+    second: Antennae_Top_Left|LLB_ElbowAction
+  - first:
+      74: 782287321732618922
+    second: Antennae_Top_Left|LLB_HandAction
+  - first:
+      74: -3219681306869749774
+    second: Antennae_Top_Left|LLB_HumerusAction
+  - first:
+      74: 7837132588746531442
+    second: Antennae_Top_Left|LLB_PhalangesAction
+  - first:
+      74: 3153295958052272003
+    second: Antennae_Top_Left|LLB_ShoulderAction
+  - first:
+      74: -1146643082481351942
+    second: Antennae_Top_Left|LLB_UlnaAction
+  - first:
+      74: 1513578971808269004
+    second: Antennae_Top_Left|LLB_WristAction
+  - first:
+      74: -2801068299126021328
+    second: Antennae_Top_Left|LLF_Hand.001Action
+  - first:
+      74: 4456805742580031650
+    second: Antennae_Top_Left|LLF_Phalanges.001Action
+  - first:
+      74: -7488362113077970427
+    second: Antennae_Top_Left|LLF_Ulna.001Action
+  - first:
+      74: 6338007216429278500
+    second: Antennae_Top_Left|LLF_Wrist.001Action
+  - first:
+      74: 722966234126556882
+    second: Antennae_Top_Left|LLM_ElbowAction
+  - first:
+      74: 8376238891517661254
+    second: Antennae_Top_Left|LLM_HandAction
+  - first:
+      74: -2263450217562114951
+    second: Antennae_Top_Left|LLM_HumerusAction
+  - first:
+      74: 711857295970020801
+    second: Antennae_Top_Left|LLM_PhalangesAction
+  - first:
+      74: 1953625634429885637
+    second: Antennae_Top_Left|LLM_UlnaAction
+  - first:
+      74: 2945098645812788738
+    second: Antennae_Top_Left|LLM_WristAction
+  - first:
+      74: -4295389408863473405
+    second: Antennae_Top_Left|NeckAction
+  - first:
+      74: 1647960934669991284
+    second: Antennae_Top_Left|Right_Wing_Back.002Action.001
+  - first:
+      74: 7479609296146187689
+    second: Antennae_Top_Left|Right_Wing_Back.002Action.002
+  - first:
+      74: 4641803647998625152
+    second: Antennae_Top_Left|Right_Wing_BackAction.003
+  - first:
+      74: 917702129453887557
+    second: Antennae_Top_Left|Right_Wing_BackAction.004
+  - first:
+      74: 4415540546667909811
+    second: Antennae_Top_Left|SphereAction
+  - first:
+      74: 351120447181665374
+    second: Antennae_Top_Left|SphereAction.001
+  - first:
+      74: -6054096165699685409
+    second: Antennae_Top_Left|SphereAction.002
+  - first:
+      74: -8482189604251140461
+    second: Antennae_Top_Left|SphereAction.003
+  - first:
+      74: -2295441974064370654
+    second: Antennae_Top_Left|TailAction
+  - first:
+      74: 6211782047881685674
+    second: Antennae_Left|Antennae_LeftAction
+  - first:
+      74: 5268237391443088571
+    second: Antennae_Left|Antennae_RightAction
+  - first:
+      74: 6942488720601024816
+    second: Antennae_Left|Antennae_Top_LeftAction
+  - first:
+      74: 837462139109831700
+    second: Antennae_Left|Antennae_Top_RightAction
+  - first:
+      74: 8219195672854260428
+    second: Antennae_Left|BodyAction
+  - first:
+      74: 2279402611286541843
+    second: Antennae_Left|Eye CenterAction
+  - first:
+      74: -7410933101119867748
+    second: Antennae_Left|Eye RightAction
+  - first:
+      74: 4213833103034850755
+    second: Antennae_Left|Eye RightAction.001
+  - first:
+      74: -8657123642648758456
+    second: Antennae_Left|HeadAction
+  - first:
+      74: 8214530995967033892
+    second: Antennae_Left|Left_Leg_MiddleAction
+  - first:
+      74: 9050103978346098764
+    second: Antennae_Left|LLB_ElbowAction
+  - first:
+      74: 8530188200601272202
+    second: Antennae_Left|LLB_HandAction
+  - first:
+      74: -8632833015431311415
+    second: Antennae_Left|LLB_HumerusAction
+  - first:
+      74: 3044970433955605423
+    second: Antennae_Left|LLB_PhalangesAction
+  - first:
+      74: -4802906684205158043
+    second: Antennae_Left|LLB_ShoulderAction
+  - first:
+      74: -4686063270903083432
+    second: Antennae_Left|LLB_UlnaAction
+  - first:
+      74: -5462386863745599366
+    second: Antennae_Left|LLB_WristAction
+  - first:
+      74: 4507887735544295204
+    second: Antennae_Left|LLF_Hand.001Action
+  - first:
+      74: 125504761104560622
+    second: Antennae_Left|LLF_Phalanges.001Action
+  - first:
+      74: 853300259459463463
+    second: Antennae_Left|LLF_Ulna.001Action
+  - first:
+      74: 5113061538913250175
+    second: Antennae_Left|LLF_Wrist.001Action
+  - first:
+      74: 4018340800183373424
+    second: Antennae_Left|LLM_ElbowAction
+  - first:
+      74: 3594541792896882868
+    second: Antennae_Left|LLM_HandAction
+  - first:
+      74: -8771593060434979193
+    second: Antennae_Left|LLM_HumerusAction
+  - first:
+      74: -6422477434329783758
+    second: Antennae_Left|LLM_PhalangesAction
+  - first:
+      74: 6380953603720586910
+    second: Antennae_Left|LLM_UlnaAction
+  - first:
+      74: -1846987824194155374
+    second: Antennae_Left|LLM_WristAction
+  - first:
+      74: -5587386087524708989
+    second: Antennae_Left|NeckAction
+  - first:
+      74: -1127508626865703268
+    second: Antennae_Left|Right_Wing_Back.002Action.001
+  - first:
+      74: -4072692668873970926
+    second: Antennae_Left|Right_Wing_Back.002Action.002
+  - first:
+      74: 8258520616372142057
+    second: Antennae_Left|Right_Wing_BackAction.003
+  - first:
+      74: -9199798484386227935
+    second: Antennae_Left|Right_Wing_BackAction.004
+  - first:
+      74: -5268447001325588869
+    second: Antennae_Left|SphereAction
+  - first:
+      74: 4968109568150024261
+    second: Antennae_Left|SphereAction.001
+  - first:
+      74: 7174036805372548396
+    second: Antennae_Left|SphereAction.002
+  - first:
+      74: -572227518980048513
+    second: Antennae_Left|SphereAction.003
+  - first:
+      74: -196982880159243171
+    second: Antennae_Left|TailAction
+  - first:
+      74: -4708267317517880596
+    second: Antennae_Right|Antennae_LeftAction
+  - first:
+      74: -5200083445979898575
+    second: Antennae_Right|Antennae_RightAction
+  - first:
+      74: -8866852114348799677
+    second: Antennae_Right|Antennae_Top_LeftAction
+  - first:
+      74: 7416487106029742778
+    second: Antennae_Right|Antennae_Top_RightAction
+  - first:
+      74: -4529138789445918573
+    second: Antennae_Right|BodyAction
+  - first:
+      74: -6733202367755961214
+    second: Antennae_Right|Eye CenterAction
+  - first:
+      74: -6066133958266578629
+    second: Antennae_Right|Eye RightAction
+  - first:
+      74: -8052629086485540718
+    second: Antennae_Right|Eye RightAction.001
+  - first:
+      74: -3485070205959244995
+    second: Antennae_Right|HeadAction
+  - first:
+      74: 4199496257016566431
+    second: Antennae_Right|Left_Leg_MiddleAction
+  - first:
+      74: 468258641495224446
+    second: Antennae_Right|LLB_ElbowAction
+  - first:
+      74: 1918382388730511148
+    second: Antennae_Right|LLB_HandAction
+  - first:
+      74: -1778049104147219305
+    second: Antennae_Right|LLB_HumerusAction
+  - first:
+      74: -8381877589131264895
+    second: Antennae_Right|LLB_PhalangesAction
+  - first:
+      74: 5784767580159598754
+    second: Antennae_Right|LLB_ShoulderAction
+  - first:
+      74: -479312553781592762
+    second: Antennae_Right|LLB_UlnaAction
+  - first:
+      74: 5711109750804755193
+    second: Antennae_Right|LLB_WristAction
+  - first:
+      74: -1518618538260601227
+    second: Antennae_Right|LLF_Hand.001Action
+  - first:
+      74: 5791351491274673112
+    second: Antennae_Right|LLF_Phalanges.001Action
+  - first:
+      74: 7883978267105285923
+    second: Antennae_Right|LLF_Ulna.001Action
+  - first:
+      74: -5199619843536437947
+    second: Antennae_Right|LLF_Wrist.001Action
+  - first:
+      74: 5543195135120127054
+    second: Antennae_Right|LLM_ElbowAction
+  - first:
+      74: -2355204204377264764
+    second: Antennae_Right|LLM_HandAction
+  - first:
+      74: 4769625111721789475
+    second: Antennae_Right|LLM_HumerusAction
+  - first:
+      74: 5569286071229806679
+    second: Antennae_Right|LLM_PhalangesAction
+  - first:
+      74: 1407819703587583352
+    second: Antennae_Right|LLM_UlnaAction
+  - first:
+      74: 7804421983180492199
+    second: Antennae_Right|LLM_WristAction
+  - first:
+      74: 251239904285519851
+    second: Antennae_Right|NeckAction
+  - first:
+      74: -8451082456772727866
+    second: Antennae_Right|Right_Wing_Back.002Action.001
+  - first:
+      74: -1564803570911260780
+    second: Antennae_Right|Right_Wing_Back.002Action.002
+  - first:
+      74: 1469161391061768828
+    second: Antennae_Right|Right_Wing_BackAction.003
+  - first:
+      74: 3771906626343575962
+    second: Antennae_Right|Right_Wing_BackAction.004
+  - first:
+      74: -7502796991748907829
+    second: Antennae_Right|SphereAction
+  - first:
+      74: -5734198397772876892
+    second: Antennae_Right|SphereAction.001
+  - first:
+      74: -6884469714647105670
+    second: Antennae_Right|SphereAction.002
+  - first:
+      74: -1993754391913191700
+    second: Antennae_Right|SphereAction.003
+  - first:
+      74: -5811907111577059756
+    second: Antennae_Right|TailAction
+  - first:
+      74: 882077538477825602
+    second: Eye Right.001|Antennae_LeftAction
+  - first:
+      74: 4494064937477523660
+    second: Eye Right.001|Antennae_RightAction
+  - first:
+      74: 7351772220399634974
+    second: Eye Right.001|Antennae_Top_LeftAction
+  - first:
+      74: -7435020272831713046
+    second: Eye Right.001|Antennae_Top_RightAction
+  - first:
+      74: 6050379703752201652
+    second: Eye Right.001|BodyAction
+  - first:
+      74: 8642791819657577464
+    second: Eye Right.001|Eye CenterAction
+  - first:
+      74: -7726331019049270524
+    second: Eye Right.001|Eye RightAction
+  - first:
+      74: -3618024235123972534
+    second: Eye Right.001|Eye RightAction.001
+  - first:
+      74: 949777513621707684
+    second: Eye Right.001|HeadAction
+  - first:
+      74: 2420705317832906407
+    second: Eye Right.001|Left_Leg_MiddleAction
+  - first:
+      74: -2486187971979675980
+    second: Eye Right.001|LLB_ElbowAction
+  - first:
+      74: 5444411380063033830
+    second: Eye Right.001|LLB_HandAction
+  - first:
+      74: -299163239383453483
+    second: Eye Right.001|LLB_HumerusAction
+  - first:
+      74: 567935543545246434
+    second: Eye Right.001|LLB_PhalangesAction
+  - first:
+      74: -4247007252227034040
+    second: Eye Right.001|LLB_ShoulderAction
+  - first:
+      74: -5411415188866853761
+    second: Eye Right.001|LLB_UlnaAction
+  - first:
+      74: -646427068892993186
+    second: Eye Right.001|LLB_WristAction
+  - first:
+      74: 1050586041842921750
+    second: Eye Right.001|LLF_Hand.001Action
+  - first:
+      74: 1840392672969202021
+    second: Eye Right.001|LLF_Phalanges.001Action
+  - first:
+      74: 134942255241260584
+    second: Eye Right.001|LLF_Ulna.001Action
+  - first:
+      74: -6459257475825499962
+    second: Eye Right.001|LLF_Wrist.001Action
+  - first:
+      74: 1436143681822161038
+    second: Eye Right.001|LLM_ElbowAction
+  - first:
+      74: 6655385550938675063
+    second: Eye Right.001|LLM_HandAction
+  - first:
+      74: 6726118063080322929
+    second: Eye Right.001|LLM_HumerusAction
+  - first:
+      74: 3607133754821436888
+    second: Eye Right.001|LLM_PhalangesAction
+  - first:
+      74: 677356835278860523
+    second: Eye Right.001|LLM_UlnaAction
+  - first:
+      74: -3775601068707147619
+    second: Eye Right.001|LLM_WristAction
+  - first:
+      74: -4304472532965107895
+    second: Eye Right.001|NeckAction
+  - first:
+      74: -1468997527049684668
+    second: Eye Right.001|Right_Wing_Back.002Action.001
+  - first:
+      74: 6230221677430668000
+    second: Eye Right.001|Right_Wing_Back.002Action.002
+  - first:
+      74: -4498410624424828813
+    second: Eye Right.001|Right_Wing_BackAction.003
+  - first:
+      74: 2930061996203087576
+    second: Eye Right.001|Right_Wing_BackAction.004
+  - first:
+      74: 6558619662128143197
+    second: Eye Right.001|SphereAction
+  - first:
+      74: -5325063546976113879
+    second: Eye Right.001|SphereAction.001
+  - first:
+      74: 1313482646456908911
+    second: Eye Right.001|SphereAction.002
+  - first:
+      74: 6792640748875660243
+    second: Eye Right.001|SphereAction.003
+  - first:
+      74: -6678485607770335851
+    second: Eye Right.001|TailAction
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
