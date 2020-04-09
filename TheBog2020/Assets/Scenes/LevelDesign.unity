@@ -5111,8 +5111,33 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.width
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8747040569963851985, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90c14b2ab98cf114fb9136693ef43bf3, type: 3}
+--- !u!1 &1331574335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 762781697857453954, guid: 90c14b2ab98cf114fb9136693ef43bf3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1331574334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1331574336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331574335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591fa9af1bce78646a7585b1a54be6e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForwardBackwardTilt: 20
+  LeftRightTilt: 20
 --- !u!4 &1338707133 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: b0af9810cdb0747bbb027399266adc30,
@@ -7791,7 +7816,7 @@ PrefabInstance:
     - target: {fileID: 5766635130370681267, guid: cff03ce02660c436da3357526681285a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5766635130370681276, guid: cff03ce02660c436da3357526681285a,
         type: 3}
