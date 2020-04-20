@@ -21,7 +21,7 @@ public class PlayerHover : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Begin raycast above player
         Vector3 rayCastOrigin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
