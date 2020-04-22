@@ -51,3 +51,7 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+#Ignore Volumetric Fog & Cloud Demo Assets
+*/[Aa]ssets/VolumetricFog/Demos
+*/[Aa]ssets/VolumetricFog/Standard Assets
