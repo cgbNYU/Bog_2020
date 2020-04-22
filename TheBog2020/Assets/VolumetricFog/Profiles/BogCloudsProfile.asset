@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 402b5b37641054d2aa7fd46be6c9bc67, type: 3}
-  m_Name: Foggy Lake
+  m_Name: BogCloudsProfile
   m_EditorClassIdentifier: 
   lightingModel: 0
   sunCopyColor: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
   noiseSparse: 0
   noiseFinalMultiplier: 1
   alpha: 1
-  color: {r: 0, g: 0.7613763, b: 0.7924528, a: 1}
+  color: {r: 0, g: 0.7882494, b: 0.8207547, a: 1}
   deepObscurance: 1
   specularColor: {r: 1, g: 1, b: 1, a: 1}
   specularThreshold: 0.907
