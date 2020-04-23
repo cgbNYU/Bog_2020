@@ -552,6 +552,13 @@ public class PlayerController : MonoBehaviour
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;
             _eggHolder.DropEgg();
+            
+            //Explode the model
+            ExplodeModel[] explodeModels = GetComponentsInChildren<ExplodeModel>();
+            foreach (ExplodeModel explodeModel in explodeModels)
+            {
+                explodeModel.Explode();
+            }
         }
     }
 
