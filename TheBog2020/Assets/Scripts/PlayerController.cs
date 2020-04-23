@@ -207,13 +207,13 @@ public class PlayerController : MonoBehaviour
         switch (_moveState)
         {
             case MoveState.Neutral:
-                AntennaeRadar();
+                //AntennaeRadar();
                 LockOnCheck();
                 Move();
                 Spit();
                 break;
             case MoveState.Invulnerable:
-                AntennaeRadar();
+                //AntennaeRadar();
                 LockOnCheck();
                 Move();
                 Spit();
