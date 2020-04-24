@@ -105,6 +105,7 @@ public class Nest : MonoBehaviour
         //Animate egg hatching
 
         //Respawn/Reactivate player model
+        pc.GetComponent<PlayerModelSpawner>().SpawnModels();
 
         //Set player controller to active state
         pc.StateTransition(PlayerController.MoveState.Invulnerable, pc.InvulnerableTime);

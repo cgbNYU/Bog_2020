@@ -7,15 +7,33 @@ public class ExplodeModel : MonoBehaviour
     //Lists to Hold the rigidbodies and the joints
     private Rigidbody[] _rbs;
     private Joint[] _joints;
+    private bool _exploded;
+    private float _timer;
     
     //Tuneables
     public float ExplodeForce;
+    public float DespawnTime;
     
     // Start is called before the first frame update
     void Start()
     {
         _rbs = GetComponentsInChildren<Rigidbody>();
         _joints = GetComponentsInChildren<Joint>();
+
+        _exploded = false;
+        _timer = DespawnTime;
+    }
+
+    private void Update()
+    {
+        if (_exploded)
+        {
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void Explode()
@@ -45,5 +63,7 @@ public class ExplodeModel : MonoBehaviour
                 rb.AddForce(direction * ExplodeForce);
             }
         }
+
+        _exploded = true;
     }
 }

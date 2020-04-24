@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _camRelativeVector;
     private Animator _animator;
     private PlayerEggHolder _eggHolder;
+    private PlayerModelSpawner _modelSpawner;
     
     #endregion
 
@@ -165,6 +166,9 @@ public class PlayerController : MonoBehaviour
         //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
         
+        //SpawnModels
+        _modelSpawner = GetComponent<PlayerModelSpawner>();
+        _modelSpawner.SpawnModels();
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
@@ -319,11 +323,11 @@ public class PlayerController : MonoBehaviour
         //Calculate Quadratic Wing Drag
         Vector3 leftWingVel = _rb.GetPointVelocity(leftWingWorldPoint);
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
-        float leftWingVelFwd = Vector3.Dot(leftWingVel, transform.right*1);
-        float rightWingVelFwd = Vector3.Dot(rightWingVel, transform.right*-1);
+        float leftWingVelFwd = Vector3.Dot(leftWingVel, _rb.transform.right*1);
+        float rightWingVelFwd = Vector3.Dot(rightWingVel, _rb.transform.right*-1);
         
-        Vector3 leftDragForce = transform.forward * leftWingVelFwd  * -0.2f;
-        Vector3 rightDragForce = transform.forward * rightWingVelFwd * -0.2f;
+        Vector3 leftDragForce = _rb.transform.forward * leftWingVelFwd  * -0.2f;
+        Vector3 rightDragForce = _rb.transform.forward * rightWingVelFwd * -0.2f;
         
         //Apply Quadratic Wing drag
         _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
@@ -340,6 +344,12 @@ public class PlayerController : MonoBehaviour
         
         //Apply Linear Rotational Drag
         _rb.AddTorque(rotationDragForce);
+    }
+
+    private void FixRotation()
+    {
+        Vector3 resetRotation = new Vector3(0, _rb.transform.localRotation.y * Mathf.Rad2Deg, 0);
+        _rb.rotation = Quaternion.Euler(resetRotation);
     }
 
     private void ReturnToNeutralCountdown()
@@ -474,10 +484,10 @@ public class PlayerController : MonoBehaviour
     private void LockState()
     {
         //If you had a target last frame or they died, unhighlight the enemy
-        if (EnemyInRange() == null && _lockTargetTransform != null)
+        /*if (EnemyInRange() == null && _lockTargetTransform != null)
         {
             UnHighlightEnemy();
-        }
+        }*/
 
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
         if (_lockTargetTransform != null) //if yes
@@ -494,7 +504,7 @@ public class PlayerController : MonoBehaviour
             _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
             
             //Highlight the enemy
-            HighlightEnemy();
+            //HighlightEnemy();
         }
         
         //Check if you release the button
@@ -505,7 +515,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
-            UnHighlightEnemy();
+            //UnHighlightEnemy();
             StateTransition(MoveState.Neutral, 0);
             
         }
@@ -547,7 +557,7 @@ public class PlayerController : MonoBehaviour
     {
         if (CheckState() != MoveState.Invulnerable)
         {
-            UnhighlightPlayer();
+            //UnhighlightPlayer();
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;
