@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 49541920337282137}
   m_Layer: 10
   m_Name: Eye Right.001
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 2918516491416883995}
   m_Layer: 10
   m_Name: Right_Wing_Back.003 (2) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 235129781220844201}
   m_Layer: 8
   m_Name: Left_Wing_Back.003 (3) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 612095063348780464}
   m_Layer: 8
   m_Name: Right_Wing_Back.003 (2) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3088,7 +3088,7 @@ GameObject:
   - component: {fileID: 5801525720700226011}
   m_Layer: 9
   m_Name: Eye Right
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3472,7 +3472,7 @@ GameObject:
   - component: {fileID: 3956068119917089564}
   m_Layer: 9
   m_Name: Right_Wing_Back.003 (2) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4498,7 +4498,7 @@ GameObject:
   - component: {fileID: 4144613094181916708}
   m_Layer: 11
   m_Name: Left_Wing_Back.003 (3) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4670,7 +4670,7 @@ GameObject:
   - component: {fileID: 1966157538462683682}
   m_Layer: 11
   m_Name: Eye Right.001
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5729,7 +5729,7 @@ GameObject:
   - component: {fileID: 2380754645754529127}
   m_Layer: 10
   m_Name: Left_Wing_Back.003 (3) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6512,7 +6512,7 @@ GameObject:
   - component: {fileID: 1126628744547768959}
   m_Layer: 10
   m_Name: Right_Wing_Front.003 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8974,7 +8974,7 @@ GameObject:
   - component: {fileID: 603353327110268683}
   m_Layer: 10
   m_Name: Eye Right
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10205,7 +10205,7 @@ GameObject:
   - component: {fileID: 5360902697971510420}
   m_Layer: 10
   m_Name: Right_Wing_Front.003 Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11517,7 +11517,7 @@ GameObject:
   - component: {fileID: 4463150909484645660}
   m_Layer: 8
   m_Name: Right_Wing_Front.003 Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12163,7 +12163,7 @@ GameObject:
   - component: {fileID: 6770169490994676634}
   m_Layer: 9
   m_Name: Left_Wing_Back.003 (3) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13467,7 +13467,7 @@ GameObject:
   - component: {fileID: 1472088120986250506}
   m_Layer: 11
   m_Name: Right_Wing_Front.003 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14365,7 +14365,7 @@ GameObject:
   - component: {fileID: 2322771931931976798}
   m_Layer: 8
   m_Name: Eye Right
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17215,7 +17215,7 @@ GameObject:
   - component: {fileID: 2543517863478076850}
   m_Layer: 11
   m_Name: Eye Right
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17409,7 +17409,7 @@ GameObject:
   - component: {fileID: 5692290488187537309}
   m_Layer: 9
   m_Name: Right_Wing_Front.003 Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17613,7 +17613,7 @@ GameObject:
   - component: {fileID: 8832439072469478328}
   m_Layer: 8
   m_Name: Eye Right.001
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18662,7 +18662,7 @@ GameObject:
   - component: {fileID: 5862253557591146475}
   m_Layer: 9
   m_Name: Eye Right.001
-  m_TagString: Untagged
+  m_TagString: Eyes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18820,7 +18820,7 @@ GameObject:
   - component: {fileID: 7162342620099206325}
   m_Layer: 8
   m_Name: Right_Wing_Front.003 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19911,7 +19911,7 @@ GameObject:
   - component: {fileID: 4445734338753891563}
   m_Layer: 9
   m_Name: Right_Wing_Front.003 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24421,7 +24421,7 @@ GameObject:
   - component: {fileID: 3211193223139497727}
   m_Layer: 11
   m_Name: Right_Wing_Front.003 Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25065,7 +25065,7 @@ GameObject:
   - component: {fileID: 1409998112104445071}
   m_Layer: 11
   m_Name: Right_Wing_Back.003 (2) Variant
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
