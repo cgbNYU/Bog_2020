@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public float LockDrag;
 
     private Transform _lockTargetTransform;
+    private Transform _previousLockTargetTransform;
     public Transform _antennaeStalkPivot;
     public GameObject _antennaeBulb;
     public Transform _antennaeStalkReset;
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private PlayerEggHolder _eggHolder;
     private PlayerModelSpawner _modelSpawner;
+    private HighlightTarget _highlightTarget;
     
     #endregion
 
@@ -169,6 +171,9 @@ public class PlayerController : MonoBehaviour
         //SpawnModels
         _modelSpawner = GetComponent<PlayerModelSpawner>();
         _modelSpawner.SpawnModels();
+        
+        //Initialize Target Highlighter
+        _highlightTarget = GetComponent<HighlightTarget>();
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
@@ -437,60 +442,21 @@ public class PlayerController : MonoBehaviour
             _moveState = MoveState.LockOn;
         }
     }
-    
-    public Material enemyMaterial;
-    public Material enemyHighlightMaterial;
-    public Material playerMaterial;
-
-    private Transform enemyModel; 
-    
-    //Highlight the model of the target enemy only for the player 
-    private void HighlightEnemy()
-    {
-        if (_lockTargetTransform != null)
-        {
-            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
-            SetMaterial(enemyModel, enemyHighlightMaterial);
-        }
-    }
-    
-    //Return the enemy model back to their default material
-    private void UnHighlightEnemy()
-    {
-        if (_lockTargetTransform != null)
-        {
-            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
-            SetMaterial(enemyModel, enemyMaterial);
-        }
-    }
-
-    private void UnhighlightPlayer()
-    {
-        SetMaterial(transform, playerMaterial);
-    }
-
-    //Recursively set the material on all the children of a GameObject 
-    private void SetMaterial(Transform model, Material material)
-    {
-        foreach (Transform child in model)
-        {
-           SetMaterial(child,material);
-           if (child.GetComponent<Renderer>() != null)
-               child.GetComponent<Renderer>().material = material;
-        }
-    }
 
     //Player will have torque applied to them so that they rotate towards their target
     //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
     {
-        //If you had a target last frame or they died, unhighlight the enemy
-        /*if (EnemyInRange() == null && _lockTargetTransform != null)
-        {
-            UnHighlightEnemy();
-        }*/
+        //If the enemy is out of range, unhighlight the enemy
+        if (EnemyInRange() == null && _lockTargetTransform != null)
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
 
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
+        
+        //If the target enemy switches, unhighlight the enemy  
+        if(_lockTargetTransform!=_previousLockTargetTransform)
+            _highlightTarget.UnHighlightEnemy(_previousLockTargetTransform);
+        
         if (_lockTargetTransform != null) //if yes
         {
             //Calculate target direction
@@ -504,8 +470,10 @@ public class PlayerController : MonoBehaviour
             _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
             _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
             
-            //Highlight the enemy
-            //HighlightEnemy();
+            //Store a reference to the target player transform to un-highlight correctly
+            _previousLockTargetTransform = _lockTargetTransform;
+            //Highlight the enemy 
+            _highlightTarget.HighlightEnemy(_lockTargetTransform);
         }
         
         //Check if you release the button
@@ -516,7 +484,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
-            //UnHighlightEnemy();
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
             StateTransition(MoveState.Neutral, 0);
             
         }
@@ -555,9 +523,9 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        _highlightTarget.UnhighlightPlayer();
         if (CheckState() != MoveState.Invulnerable)
         {
-            //UnhighlightPlayer();
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;

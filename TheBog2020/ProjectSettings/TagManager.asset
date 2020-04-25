@@ -9,6 +9,8 @@ TagManager:
   - DropTrigger
   - Egg
   - TutorialPopup
+  - Wings
+  - Eyes
   layers:
   - Default
   - TransparentFX
