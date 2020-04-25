@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 2635945638774760934}
   - component: {fileID: 4224120734551867767}
   - component: {fileID: 2635945638774760941}
+  - component: {fileID: 5178546524985351168}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,10 +76,6 @@ MonoBehaviour:
   TeamID: 0
   Spitter: {fileID: 6451971753822252130}
   InvulnerableTime: 0.25
-  enemyMaterial: {fileID: 2100000, guid: 67f6c8767d90f4578b005994ec63328e, type: 2}
-  enemyHighlightMaterial: {fileID: 2100000, guid: 6805cb5733af44fa5987f3ef5a1c5658,
-    type: 2}
-  playerMaterial: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
 --- !u!54 &2635945638774760935
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,6 +133,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModelsPrefab: {fileID: 8951345005091745250, guid: 0e3f2cf214c73e649b9f07efa69ddaad,
     type: 3}
+--- !u!114 &5178546524985351168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454c4fe192ea04fc5be1e2c666f50dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMaterial: {fileID: 0}
+  enemyHighlightMaterial: {fileID: 0}
+  playerMaterial: {fileID: 0}
 --- !u!1 &6414582220045466299
 GameObject:
   m_ObjectHideFlags: 0

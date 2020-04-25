@@ -18,8 +18,7 @@ public class HighlightTarget : MonoBehaviour
         //Get player ID
         _playerID = GetComponent<PlayerController>().PlayerID;
     }
-
-
+    
     //Highlight the model of the target enemy only for the player 
     public void HighlightEnemy(Transform enemyTransform)
     {

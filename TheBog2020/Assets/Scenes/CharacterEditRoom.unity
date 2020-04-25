@@ -7158,6 +7158,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8951345005091745250, guid: 264909c852f08bc4b91a1c49cbc2bedf,
         type: 3}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyHighlightMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b5c60ee69648d44d4829d1e846d06db5, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: playerMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 67f6c8767d90f4578b005994ec63328e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e20dff204fbcb54e90a22aac1c27920, type: 3}
 --- !u!1 &1368907314
@@ -7449,6 +7464,21 @@ PrefabInstance:
       propertyPath: PlayerID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 67f6c8767d90f4578b005994ec63328e, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyHighlightMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 6805cb5733af44fa5987f3ef5a1c5658, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: playerMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e20dff204fbcb54e90a22aac1c27920, type: 3}
 --- !u!4 &1467809053 stripped
@@ -10489,6 +10519,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8951345005091745250, guid: 264909c852f08bc4b91a1c49cbc2bedf,
         type: 3}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyHighlightMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b5c60ee69648d44d4829d1e846d06db5, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: playerMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 67f6c8767d90f4578b005994ec63328e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e20dff204fbcb54e90a22aac1c27920, type: 3}
 --- !u!4 &2039201386 stripped
@@ -11026,6 +11071,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 67f6c8767d90f4578b005994ec63328e, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: enemyHighlightMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 6805cb5733af44fa5987f3ef5a1c5658, type: 2}
+    - target: {fileID: 5178546524985351168, guid: 3e20dff204fbcb54e90a22aac1c27920,
+        type: 3}
+      propertyPath: playerMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a924aaf21224b478a47ff5c62815c9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e20dff204fbcb54e90a22aac1c27920, type: 3}
 --- !u!4 &8769666258380619124 stripped

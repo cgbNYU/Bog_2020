@@ -171,6 +171,9 @@ public class PlayerController : MonoBehaviour
         //SpawnModels
         _modelSpawner = GetComponent<PlayerModelSpawner>();
         _modelSpawner.SpawnModels();
+        
+        //Initialize Target Highlighter
+        _highlightTarget = GetComponent<HighlightTarget>();
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
