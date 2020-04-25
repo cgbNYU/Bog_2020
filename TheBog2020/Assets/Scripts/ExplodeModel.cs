@@ -12,6 +12,7 @@ public class ExplodeModel : MonoBehaviour
     
     //Tuneables
     public float ExplodeForce;
+    public float ExplodeTorque;
     public float DespawnTime;
     
     // Start is called before the first frame update
@@ -61,6 +62,9 @@ public class ExplodeModel : MonoBehaviour
                 //Add a force
                 Vector3 direction = Random.insideUnitSphere.normalized;
                 rb.AddForce(direction * ExplodeForce);
+                
+                //Add a torque
+                rb.AddTorque(direction * ExplodeTorque);
             }
         }
 

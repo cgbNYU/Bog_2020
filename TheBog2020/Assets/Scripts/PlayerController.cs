@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
+        _spitTimer -= Time.deltaTime;
         _spitButton = _rewiredPlayer.GetButtonDown("Spit");
         _lockButtonHeld = _rewiredPlayer.GetButton("Lock");
     }
@@ -523,7 +524,6 @@ public class PlayerController : MonoBehaviour
 
     private void Spit()
     {
-        _spitTimer -= Time.deltaTime;
         if (_spitButton && _spitTimer <= 0)
         {
             //Reset input and timer

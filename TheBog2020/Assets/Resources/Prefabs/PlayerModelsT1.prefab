@@ -9492,7 +9492,7 @@ GameObject:
   - component: {fileID: 8951345005091745251}
   - component: {fileID: 8355795952765677850}
   m_Layer: 0
-  m_Name: PlayerModels
+  m_Name: PlayerModelsT1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9528,7 +9528,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bc2475a464394bb3f1e7b053a6cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplodeForce: 1000
+  ExplodeForce: 500
+  ExplodeTorque: 150
   DespawnTime: 3
 --- !u!1 &8951345005102229201
 GameObject:

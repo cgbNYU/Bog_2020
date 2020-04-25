@@ -24404,7 +24404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bc2475a464394bb3f1e7b053a6cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplodeForce: 1000
+  ExplodeForce: 500
+  ExplodeTorque: 150
   DespawnTime: 3
 --- !u!1 &8998389131807849095
 GameObject:
