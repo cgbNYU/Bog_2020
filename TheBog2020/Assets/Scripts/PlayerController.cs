@@ -449,7 +449,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_lockTargetTransform != null)
         {
-            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
+            enemyModel = _lockTargetTransform.GetChild(1).Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
             SetMaterial(enemyModel, enemyHighlightMaterial);
         }
     }
@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_lockTargetTransform != null)
         {
-            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
+            enemyModel = _lockTargetTransform.GetChild(1).Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
             SetMaterial(enemyModel, enemyMaterial);
         }
     }
@@ -476,7 +476,8 @@ public class PlayerController : MonoBehaviour
         {
            SetMaterial(child,material);
            if (child.GetComponent<Renderer>() != null)
-               child.GetComponent<Renderer>().material = material;
+               if (!child.CompareTag("Eyes") && !child.CompareTag("Wings")) 
+                   child.GetComponent<Renderer>().material = material;
         }
     }
 
@@ -485,10 +486,10 @@ public class PlayerController : MonoBehaviour
     private void LockState()
     {
         //If you had a target last frame or they died, unhighlight the enemy
-        /*if (EnemyInRange() == null && _lockTargetTransform != null)
+        if (EnemyInRange() == null && _lockTargetTransform != null)
         {
             UnHighlightEnemy();
-        }*/
+        }
 
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
         if (_lockTargetTransform != null) //if yes
@@ -505,7 +506,7 @@ public class PlayerController : MonoBehaviour
             _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
             
             //Highlight the enemy
-            //HighlightEnemy();
+            HighlightEnemy();
         }
         
         //Check if you release the button
@@ -516,7 +517,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
-            //UnHighlightEnemy();
+            UnHighlightEnemy();
             StateTransition(MoveState.Neutral, 0);
             
         }
@@ -555,9 +556,9 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        UnhighlightPlayer();
         if (CheckState() != MoveState.Invulnerable)
         {
-            //UnhighlightPlayer();
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;
