@@ -442,8 +442,9 @@ public class PlayerController : MonoBehaviour
     public Material enemyHighlightMaterial;
     public Material playerMaterial;
 
-    private Transform enemyModel; 
-    
+    private Transform enemyModel;
+    private Transform _previousLockTargetTransform;
+
     //Highlight the model of the target enemy only for the player 
     private void HighlightEnemy()
     {
@@ -455,11 +456,11 @@ public class PlayerController : MonoBehaviour
     }
     
     //Return the enemy model back to their default material
-    private void UnHighlightEnemy()
+    private void UnHighlightEnemy(Transform enemyTransform)
     {
-        if (_lockTargetTransform != null)
+        if (enemyTransform != null)
         {
-            enemyModel = _lockTargetTransform.GetChild(1).Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
+            enemyModel = enemyTransform.GetChild(1).Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
             SetMaterial(enemyModel, enemyMaterial);
         }
     }
@@ -485,13 +486,16 @@ public class PlayerController : MonoBehaviour
     //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
     {
-        //If you had a target last frame or they died, unhighlight the enemy
+        //If the enemy is out of range, unhighlight the enemy
         if (EnemyInRange() == null && _lockTargetTransform != null)
-        {
-            UnHighlightEnemy();
-        }
+            UnHighlightEnemy(_lockTargetTransform);
 
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
+        
+        //If the target enemy switches, unhighlight the enemy  
+        if(_lockTargetTransform!=_previousLockTargetTransform)
+            UnHighlightEnemy(_previousLockTargetTransform);
+        
         if (_lockTargetTransform != null) //if yes
         {
             //Calculate target direction
@@ -505,7 +509,9 @@ public class PlayerController : MonoBehaviour
             _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
             _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
             
-            //Highlight the enemy
+            //Store a reference to the target player transform to un-highlight correctly
+            _previousLockTargetTransform = _lockTargetTransform;
+            //Highlight the enemy 
             HighlightEnemy();
         }
         
@@ -517,7 +523,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
-            UnHighlightEnemy();
+            UnHighlightEnemy(_lockTargetTransform);
             StateTransition(MoveState.Neutral, 0);
             
         }
