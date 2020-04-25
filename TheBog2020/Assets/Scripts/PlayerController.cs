@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public float LockDrag;
 
     private Transform _lockTargetTransform;
+    private Transform _previousLockTargetTransform;
     public Transform _antennaeStalkPivot;
     public GameObject _antennaeBulb;
     public Transform _antennaeStalkReset;
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private PlayerEggHolder _eggHolder;
     private PlayerModelSpawner _modelSpawner;
+    private HighlightTarget _highlightTarget;
     
     #endregion
 
@@ -437,50 +439,6 @@ public class PlayerController : MonoBehaviour
             _moveState = MoveState.LockOn;
         }
     }
-    
-    public Material enemyMaterial;
-    public Material enemyHighlightMaterial;
-    public Material playerMaterial;
-
-    private Transform enemyModel;
-    private Transform _previousLockTargetTransform;
-
-    //Highlight the model of the target enemy only for the player 
-    private void HighlightEnemy()
-    {
-        if (_lockTargetTransform != null)
-        {
-            enemyModel = _lockTargetTransform.GetChild(1).Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
-            SetMaterial(enemyModel, enemyHighlightMaterial);
-        }
-    }
-    
-    //Return the enemy model back to their default material
-    private void UnHighlightEnemy(Transform enemyTransform)
-    {
-        if (enemyTransform != null)
-        {
-            enemyModel = enemyTransform.GetChild(1).Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
-            SetMaterial(enemyModel, enemyMaterial);
-        }
-    }
-
-    private void UnhighlightPlayer()
-    {
-        SetMaterial(transform, playerMaterial);
-    }
-
-    //Recursively set the material on all the children of a GameObject 
-    private void SetMaterial(Transform model, Material material)
-    {
-        foreach (Transform child in model)
-        {
-           SetMaterial(child,material);
-           if (child.GetComponent<Renderer>() != null)
-               if (!child.CompareTag("Eyes") && !child.CompareTag("Wings")) 
-                   child.GetComponent<Renderer>().material = material;
-        }
-    }
 
     //Player will have torque applied to them so that they rotate towards their target
     //If the player releases the spit button, they shoot and stop locking on
@@ -488,13 +446,13 @@ public class PlayerController : MonoBehaviour
     {
         //If the enemy is out of range, unhighlight the enemy
         if (EnemyInRange() == null && _lockTargetTransform != null)
-            UnHighlightEnemy(_lockTargetTransform);
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
 
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
         
         //If the target enemy switches, unhighlight the enemy  
         if(_lockTargetTransform!=_previousLockTargetTransform)
-            UnHighlightEnemy(_previousLockTargetTransform);
+            _highlightTarget.UnHighlightEnemy(_previousLockTargetTransform);
         
         if (_lockTargetTransform != null) //if yes
         {
@@ -512,7 +470,7 @@ public class PlayerController : MonoBehaviour
             //Store a reference to the target player transform to un-highlight correctly
             _previousLockTargetTransform = _lockTargetTransform;
             //Highlight the enemy 
-            HighlightEnemy();
+            _highlightTarget.HighlightEnemy(_lockTargetTransform);
         }
         
         //Check if you release the button
@@ -523,7 +481,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
-            UnHighlightEnemy(_lockTargetTransform);
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
             StateTransition(MoveState.Neutral, 0);
             
         }
@@ -562,7 +520,7 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
-        UnhighlightPlayer();
+        _highlightTarget.UnhighlightPlayer();
         if (CheckState() != MoveState.Invulnerable)
         {
             _rb.velocity = Vector3.zero;
