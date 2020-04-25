@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
         Spitting,
         Airborne,
         Bouncing,
-        Dead
+        Dead,
+        Inactive
     }
 
     private MoveState _moveState;
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour
         ResetInputs();
         
         //Initialize state
-        StateTransition(MoveState.Neutral, 0);
+        StateTransition(MoveState.Inactive, 0);
         _stateTimer = 0;
         _spitTimer = 0;
         
@@ -247,6 +248,8 @@ public class PlayerController : MonoBehaviour
             case MoveState.Dead:
                 DeathState();
                 break;
+            case MoveState.Inactive:
+                break;
             default:
                 Debug.Log("state machine broke: " + PlayerID);
                 break;
@@ -281,7 +284,7 @@ public class PlayerController : MonoBehaviour
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
         _spitTimer -= Time.deltaTime;
-        _spitButton = _rewiredPlayer.GetButtonDown("Spit");
+        _spitButton = _rewiredPlayer.GetButton("Spit");
         _lockButtonHeld = _rewiredPlayer.GetButton("Lock");
     }
 

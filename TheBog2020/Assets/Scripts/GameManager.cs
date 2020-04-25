@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour
                     UIManager.UM.CloseTutorialPopups();
                     UIManager.UM.ClearAllUIElements();
                     _gameState = GameState.MatchInProgress;
+                    foreach (PlayerController pc in PlayerControllers)
+                    {
+                        pc.StateTransition(PlayerController.MoveState.Neutral, 0);
+                    }
                 }
                 break;
             case GameState.MatchInProgress:
