@@ -45,6 +45,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 0}
+--- !u!136 &2217813012754994419
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619473108573707635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.011092015
+  m_Height: 0.08104493
+  m_Direction: 1
+  m_Center: {x: -0.041698728, y: 0.035147253, z: 0.028404936}
 --- !u!1001 &2953511084818302074
 PrefabInstance:
   m_ObjectHideFlags: 0

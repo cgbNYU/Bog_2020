@@ -37,6 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6314458936194334669}
+  - component: {fileID: 1850441145296255354}
   m_Layer: 0
   m_Name: Env_Coral
   m_TagString: Untagged
@@ -60,6 +61,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1850441145296255354
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314458936194334668}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.8919811
+  m_Height: 11.049131
+  m_Direction: 1
+  m_Center: {x: 0.0063939095, y: -33.278152, z: 15.725681}
 --- !u!1001 &6314458935473361063
 PrefabInstance:
   m_ObjectHideFlags: 0
