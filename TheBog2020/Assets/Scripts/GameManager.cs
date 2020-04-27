@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
                 {
                     //TODO: Reset the game. temp: reloading scene
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                    _gameState = GameState.Title;
+                    _gameState = GameState.AttractScreen;
                 }
                 break;
             default: 
