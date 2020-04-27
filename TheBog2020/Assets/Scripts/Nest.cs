@@ -51,7 +51,7 @@ public class Nest : MonoBehaviour
     {
         foreach (var spawn in SpawnLocations)
         {
-            GameObject newEgg = Instantiate(Resources.Load<GameObject>("Prefabs/Egg"));
+            GameObject newEgg = Instantiate(Resources.Load<GameObject>("Prefabs/Players/Egg"));
             newEgg.transform.position = spawn.position;
             newEgg.GetComponent<Renderer>().material = EggMaterial;
             Egg eggScript = newEgg.GetComponent<Egg>();
