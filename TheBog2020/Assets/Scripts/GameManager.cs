@@ -48,19 +48,26 @@ public class GameManager : MonoBehaviour
         _gameState = GameState.AttractScreen;
     }
 
+    private float loadingTimer = 0;
     // Update is called once per frame
     void Update()
     {
         switch (_gameState)
         {
             case GameState.AttractScreen:
-                if (Input.anyKey)
+                //Timer to ignore input briefly in Attract Mode to let the Video buffer
+                loadingTimer += Time.deltaTime;
+                if (loadingTimer >= 3)
                 {
-                    GameObject.Find("AttractScreen_Player").GetComponent<AttractScreen>().StopVideo();
-                    //Play bgm
-                    AudioManager.AM.GetComponent<AudioSource>().Play(); 
-                    _gameState = GameState.Title;
+                    if (Input.anyKey)
+                    {
+                        GameObject.Find("AttractScreen_Player").GetComponent<AttractScreen>().StopVideo();
+                        //Play bgm
+                        AudioManager.AM.GetComponent<AudioSource>().Play();
+                        _gameState = GameState.Title;
+                    }
                 }
+
                 break;
             case GameState.Title:
                 if (UIManager.UM.AllPlayersReady())
