@@ -8,6 +8,8 @@ public class AttractScreen: MonoBehaviour {
     public RawImage rawImage;
     public VideoPlayer videoPlayer;
     public AudioSource audioSource;
+    public float videoStartDelayTime = 0.1f;
+    
     // Use this for initialization
     void Start () {
         StartCoroutine(PlayVideo());
@@ -15,7 +17,7 @@ public class AttractScreen: MonoBehaviour {
     IEnumerator PlayVideo()
     {
         videoPlayer.Prepare();
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(videoStartDelayTime);
         while (!videoPlayer.isPrepared)
         {
             yield return waitForSeconds;
