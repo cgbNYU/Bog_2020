@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54f256b7c13448fdba7c7f3f8aba4d0, type: 3}
   m_Name: PCTune_Apr27_PlaytestBayridge
   m_EditorClassIdentifier: 
-  TuningNotes: "Playtest at Bayridge with my roommates \nInreeased quad angular drag
+  TuningNotes: "Playtest at Bayridge with my roommates \nIncreased quad angular drag
     to -15 which makes the rotation stop faster "
   ForceIncrease: 0.4
   ForceDecrease: 0.05
