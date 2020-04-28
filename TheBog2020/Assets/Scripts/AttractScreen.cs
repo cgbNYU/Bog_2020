@@ -26,6 +26,7 @@ public class AttractScreen: MonoBehaviour {
         rawImage.texture = videoPlayer.texture;
         videoPlayer.Play();
         audioSource.Play();
+        
     }
 
     public void StopVideo()
