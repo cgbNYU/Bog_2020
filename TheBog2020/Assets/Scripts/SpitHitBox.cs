@@ -20,7 +20,12 @@ public class SpitHitBox : MonoBehaviour
         Destroy(gameObject);
     }
 
-        
+    private void OnCollisionEnter(Collision other)
+    {
+        //Debug.Log("Spit collided and was destroyed");
+        Destroy(gameObject);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +37,10 @@ public class SpitHitBox : MonoBehaviour
                 KillPlayer(otherPlayer);
                 Destroy(gameObject);
             }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

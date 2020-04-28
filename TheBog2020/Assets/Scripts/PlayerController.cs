@@ -502,7 +502,7 @@ public class PlayerController : MonoBehaviour
             _spitTimer = SpitTime;
             
             //Instantiate spit and fire it
-            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
+            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Players/Spit"));
             spit.transform.position = Spitter.position;
             spit.transform.rotation = Spitter.rotation;
             spit.GetComponent<SpitHitBox>().TeamID = TeamID;
@@ -527,6 +527,7 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         _highlightTarget.UnhighlightPlayer();
+        _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
         if (CheckState() != MoveState.Invulnerable)
         {
             _rb.velocity = Vector3.zero;
