@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using UnityEditor.SceneManagement;
 
 /// <summary>
 /// Takes the player input and manages the positions, states, and current stats of each player
@@ -161,10 +162,7 @@ public class PlayerController : MonoBehaviour
         StateTransition(MoveState.Inactive, 0);
         _stateTimer = 0;
         _spitTimer = 0;
-        
-        //Initialize egg holder
-        _eggHolder = GetComponent<PlayerEggHolder>();
-        
+
         //Initialize PC tuning variables
         //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
@@ -172,6 +170,10 @@ public class PlayerController : MonoBehaviour
         //SpawnModels
         _modelSpawner = GetComponent<PlayerModelSpawner>();
         _modelSpawner.SpawnModels();
+        
+        //Initialize egg holder
+        _eggHolder = GetComponent<PlayerEggHolder>();
+        _eggHolder.GetTailReference();
         
         //Initialize Target Highlighter
         _highlightTarget = GetComponent<HighlightTarget>();
@@ -528,13 +530,16 @@ public class PlayerController : MonoBehaviour
     {
         _highlightTarget.UnhighlightPlayer();
         _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
+        
+        Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
+        
         if (CheckState() != MoveState.Invulnerable)
         {
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;
             _eggHolder.DropEgg();
-            
+
             //Explode the model
             ExplodeModel[] explodeModels = GetComponentsInChildren<ExplodeModel>();
             foreach (ExplodeModel explodeModel in explodeModels)
