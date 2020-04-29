@@ -10,8 +10,8 @@ using UnityEngine;
 /// </summary>
 public class PlayerEggHolder : MonoBehaviour
 {
-    //[HideInInspector] 
     public Egg EggHolder = null; //null if no egg is held by the player
+    public Transform BugTail;
     
     //Reference to player controller
     private PlayerController _pc;
@@ -21,6 +21,12 @@ public class PlayerEggHolder : MonoBehaviour
     {
         //Get the Team ID from the Player Controller at Start
         _pc = GetComponent<PlayerController>();
+    }
+
+    //Get ref to tail transform from the player model index 
+    public void GetTailReference()
+    {
+        BugTail = GetComponentInChildren<PlayerModelIndex>().bugTailRef;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +48,7 @@ public class PlayerEggHolder : MonoBehaviour
             //Generic drop location
             if (other.gameObject.CompareTag("DropTrigger"))
             {
+                EggHolder.inWhirlpool = true; // The Egg was dropped into the whirlpool
                 DropEgg();
             }
         }
@@ -52,14 +59,14 @@ public class PlayerEggHolder : MonoBehaviour
         {
             Egg eggToPickup = other.gameObject.GetComponent<Egg>();
             
-            // If the Egg is your team & outside the nest & is not being held by a player
-            if (eggToPickup.TeamID == _pc.TeamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld)
+            // If the Egg is your team & outside the nest & is not being held by a player 
+            if (eggToPickup.TeamID == _pc.TeamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld )
             {
                 PickupEgg(eggToPickup);
             }
 
-            // If the Egg is the other team
-            if (eggToPickup.TeamID != _pc.TeamID)
+            // If the Egg is the other team && not in the whirlpool
+            if (eggToPickup.TeamID != _pc.TeamID && !eggToPickup.inWhirlpool)
             {
                 PickupEgg(eggToPickup);
             }
@@ -74,8 +81,14 @@ public class PlayerEggHolder : MonoBehaviour
         {
             EggHolder.OutOfNest = true; // The Egg is outside the Nest
         }
+        
+        // The player moves out of the whirpool area & is holding an egg
+        if (other.gameObject.CompareTag("DropTrigger") && EggHolder != null)
+        {
+            EggHolder.inWhirlpool = false; // The Egg is outside the Whirlpool
+        }
     }
-    
+
     private void PickupEgg(Egg eggToPickup)
     {
         if (_pc.CheckState() != PlayerController.MoveState.Dead && !eggToPickup.IsHeld)
@@ -84,7 +97,10 @@ public class PlayerEggHolder : MonoBehaviour
             EggHolder.IsHeld = true;
             EggHolder.GetComponent<Rigidbody>().isKinematic = true;
             EggHolder.GetComponent<Collider>().isTrigger = true;
-            EggHolder.transform.parent = transform;
+            
+            //EggHolder.transform.SetParent(BugTail.transform);
+            EggHolder.transform.parent = BugTail.transform;
+            EggHolder.transform.localPosition = new Vector3(0,0,-0.4f);
         }
     }
 

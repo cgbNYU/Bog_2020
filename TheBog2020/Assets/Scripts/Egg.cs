@@ -16,4 +16,5 @@ public class Egg : MonoBehaviour
     public bool IsHeld;
     public bool OutOfNest;
     public bool IsSpawning;
+    public bool inWhirlpool;
 }

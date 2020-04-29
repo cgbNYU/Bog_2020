@@ -106,6 +106,9 @@ public class Nest : MonoBehaviour
 
         //Respawn/Reactivate player model
         pc.GetComponent<PlayerModelSpawner>().SpawnModels();
+        
+        //Give the Egg Holder the ref to the Tail
+        pc.GetComponent<PlayerEggHolder>().GetTailReference();
 
         //Set player controller to active state
         pc.StateTransition(PlayerController.MoveState.Invulnerable, pc.InvulnerableTime);
