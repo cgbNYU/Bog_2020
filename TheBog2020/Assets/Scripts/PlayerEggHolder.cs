@@ -42,6 +42,7 @@ public class PlayerEggHolder : MonoBehaviour
             //Generic drop location
             if (other.gameObject.CompareTag("DropTrigger"))
             {
+                EggHolder.inWhirlpool = true; // The Egg was dropped into the whirlpool
                 DropEgg();
             }
         }
@@ -52,14 +53,14 @@ public class PlayerEggHolder : MonoBehaviour
         {
             Egg eggToPickup = other.gameObject.GetComponent<Egg>();
             
-            // If the Egg is your team & outside the nest & is not being held by a player
-            if (eggToPickup.TeamID == _pc.TeamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld)
+            // If the Egg is your team & outside the nest & is not being held by a player 
+            if (eggToPickup.TeamID == _pc.TeamID && eggToPickup.OutOfNest && !eggToPickup.IsHeld )
             {
                 PickupEgg(eggToPickup);
             }
 
-            // If the Egg is the other team
-            if (eggToPickup.TeamID != _pc.TeamID)
+            // If the Egg is the other team && not in the whirlpool
+            if (eggToPickup.TeamID != _pc.TeamID && !eggToPickup.inWhirlpool)
             {
                 PickupEgg(eggToPickup);
             }
@@ -73,6 +74,12 @@ public class PlayerEggHolder : MonoBehaviour
         if (other.gameObject.CompareTag("Nest") && EggHolder != null)
         {
             EggHolder.OutOfNest = true; // The Egg is outside the Nest
+        }
+        
+        // The player moves out of the whirpool area & is holding an egg
+        if (other.gameObject.CompareTag("DropTrigger") && EggHolder != null)
+        {
+            EggHolder.inWhirlpool = false; // The Egg is outside the Whirlpool
         }
     }
     
