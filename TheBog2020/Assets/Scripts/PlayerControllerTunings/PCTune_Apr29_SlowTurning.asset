@@ -17,7 +17,7 @@ MonoBehaviour:
   ForceIncrease: 0.4
   ForceDecrease: 0.05
   MaxForce: 80
-  WingOffset: 1
+  WingOffset: 0.35
   WingDrag: -0.15
   MaxTorque: 5
   QuadAngularDrag: -15
@@ -55,6 +55,6 @@ MonoBehaviour:
   SpitTime: 0.56
   DeathTime: 2
   LockOnRange: 40
-  LockTorque: 3.1
-  LockDrag: -1.51
+  LockTorque: 5
+  LockDrag: -2
   ExampleArchivedTuningVar: 0
