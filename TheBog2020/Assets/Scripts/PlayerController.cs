@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
     //Public
     public int PlayerID;
     public int TeamID; //0 = red, 1 = blue
-    public Collider LungeCollider;
     public Transform Spitter;
     public float InvulnerableTime;
     
@@ -117,16 +116,9 @@ public class PlayerController : MonoBehaviour
         _moveState = newState;
         
         //Check for state specific things
-        if (newState == MoveState.Lunging)
-        {
-            LungeCollider.enabled = true;
-            _animator.Play("TestAnim_Lunge");
-            _rb.AddForce(transform.forward * LungeForce);
-        }
-        else if (newState == MoveState.Neutral)
+        if (newState == MoveState.Neutral)
         {
             _stateTimer = 0;
-            LungeCollider.enabled = false;
         }
         else if (newState == MoveState.Dead)
         {
@@ -165,9 +157,6 @@ public class PlayerController : MonoBehaviour
         StateTransition(MoveState.Neutral, 0);
         _stateTimer = 0;
         _spitTimer = 0;
-        
-        //Initialize attacks
-        LungeCollider.enabled = false;
         
         //Initialize egg holder
         _eggHolder = GetComponent<PlayerEggHolder>();
@@ -218,14 +207,12 @@ public class PlayerController : MonoBehaviour
         switch (_moveState)
         {
             case MoveState.Neutral:
-                _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
                 Move();
                 Spit();
                 break;
             case MoveState.Invulnerable:
-                _animator.Play("TestAnim_Idle");
                 AntennaeRadar();
                 LockOnCheck();
                 Move();
