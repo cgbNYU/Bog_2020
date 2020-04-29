@@ -9491,6 +9491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8951345005091745251}
   - component: {fileID: 8355795952765677850}
+  - component: {fileID: 7026782982798377420}
   m_Layer: 0
   m_Name: PlayerModelsT1
   m_TagString: Untagged
@@ -9531,6 +9532,19 @@ MonoBehaviour:
   ExplodeForce: 500
   ExplodeTorque: 150
   DespawnTime: 3
+--- !u!114 &7026782982798377420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951345005091745250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6efa5ff26024180a165afc90f98470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bugTailRef: {fileID: 481588331504148626}
 --- !u!1 &8951345005102229201
 GameObject:
   m_ObjectHideFlags: 0
