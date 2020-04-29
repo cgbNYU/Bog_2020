@@ -439,11 +439,59 @@ public class PlayerController : MonoBehaviour
             _moveState = MoveState.LockOn;
         }
     }
+    
+    public Material enemyMaterial;
+    public Material enemyHighlightMaterial;
+    public Material playerMaterial;
+
+    private Transform enemyModel; 
+    
+    //Highlight the model of the target enemy only for the player 
+    private void HighlightEnemy()
+    {
+        if (_lockTargetTransform != null)
+        {
+            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
+            SetMaterial(enemyModel, enemyHighlightMaterial);
+        }
+    }
+    
+    //Return the enemy model back to their default material
+    private void UnHighlightEnemy()
+    {
+        if (_lockTargetTransform != null)
+        {
+            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
+            SetMaterial(enemyModel, enemyMaterial);
+        }
+    }
+
+    private void UnhighlightPlayer()
+    {
+        SetMaterial(transform, playerMaterial);
+    }
+
+    //Recursively set the material on all the children of a GameObject 
+    private void SetMaterial(Transform model, Material material)
+    {
+        foreach (Transform child in model)
+        {
+           SetMaterial(child,material);
+           if (child.GetComponent<Renderer>() != null)
+               child.GetComponent<Renderer>().material = material;
+        }
+    }
 
     //Player will have torque applied to them so that they rotate towards their target
     //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
-    {     
+    {
+        //If you had a target last frame or they died, unhighlight the enemy
+        if (EnemyInRange() == null && _lockTargetTransform != null)
+        {
+            UnHighlightEnemy();
+        }
+
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
         if (_lockTargetTransform != null) //if yes
         {
@@ -457,6 +505,9 @@ public class PlayerController : MonoBehaviour
             //Apply torque, reducing force by the size of the angle
             _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
             _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
+            
+            //Highlight the enemy
+            HighlightEnemy();
         }
         
         //Check if you release the button
@@ -467,7 +518,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
+            UnHighlightEnemy();
             StateTransition(MoveState.Neutral, 0);
+            
         }
     }
 
@@ -507,9 +560,9 @@ public class PlayerController : MonoBehaviour
     {
         if (CheckState() != MoveState.Invulnerable)
         {
+            UnhighlightPlayer();
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
-            _animator.Play("TestAnim_Death");
             _moveState = MoveState.Dead;
             _eggHolder.DropEgg();
         }
