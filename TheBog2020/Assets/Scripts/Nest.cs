@@ -51,7 +51,7 @@ public class Nest : MonoBehaviour
     {
         foreach (var spawn in SpawnLocations)
         {
-            GameObject newEgg = Instantiate(Resources.Load<GameObject>("Prefabs/Egg"));
+            GameObject newEgg = Instantiate(Resources.Load<GameObject>("Prefabs/Players/Egg"));
             newEgg.transform.position = spawn.position;
             newEgg.GetComponent<Renderer>().material = EggMaterial;
             Egg eggScript = newEgg.GetComponent<Egg>();
@@ -105,6 +105,10 @@ public class Nest : MonoBehaviour
         //Animate egg hatching
 
         //Respawn/Reactivate player model
+        pc.GetComponent<PlayerModelSpawner>().SpawnModels();
+        
+        //Give the Egg Holder the ref to the Tail
+        pc.GetComponent<PlayerEggHolder>().GetTailReference();
 
         //Set player controller to active state
         pc.StateTransition(PlayerController.MoveState.Invulnerable, pc.InvulnerableTime);

@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2635945638774760930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2635945638774760929}
+  - component: {fileID: 2635945638774760928}
+  - component: {fileID: 2635945638774760935}
+  - component: {fileID: 2635945638774760934}
+  - component: {fileID: 4224120734551867767}
+  - component: {fileID: 2635945638774760941}
+  - component: {fileID: 5178546524985351168}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2635945638774760929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -55.72, y: 0.755, z: -65.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6451971753822252130}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2635945638774760928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c55f8cd4d7a38e4981759f49ce5b527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pcTune: {fileID: 11400000, guid: 43175ea7469c142f28291f7393df5945, type: 2}
+  ForceIncrease: 0.2
+  ForceDecrease: 0.04
+  MaxForce: 100
+  WingOffset: 0.5
+  WingDrag: -0.075
+  QuadAngularDrag: -1
+  MaxTorque: 0
+  BufferFrames: 3
+  LungeTargetRadius: 2
+  LungeRange: 10
+  LungeForce: 5000
+  LungeTime: 0.4
+  ClashForce: 0
+  SpitForce: 5000
+  SpitTime: 0.56
+  DeathTime: 2
+  LockOnRange: 40
+  LockTorque: 3.1
+  LockDrag: -1.51
+  _antennaeStalkPivot: {fileID: 0}
+  _antennaeBulb: {fileID: 0}
+  _antennaeStalkReset: {fileID: 0}
+  PlayerID: 0
+  TeamID: 0
+  Spitter: {fileID: 6451971753822252130}
+  InvulnerableTime: 0.25
+--- !u!54 &2635945638774760935
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  serializedVersion: 2
+  m_Mass: 2
+  m_Drag: 0
+  m_AngularDrag: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!136 &2635945638774760934
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.142568
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.78963304, z: 0}
+--- !u!114 &4224120734551867767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b7165eadb81490da65ef759e127410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EggHolder: {fileID: 0}
+--- !u!114 &2635945638774760941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b79438a046d0141af08c919155ddcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelsPrefab: {fileID: 8951345005091745250, guid: 0e3f2cf214c73e649b9f07efa69ddaad,
+    type: 3}
+--- !u!114 &5178546524985351168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454c4fe192ea04fc5be1e2c666f50dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMaterial: {fileID: 0}
+  enemyHighlightMaterial: {fileID: 0}
+  playerMaterial: {fileID: 0}
+--- !u!1 &6414582220045466299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6451971753822252130}
+  m_Layer: 0
+  m_Name: Spitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6451971753822252130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414582220045466299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.336, z: 1.086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2635945638774760929}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -66,6 +66,14 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    public void OpenTutorialPopups()
+    {
+        foreach (var popup in TutorialPopups)
+        {
+            popup.gameObject.SetActive(true);
+        }
+    }
+    
     //Searches for the references to the UI elements
     private void FindUIReferences()
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using UnityEditor.SceneManagement;
 
 /// <summary>
 /// Takes the player input and manages the positions, states, and current stats of each player
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
     public float LockDrag;
 
     private Transform _lockTargetTransform;
+    private Transform _previousLockTargetTransform;
     public Transform _antennaeStalkPivot;
     public GameObject _antennaeBulb;
     public Transform _antennaeStalkReset;
@@ -84,6 +86,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _camRelativeVector;
     private Animator _animator;
     private PlayerEggHolder _eggHolder;
+    private PlayerModelSpawner _modelSpawner;
+    private HighlightTarget _highlightTarget;
     
     #endregion
 
@@ -99,7 +103,8 @@ public class PlayerController : MonoBehaviour
         Spitting,
         Airborne,
         Bouncing,
-        Dead
+        Dead,
+        Inactive
     }
 
     private MoveState _moveState;
@@ -154,17 +159,24 @@ public class PlayerController : MonoBehaviour
         ResetInputs();
         
         //Initialize state
-        StateTransition(MoveState.Neutral, 0);
+        StateTransition(MoveState.Inactive, 0);
         _stateTimer = 0;
         _spitTimer = 0;
-        
-        //Initialize egg holder
-        _eggHolder = GetComponent<PlayerEggHolder>();
-        
+
         //Initialize PC tuning variables
         //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
         
+        //SpawnModels
+        _modelSpawner = GetComponent<PlayerModelSpawner>();
+        _modelSpawner.SpawnModels();
+        
+        //Initialize egg holder
+        _eggHolder = GetComponent<PlayerEggHolder>();
+        _eggHolder.GetTailReference();
+        
+        //Initialize Target Highlighter
+        _highlightTarget = GetComponent<HighlightTarget>();
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
@@ -207,13 +219,13 @@ public class PlayerController : MonoBehaviour
         switch (_moveState)
         {
             case MoveState.Neutral:
-                AntennaeRadar();
+                //AntennaeRadar();
                 LockOnCheck();
                 Move();
                 Spit();
                 break;
             case MoveState.Invulnerable:
-                AntennaeRadar();
+                //AntennaeRadar();
                 LockOnCheck();
                 Move();
                 Spit();
@@ -237,6 +249,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case MoveState.Dead:
                 DeathState();
+                break;
+            case MoveState.Inactive:
                 break;
             default:
                 Debug.Log("state machine broke: " + PlayerID);
@@ -271,7 +285,8 @@ public class PlayerController : MonoBehaviour
 
         //Attack inputs
         _lungeButton = _rewiredPlayer.GetButtonDown("Lunge");
-        _spitButton = _rewiredPlayer.GetButtonDown("Spit");
+        _spitTimer -= Time.deltaTime;
+        _spitButton = _rewiredPlayer.GetButton("Spit");
         _lockButtonHeld = _rewiredPlayer.GetButton("Lock");
     }
 
@@ -319,11 +334,11 @@ public class PlayerController : MonoBehaviour
         //Calculate Quadratic Wing Drag
         Vector3 leftWingVel = _rb.GetPointVelocity(leftWingWorldPoint);
         Vector3 rightWingVel = _rb.GetPointVelocity(rightWingWorldPoint);
-        float leftWingVelFwd = Vector3.Dot(leftWingVel, transform.right*1);
-        float rightWingVelFwd = Vector3.Dot(rightWingVel, transform.right*-1);
+        float leftWingVelFwd = Vector3.Dot(leftWingVel, _rb.transform.right*1);
+        float rightWingVelFwd = Vector3.Dot(rightWingVel, _rb.transform.right*-1);
         
-        Vector3 leftDragForce = transform.forward * leftWingVelFwd  * -0.2f;
-        Vector3 rightDragForce = transform.forward * rightWingVelFwd * -0.2f;
+        Vector3 leftDragForce = _rb.transform.forward * leftWingVelFwd  * -0.2f;
+        Vector3 rightDragForce = _rb.transform.forward * rightWingVelFwd * -0.2f;
         
         //Apply Quadratic Wing drag
         _rb.AddForceAtPosition(leftDragForce, leftWingWorldPoint);
@@ -340,6 +355,12 @@ public class PlayerController : MonoBehaviour
         
         //Apply Linear Rotational Drag
         _rb.AddTorque(rotationDragForce);
+    }
+
+    private void FixRotation()
+    {
+        Vector3 resetRotation = new Vector3(0, _rb.transform.localRotation.y * Mathf.Rad2Deg, 0);
+        _rb.rotation = Quaternion.Euler(resetRotation);
     }
 
     private void ReturnToNeutralCountdown()
@@ -426,60 +447,21 @@ public class PlayerController : MonoBehaviour
             _moveState = MoveState.LockOn;
         }
     }
-    
-    public Material enemyMaterial;
-    public Material enemyHighlightMaterial;
-    public Material playerMaterial;
-
-    private Transform enemyModel; 
-    
-    //Highlight the model of the target enemy only for the player 
-    private void HighlightEnemy()
-    {
-        if (_lockTargetTransform != null)
-        {
-            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
-            SetMaterial(enemyModel, enemyHighlightMaterial);
-        }
-    }
-    
-    //Return the enemy model back to their default material
-    private void UnHighlightEnemy()
-    {
-        if (_lockTargetTransform != null)
-        {
-            enemyModel = _lockTargetTransform.Find("PlayerModel_P" + (PlayerID + 1) + "Cam");
-            SetMaterial(enemyModel, enemyMaterial);
-        }
-    }
-
-    private void UnhighlightPlayer()
-    {
-        SetMaterial(transform, playerMaterial);
-    }
-
-    //Recursively set the material on all the children of a GameObject 
-    private void SetMaterial(Transform model, Material material)
-    {
-        foreach (Transform child in model)
-        {
-           SetMaterial(child,material);
-           if (child.GetComponent<Renderer>() != null)
-               child.GetComponent<Renderer>().material = material;
-        }
-    }
 
     //Player will have torque applied to them so that they rotate towards their target
     //If the player releases the spit button, they shoot and stop locking on
     private void LockState()
     {
-        //If you had a target last frame or they died, unhighlight the enemy
+        //If the enemy is out of range, unhighlight the enemy
         if (EnemyInRange() == null && _lockTargetTransform != null)
-        {
-            UnHighlightEnemy();
-        }
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
 
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
+        
+        //If the target enemy switches, unhighlight the enemy  
+        if(_lockTargetTransform!=_previousLockTargetTransform)
+            _highlightTarget.UnHighlightEnemy(_previousLockTargetTransform);
+        
         if (_lockTargetTransform != null) //if yes
         {
             //Calculate target direction
@@ -493,8 +475,10 @@ public class PlayerController : MonoBehaviour
             _rb.AddTorque(transform.up * LockTorque * angleInDegrees);
             _rb.AddTorque(transform.up * _rb.angularVelocity.y * LockDrag);
             
-            //Highlight the enemy
-            HighlightEnemy();
+            //Store a reference to the target player transform to un-highlight correctly
+            _previousLockTargetTransform = _lockTargetTransform;
+            //Highlight the enemy 
+            _highlightTarget.HighlightEnemy(_lockTargetTransform);
         }
         
         //Check if you release the button
@@ -505,7 +489,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_lockButtonHeld) //release to return to Neutral
         {
-            UnHighlightEnemy();
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
             StateTransition(MoveState.Neutral, 0);
             
         }
@@ -513,7 +497,6 @@ public class PlayerController : MonoBehaviour
 
     private void Spit()
     {
-        _spitTimer -= Time.deltaTime;
         if (_spitButton && _spitTimer <= 0)
         {
             //Reset input and timer
@@ -521,7 +504,7 @@ public class PlayerController : MonoBehaviour
             _spitTimer = SpitTime;
             
             //Instantiate spit and fire it
-            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Spit"));
+            GameObject spit = (GameObject) Instantiate(Resources.Load("Prefabs/Players/Spit"));
             spit.transform.position = Spitter.position;
             spit.transform.rotation = Spitter.rotation;
             spit.GetComponent<SpitHitBox>().TeamID = TeamID;
@@ -545,13 +528,24 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        _highlightTarget.UnhighlightPlayer();
+        _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
+        
+        Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
+        
         if (CheckState() != MoveState.Invulnerable)
         {
-            UnhighlightPlayer();
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;
             _eggHolder.DropEgg();
+
+            //Explode the model
+            ExplodeModel[] explodeModels = GetComponentsInChildren<ExplodeModel>();
+            foreach (ExplodeModel explodeModel in explodeModels)
+            {
+                explodeModel.Explode();
+            }
         }
     }
 
