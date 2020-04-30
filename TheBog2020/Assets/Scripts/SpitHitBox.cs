@@ -22,8 +22,12 @@ public class SpitHitBox : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("Spit collided and was destroyed");
-        Destroy(gameObject);
+        // Don't destroy the spit when it collides with these objects 
+        if (!other.gameObject.CompareTag("Nest") && !other.gameObject.CompareTag("DropTrigger") &&
+            !other.gameObject.CompareTag("Spit") && !other.gameObject.CompareTag("Egg"))
+        {
+             Destroy(gameObject);
+        }
     }
 
 
@@ -38,7 +42,9 @@ public class SpitHitBox : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else
+        // Don't destroy the spit when it collides with these objects 
+        if (!other.gameObject.CompareTag("Nest") && !other.gameObject.CompareTag("DropTrigger") &&
+            !other.gameObject.CompareTag("Spit") && !other.gameObject.CompareTag("Egg"))
         {
             Destroy(gameObject);
         }
