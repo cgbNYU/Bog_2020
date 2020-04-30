@@ -24421,6 +24421,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bugTailRef: {fileID: 481588331504148626}
+  playerModelsByPlayerCam:
+  - {fileID: 6083685369385779781}
+  - {fileID: 5440706368857703797}
+  - {fileID: 8363736122732158120}
+  - {fileID: 8234446923036769327}
 --- !u!1 &8998389131807849095
 GameObject:
   m_ObjectHideFlags: 0

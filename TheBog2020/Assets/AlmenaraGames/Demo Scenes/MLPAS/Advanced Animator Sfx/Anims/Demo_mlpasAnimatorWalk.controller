@@ -1,0 +1,431 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!91 &9100000
+AnimatorController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Demo_mlpasAnimatorWalk
+  serializedVersion: 5
+  m_AnimatorParameters:
+  - m_Name: Speed
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  m_AnimatorLayers:
+  - serializedVersion: 5
+    m_Name: Base Layer
+    m_StateMachine: {fileID: 1107640511395988134}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+--- !u!114 &114921366327482898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5e50de645a9ca48ae642a94b41a168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  first: 1
+  selectedIndex: 1
+  onStateMachine: 0
+  transitionLayer: 0
+  stateSfxs:
+  - ignoreSfx: 0
+    playOnlyWithReceiver: 1
+    customMethodWarnings: 1
+    useCustomPlayMethod: 1
+    methodName: PlayFootstep
+    customName: right foot
+    unfolded: 1
+    audioObject: {fileID: 11400000, guid: 4944c711654dc9c40bde2252980cdec6, type: 2}
+    audioObjectIdentifier: 
+    useIdentifier: 0
+    useChannel: 0
+    channel: -1
+    followAnimator: 0
+    playOnlyOnce: 0
+    playTime: 5
+    playTimeNormalized: 1
+    playFrame: 2
+    paramThreshold: 0
+    paramExactValue: 0
+    conditionEvaluated: 0
+    normalizedPlayTime: 0
+    sfxPlayed: 0
+    paramOldValue: 0
+    lastNormalizedTime: 0
+    startNormalizedTime: 0
+    lastPlayedLoop: -1
+    cycleNotPlayed: 0
+    lastIgnoredCycleTime: 0
+    started: 0
+    exit: 1
+    curLoop: 0
+    lastLoop: 0
+    cycleOffsetHasParameter: 0
+    cycleOffsetParameterID: 0
+    cycleOffset: 0
+    playCycle: 0
+    paramHash: 0
+    currentParameterRuntime:
+      parameterName: Speed
+      type: 1
+      isNull: 0
+    currentTransitionName: 
+    lastTransitionName: 
+    lastParameterName: Speed
+    lastParameterType: Float
+    runtimeTransitionName: 
+    runtimeParameterName: Speed
+    runtimeCurrentStateHash: 949806512
+    runtimeEndStateHash: 0
+    instantTransitionDuration: 0
+    playMode: 1
+    parameterEvaluateMode: 0
+    runtimeError: 0
+    runtimeErrorString: 
+    transitionInit: 0
+    parameterInit: 1
+    nullParameter: 0
+    nullTransition: 1
+    blendTree:
+    - blendNode: 0
+      unfolded: 0
+      runTimeName: 'Speed: 0'
+      threshold: 0
+      position: {x: 0, y: 0}
+      useDifferentAudioObject: 0
+      audioObject: {fileID: 0}
+      audioObjectIdentifier: 
+      useIdentifier: 0
+      useDifferentChannel: 0
+      channel: -1
+      useDifferentPlayTime: 0
+      playTime: 0
+      playTimeNormalized: 1
+      playFrame: 0
+      ignoreMotion: 0
+    - blendNode: 0
+      unfolded: 0
+      runTimeName: 'Speed: 0.5'
+      threshold: 0.5
+      position: {x: 0, y: 0}
+      useDifferentAudioObject: 0
+      audioObject: {fileID: 0}
+      audioObjectIdentifier: 
+      useIdentifier: 0
+      useDifferentChannel: 0
+      channel: -1
+      useDifferentPlayTime: 0
+      playTime: 0
+      playTimeNormalized: 1
+      playFrame: 0
+      ignoreMotion: 0
+    - blendNode: 0
+      unfolded: 0
+      runTimeName: 'Speed: 1'
+      threshold: 1
+      position: {x: 0, y: 0}
+      useDifferentAudioObject: 0
+      audioObject: {fileID: 0}
+      audioObjectIdentifier: 
+      useIdentifier: 0
+      useDifferentChannel: 0
+      channel: -1
+      useDifferentPlayTime: 0
+      playTime: 0
+      playTimeNormalized: 1
+      playFrame: 0
+      ignoreMotion: 0
+    userParameters:
+      boolParameter: 0
+      floatParameter: 0
+      intParameter: 1
+      stringParameter: 
+      objectParameter: {fileID: 0}
+    showExtraConditions: 1
+    conditions:
+    - index: 0
+      parameter: Speed
+      parameterHash: -823668238
+      mode: 0
+      threshold: 0.1
+      parameterType: 1
+      isNULL: 0
+    lastBlendValue: 0
+    pathName: 'Animator: <i><b>Demo_mlpasAnimatorWalk</b></i> - State: <i><b>Moving</b></i>'
+    currentParameter:
+      parameterName: Speed
+      type: 1
+      isNull: 0
+    currentTransition: {fileID: 0}
+    transitionAssigned: 0
+    parameterAssigned: 1
+  - ignoreSfx: 0
+    playOnlyWithReceiver: 1
+    customMethodWarnings: 1
+    useCustomPlayMethod: 1
+    methodName: PlayFootstep
+    customName: left foot
+    unfolded: 1
+    audioObject: {fileID: 11400000, guid: 4944c711654dc9c40bde2252980cdec6, type: 2}
+    audioObjectIdentifier: 
+    useIdentifier: 0
+    useChannel: 0
+    channel: -1
+    followAnimator: 0
+    playOnlyOnce: 0
+    playTime: 55
+    playTimeNormalized: 1
+    playFrame: 16
+    paramThreshold: 0
+    paramExactValue: 0
+    conditionEvaluated: 0
+    normalizedPlayTime: 0
+    sfxPlayed: 0
+    paramOldValue: 0
+    lastNormalizedTime: 0
+    startNormalizedTime: 0
+    lastPlayedLoop: -1
+    cycleNotPlayed: 0
+    lastIgnoredCycleTime: 0
+    started: 0
+    exit: 1
+    curLoop: 0
+    lastLoop: 0
+    cycleOffsetHasParameter: 0
+    cycleOffsetParameterID: 0
+    cycleOffset: 0
+    playCycle: 0
+    paramHash: 0
+    currentParameterRuntime:
+      parameterName: 
+      type: 0
+      isNull: 0
+    currentTransitionName: 
+    lastTransitionName: 
+    lastParameterName: Speed
+    lastParameterType: Float
+    runtimeTransitionName: 
+    runtimeParameterName: 
+    runtimeCurrentStateHash: 949806512
+    runtimeEndStateHash: 0
+    instantTransitionDuration: 0
+    playMode: 1
+    parameterEvaluateMode: 0
+    runtimeError: 0
+    runtimeErrorString: 
+    transitionInit: 0
+    parameterInit: 1
+    nullParameter: 0
+    nullTransition: 1
+    blendTree:
+    - blendNode: 0
+      unfolded: 0
+      runTimeName: 'Speed: 0'
+      threshold: 0
+      position: {x: 0, y: 0}
+      useDifferentAudioObject: 0
+      audioObject: {fileID: 0}
+      audioObjectIdentifier: 
+      useIdentifier: 0
+      useDifferentChannel: 0
+      channel: -1
+      useDifferentPlayTime: 0
+      playTime: 0
+      playTimeNormalized: 1
+      playFrame: 0
+      ignoreMotion: 0
+    - blendNode: 0
+      unfolded: 0
+      runTimeName: 'Speed: 0.5'
+      threshold: 0.5
+      position: {x: 0, y: 0}
+      useDifferentAudioObject: 0
+      audioObject: {fileID: 0}
+      audioObjectIdentifier: 
+      useIdentifier: 0
+      useDifferentChannel: 0
+      channel: -1
+      useDifferentPlayTime: 0
+      playTime: 0
+      playTimeNormalized: 1
+      playFrame: 0
+      ignoreMotion: 0
+    - blendNode: 0
+      unfolded: 0
+      runTimeName: 'Speed: 1'
+      threshold: 1
+      position: {x: 0, y: 0}
+      useDifferentAudioObject: 0
+      audioObject: {fileID: 0}
+      audioObjectIdentifier: 
+      useIdentifier: 0
+      useDifferentChannel: 0
+      channel: -1
+      useDifferentPlayTime: 0
+      playTime: 0
+      playTimeNormalized: 1
+      playFrame: 0
+      ignoreMotion: 0
+    userParameters:
+      boolParameter: 0
+      floatParameter: 0
+      intParameter: 2
+      stringParameter: 
+      objectParameter: {fileID: 0}
+    showExtraConditions: 1
+    conditions:
+    - index: 0
+      parameter: Speed
+      parameterHash: -823668238
+      mode: 0
+      threshold: 0.1
+      parameterType: 1
+      isNULL: 0
+    lastBlendValue: 0
+    pathName: 'Animator: <i><b>Demo_mlpasAnimatorWalk</b></i> - State: <i><b>Moving</b></i>'
+    currentParameter:
+      parameterName: Speed
+      type: 1
+      isNull: 0
+    currentTransition: {fileID: 0}
+    transitionAssigned: 0
+    parameterAssigned: 1
+  trf: {fileID: 0}
+  sfxValues:
+    stateName: 
+    layer: 0
+    useDifferentPlayPosition: 0
+    playPosition: {fileID: 0}
+    followPosition: 0
+  controller: {fileID: 0}
+  sfxControllerExternalAssigned: 0
+  init: 0
+  runtimeStateName: Moving
+  isBlendTree: 0
+  blend2D: 0
+  xParamHash: -823668238
+  yParamHash: 1784438316
+  globalAddedSfx: 65
+  currentAnimatorController: {fileID: 9100000}
+  currentState: {fileID: 1102621136432777364}
+  currentStateMachine: {fileID: 0}
+--- !u!206 &206008023692971106
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs:
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400002, guid: f316e7293100dd94b83a20f5bc5e271b, type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Speed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400006, guid: f316e7293100dd94b83a20f5bc5e271b, type: 3}
+    m_Threshold: 0.5
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Speed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400004, guid: f316e7293100dd94b83a20f5bc5e271b, type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Speed
+    m_Mirror: 0
+  m_BlendParameter: Speed
+  m_BlendParameterY: Blend
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 0
+  m_NormalizedBlendValues: 0
+  m_BlendType: 0
+--- !u!206 &206788972515770230
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlendTree
+  m_Childs: []
+  m_BlendParameter: Speed
+  m_BlendParameterY: Speed
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_NormalizedBlendValues: 0
+  m_BlendType: 0
+--- !u!1102 &1102621136432777364
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Moving
+  m_Speed: 1.1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours:
+  - {fileID: 114921366327482898}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 206008023692971106}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1107 &1107640511395988134
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Base Layer
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: 1102621136432777364}
+    m_Position: {x: 24, y: 72, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 48, y: 24, z: 0}
+  m_EntryPosition: {x: 48, y: 132, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 1102621136432777364}

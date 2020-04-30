@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using UnityEngine;
 using Rewired;
 using UnityEditor.SceneManagement;
@@ -135,6 +136,12 @@ public class PlayerController : MonoBehaviour
     {
         return _moveState;
     }
+
+    #endregion
+
+    #region AudioVariables
+    [Header("Audio Variables")]
+    public AudioObject SpitSound;
 
     #endregion
     
@@ -459,7 +466,7 @@ public class PlayerController : MonoBehaviour
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
         
         //If the target enemy switches, unhighlight the enemy  
-        if(_lockTargetTransform!=_previousLockTargetTransform)
+        if(_lockTargetTransform!=_previousLockTargetTransform && _lockTargetTransform != null)
             _highlightTarget.UnHighlightEnemy(_previousLockTargetTransform);
         
         if (_lockTargetTransform != null) //if yes
@@ -510,6 +517,9 @@ public class PlayerController : MonoBehaviour
             spit.transform.rotation = Spitter.rotation;
             spit.GetComponent<SpitHitBox>().TeamID = TeamID;
             spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
+            
+            //Play Sound
+            MultiAudioManager.PlayAudioObject(SpitSound, transform.position);
         }
     }
     

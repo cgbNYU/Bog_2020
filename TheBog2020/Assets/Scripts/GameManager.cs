@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
                     {
                         GameObject.Find("AttractScreen_Player").GetComponent<AttractScreen>().StopVideo();
                         //Play bgm
-                        AudioManager.AM.GetComponent<AudioSource>().Play();
                         _gameState = GameState.Title;
                     }
                 }

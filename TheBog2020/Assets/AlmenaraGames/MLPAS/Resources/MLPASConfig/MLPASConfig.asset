@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9605097dec918b54b86b952c19b34121, type: 3}
+  m_Name: MLPASConfig
+  m_EditorClassIdentifier: 
+  sfxMixerGroup: {fileID: 243052860578643906, guid: 4b3f3a305952a574191f055c8efa0967,
+    type: 2}
+  bgmMixerGroup: {fileID: 243318579703096844, guid: 4b3f3a305952a574191f055c8efa0967,
+    type: 2}
+  occludeCheck:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  occludeMultiplier: 0.5
+  runtimeIdentifierPrefix: '[rt]'
+  maxAudioSources: 256
+  dopplerFactor: 1
+  stateClipboardBuffer: []
+  updated: 1

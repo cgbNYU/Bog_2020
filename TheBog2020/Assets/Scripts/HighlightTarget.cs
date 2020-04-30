@@ -24,7 +24,7 @@ public class HighlightTarget : MonoBehaviour
     {
         if (enemyTransform != null)
         {
-            enemyModel = enemyTransform.GetChild(1).Find("PlayerModel_P" + (_playerID + 1) + "Cam");
+            enemyModel = enemyTransform.GetComponentInChildren<PlayerModelIndex>().playerModelsByPlayerCam[_playerID];
             SetMaterial(enemyModel, enemyHighlightMaterial);
         }
     }
@@ -32,9 +32,9 @@ public class HighlightTarget : MonoBehaviour
     //Return the enemy model back to their default material
     public void UnHighlightEnemy(Transform enemyTransform)
     {
-        if (enemyTransform != null)
+        if (enemyTransform != null && enemyTransform.GetComponentInChildren<PlayerModelIndex>() != null)
         {
-            enemyModel = enemyTransform.GetChild(1).Find("PlayerModel_P" + (_playerID + 1) + "Cam");
+            enemyModel = enemyTransform.GetComponentInChildren<PlayerModelIndex>().playerModelsByPlayerCam[_playerID];
             SetMaterial(enemyModel, enemyMaterial);
         }
     }

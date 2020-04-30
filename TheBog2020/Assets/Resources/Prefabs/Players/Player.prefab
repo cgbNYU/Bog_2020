@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4224120734551867767}
   - component: {fileID: 2635945638774760941}
   - component: {fileID: 5178546524985351168}
+  - component: {fileID: -7466616774296832130}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -76,6 +77,7 @@ MonoBehaviour:
   TeamID: 0
   Spitter: {fileID: 6451971753822252130}
   InvulnerableTime: 0.25
+  SpitSound: {fileID: 11400000, guid: c263a8ee588aee548a13deef52284878, type: 2}
 --- !u!54 &2635945638774760935
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EggHolder: {fileID: 0}
+  BugTail: {fileID: 0}
 --- !u!114 &2635945638774760941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +151,24 @@ MonoBehaviour:
   enemyMaterial: {fileID: 0}
   enemyHighlightMaterial: {fileID: 0}
   playerMaterial: {fileID: 0}
+--- !u!114 &-7466616774296832130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ea08d60a603164e83c1fb75543763e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionOffset: {x: 0, y: 0, z: 0}
+  LocalOffset: 0
+  OverrideForward: {x: 0, y: 0, z: 0}
+  LocalForward: 1
+  ReverbPreset: 0
+  useReverbZones: 1
 --- !u!1 &6414582220045466299
 GameObject:
   m_ObjectHideFlags: 0
