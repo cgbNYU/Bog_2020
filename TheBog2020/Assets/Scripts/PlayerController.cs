@@ -466,7 +466,7 @@ public class PlayerController : MonoBehaviour
         _lockTargetTransform = EnemyInRange(); //check to see if anyone is in range
         
         //If the target enemy switches, unhighlight the enemy  
-        if(_lockTargetTransform!=_previousLockTargetTransform)
+        if(_lockTargetTransform!=_previousLockTargetTransform && _lockTargetTransform != null)
             _highlightTarget.UnHighlightEnemy(_previousLockTargetTransform);
         
         if (_lockTargetTransform != null) //if yes

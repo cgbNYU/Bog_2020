@@ -32,7 +32,7 @@ public class HighlightTarget : MonoBehaviour
     //Return the enemy model back to their default material
     public void UnHighlightEnemy(Transform enemyTransform)
     {
-        if (enemyTransform != null)
+        if (enemyTransform != null && enemyTransform.GetComponentInChildren<PlayerModelIndex>() != null)
         {
             enemyModel = enemyTransform.GetComponentInChildren<PlayerModelIndex>().playerModelsByPlayerCam[_playerID];
             SetMaterial(enemyModel, enemyMaterial);
