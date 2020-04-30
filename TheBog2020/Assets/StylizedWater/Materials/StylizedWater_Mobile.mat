@@ -82,7 +82,7 @@ Material:
     - _RT_REFRACTION: 0
     - _ReflectionFresnel: 2
     - _ReflectionRefraction: 0.006
-    - _ReflectionStrength: 0
+    - _ReflectionStrength: 1
     - _RefractionAmount: 0.057
     - _RimDistance: 0.899
     - _RimDistortion: 0.139
