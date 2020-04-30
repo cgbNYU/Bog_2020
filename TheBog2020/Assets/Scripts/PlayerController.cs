@@ -465,7 +465,8 @@ public class PlayerController : MonoBehaviour
         if (_lockTargetTransform != null) //if yes
         {
             //Calculate target direction
-            Vector3 targetDirection = _lockTargetTransform.position - transform.position;
+            Vector3 levelledTargetPos = new Vector3(_lockTargetTransform.position.x, transform.position.y, _lockTargetTransform.position.z);
+            Vector3 targetDirection = levelledTargetPos - transform.position;
             targetDirection.Normalize();
         
             //Calculate angle between forward facing and target direction
