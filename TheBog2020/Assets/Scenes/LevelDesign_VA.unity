@@ -1482,7 +1482,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321058812}
-  m_LocalRotation: {x: 0.00000092165203, y: -0.99057025, z: 0.13700634, w: 0.00000015662941}
+  m_LocalRotation: {x: 0.0000009170619, y: -0.99057025, z: 0.13700637, w: 0.00000012344236}
   m_LocalPosition: {x: 1.9827576, y: 3.887748, z: 201.69263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3094,6 +3094,7 @@ GameObject:
   - component: {fileID: 1087124827}
   - component: {fileID: 1087124831}
   - component: {fileID: 1087124830}
+  - component: {fileID: 1087124832}
   m_Layer: 0
   m_Name: Player3Camera
   m_TagString: MainCamera
@@ -3108,7 +3109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087124825}
-  m_LocalRotation: {x: 0.00000092165203, y: -0.99057025, z: 0.13700634, w: 0.00000015662941}
+  m_LocalRotation: {x: 0.0000009170619, y: -0.99057025, z: 0.13700637, w: 0.00000012344236}
   m_LocalPosition: {x: 87.11582, y: 2.8702545, z: 92.757774}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3469,6 +3470,18 @@ MonoBehaviour:
   _maskBrushFuzziness: 0.5
   _maskBrushOpacity: 0.15
   _fogOfWarTexture: {fileID: 0}
+--- !u!114 &1087124832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087124825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b9ae18c04c25345a5622a4d1fdcf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1108180954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7650293372181771403, guid: 3b233c758e80a4dc58518da637ad2d14,
@@ -3694,6 +3707,7 @@ GameObject:
   - component: {fileID: 1274538022}
   - component: {fileID: 1274538026}
   - component: {fileID: 1274538025}
+  - component: {fileID: 1274538027}
   m_Layer: 0
   m_Name: Player4Camera
   m_TagString: MainCamera
@@ -4069,6 +4083,18 @@ MonoBehaviour:
   _maskBrushFuzziness: 0.5
   _maskBrushOpacity: 0.15
   _fogOfWarTexture: {fileID: 0}
+--- !u!114 &1274538027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274538020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b9ae18c04c25345a5622a4d1fdcf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1276403717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4564,6 +4590,7 @@ GameObject:
   - component: {fileID: 1607009627}
   - component: {fileID: 1607009631}
   - component: {fileID: 1607009630}
+  - component: {fileID: 1607009632}
   m_Layer: 0
   m_Name: Player2Camera
   m_TagString: MainCamera
@@ -4939,6 +4966,18 @@ MonoBehaviour:
   _maskBrushFuzziness: 0.5
   _maskBrushOpacity: 0.15
   _fogOfWarTexture: {fileID: 0}
+--- !u!114 &1607009632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607009625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b9ae18c04c25345a5622a4d1fdcf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1625569400
 GameObject:
   m_ObjectHideFlags: 0
@@ -8578,6 +8617,7 @@ GameObject:
   - component: {fileID: 8769666258708370126}
   - component: {fileID: 8769666258708370128}
   - component: {fileID: 8769666258708370127}
+  - component: {fileID: 8769666258708370129}
   m_Layer: 0
   m_Name: Player1Camera
   m_TagString: MainCamera
@@ -8896,3 +8936,15 @@ MonoBehaviour:
   _maskBrushFuzziness: 0.5
   _maskBrushOpacity: 0.15
   _fogOfWarTexture: {fileID: 0}
+--- !u!114 &8769666258708370129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769666258708370124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b9ae18c04c25345a5622a4d1fdcf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
