@@ -11,6 +11,7 @@ TagManager:
   - TutorialPopup
   - Wings
   - Eyes
+  - Spit
   layers:
   - Default
   - TransparentFX
