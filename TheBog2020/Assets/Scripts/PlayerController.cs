@@ -139,9 +139,10 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region AudioVariables
+    #region Audio Variables
     [Header("Audio Variables")]
     public AudioObject SpitSound;
+    public AudioObject DeathSound;
 
     #endregion
     
@@ -557,6 +558,9 @@ public class PlayerController : MonoBehaviour
             {
                 explodeModel.Explode();
             }
+            
+            //Play Death Sound
+            MultiAudioManager.PlayAudioObject(DeathSound, transform.position);
         }
     }
 
