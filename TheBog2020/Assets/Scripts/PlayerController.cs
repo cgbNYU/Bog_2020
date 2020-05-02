@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Variables")]
     public AudioObject SpitSound;
     public AudioObject DeathSound;
+    public AudioObject HitWallSound;
 
     #endregion
     
@@ -574,6 +575,19 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    #endregion
+
+    #region On Collision/Trigger
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //Make a sound when bumping into walls
+        if (other.transform.CompareTag("Wall"))
+        {
+            MultiAudioManager.PlayAudioObject(HitWallSound, transform.position);
+        }
+    }
+
     #endregion
 
     #region Archived Functions

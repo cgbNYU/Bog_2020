@@ -13,6 +13,7 @@ TagManager:
   - Eyes
   - Spit
   - Water
+  - Wall
   layers:
   - Default
   - TransparentFX

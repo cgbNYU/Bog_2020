@@ -79,6 +79,7 @@ MonoBehaviour:
   InvulnerableTime: 0.25
   SpitSound: {fileID: 11400000, guid: c263a8ee588aee548a13deef52284878, type: 2}
   DeathSound: {fileID: 11400000, guid: ac3233d14739ec64eb75b977e72be147, type: 2}
+  HitWallSound: {fileID: 11400000, guid: cb5c225eb2dfb8148b00bf2b495eaf5b, type: 2}
 --- !u!54 &2635945638774760935
 Rigidbody:
   m_ObjectHideFlags: 0
