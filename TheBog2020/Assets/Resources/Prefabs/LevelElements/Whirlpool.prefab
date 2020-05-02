@@ -468,6 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PullForce: 10
   WhirlpoolRange: 25
+  EggDestroySound: {fileID: 11400000, guid: c4e8ff07911a15047832f446562c0dee, type: 2}
 --- !u!1 &4229707397270248234
 GameObject:
   m_ObjectHideFlags: 0
