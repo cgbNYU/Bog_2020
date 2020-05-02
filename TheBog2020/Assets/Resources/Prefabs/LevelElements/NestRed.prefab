@@ -1190,6 +1190,7 @@ MonoBehaviour:
   - {fileID: 1806263140102450157}
   - {fileID: 8996269694160513140}
   - {fileID: 6364132294132080327}
+  RespawnSound: {fileID: 11400000, guid: b175821dc782bb04f833cb6227f80729, type: 2}
 --- !u!135 &272909634294490205
 SphereCollider:
   m_ObjectHideFlags: 0
