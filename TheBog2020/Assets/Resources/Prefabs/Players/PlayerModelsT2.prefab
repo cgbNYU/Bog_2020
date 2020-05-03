@@ -24368,6 +24368,7 @@ GameObject:
   - component: {fileID: 8951345005091745251}
   - component: {fileID: 8355795952765677850}
   - component: {fileID: 4930545982570284727}
+  - component: {fileID: 1773432248073256163}
   m_Layer: 0
   m_Name: PlayerModelsT2
   m_TagString: Untagged
@@ -24426,6 +24427,38 @@ MonoBehaviour:
   - {fileID: 5440706368857703797}
   - {fileID: 8363736122732158120}
   - {fileID: 8234446923036769327}
+--- !u!114 &1773432248073256163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951345005091745250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62978a103927c745be71fc62db2a881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftWingMeshRenderers:
+  - {fileID: 5627980760882800913}
+  - {fileID: 7552737134870122227}
+  - {fileID: 2562509021342588287}
+  - {fileID: 2779064883007184167}
+  - {fileID: 7411215925719938818}
+  - {fileID: 7005961267108284662}
+  - {fileID: 6385775944649021578}
+  - {fileID: 3421219629511605711}
+  RightWingMeshRenderers:
+  - {fileID: 9176682546351536027}
+  - {fileID: 1418024804194292872}
+  - {fileID: 5061462862712747975}
+  - {fileID: 229255601334276233}
+  - {fileID: 2946176094425020709}
+  - {fileID: 7214304106099115151}
+  - {fileID: 6112539145525179197}
+  - {fileID: 5464539046942016715}
+  MinAmp: 1
+  MaxAmp: 2
 --- !u!1 &8998389131807849095
 GameObject:
   m_ObjectHideFlags: 0

@@ -299,12 +299,22 @@ public class PlayerController : MonoBehaviour
         _lockButtonHeld = _rewiredPlayer.GetButton("Lock");
     }
 
-    //Called from external scripts that need the input vectors (TiltModel)
-    public Vector3 ReadInputs()
+    //Called from external scripts that need the heading vectors (TiltModel)
+    public Vector3 ReadHeading()
     {
         Vector3 inputVector = _leftStickHeadingVector + _rightStickHeadingVector;
 
         return inputVector;
+    }
+
+    public Vector3 ReadLeftInput()
+    {
+        return _leftStickVector;
+    }
+
+    public Vector3 ReadRightInput()
+    {
+        return _rightStickVector;
     }
 
     private void ResetInputs()
