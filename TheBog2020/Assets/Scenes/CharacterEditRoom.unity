@@ -416,166 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &26071917
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 26071918}
-  - component: {fileID: 26071920}
-  - component: {fileID: 26071919}
-  m_Layer: 0
-  m_Name: WhaleTrack (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &26071918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26071917}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 765519265}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &26071919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26071917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982b73a98a35a34092e7dcf25584928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoundDelay: 20
---- !u!114 &26071920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26071917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6214d9bea85c048448741528c759aa86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObject: {fileID: 11400000, guid: fceb14ec4831d8b4f9fd9deef92764db, type: 2}
-  defaultChannel: -1
-  masterVolume: 0.5
-  overrideMasterVolume: 0
-  masterVolumeOverride: 1
-  playUpdateMode: 1
-  overridePlayUpdateMode: 0
-  playUpdateModeOverride: 1
-  TargetToFollow: {fileID: 0}
-  Mute: 0
-  OverrideValues: 1
-  overrideRandomVolumeMultiplier: 0
-  randomVolumeMultiplier: 1
-  overrideRandomPitchMultiplier: 0
-  randomPitchMultiplier: 1
-  overrideAudioClip: 0
-  audioClipOverride: {fileID: 0}
-  overrideVolume: 0
-  volumeOverride: 1
-  overridePitch: 0
-  pitchOverride: 1
-  overrideSpatialMode: 1
-  spatialMode2DOverride: 1
-  overrideStereoPan: 0
-  stereoPanOverride: 0
-  overrideSpread: 0
-  spreadOverride: 0
-  overrideDopplerLevel: 0
-  dopplerLevelOverride: 0.25
-  overrideReverbZone: 0
-  reverbZoneMixOverride: 1
-  overrideDistance: 0
-  minDistanceOverride: 1
-  maxDistanceOverride: 20
-  overrideMixerGroup: 0
-  mixerGroupOverride: {fileID: 0}
-  occludeSound: 0
-  overrideOccludeSound: 0
-  occludeSoundOverride: 0
-  delay: 0
-  delayUpdateMode: 0
-  overrideDelayUpdateMode: 0
-  delayUpdateModeOverride: 0
-  overrideVolumeRolloff: 0
-  volumeRolloffOverride: 0
-  volumeRolloffCurveOverride:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  overrideSpatialize: 0
-  spatializeOverride: 0
-  playOnStart: 0
-  fadeInOnStart: 0
-  fadeInOnStartTime: 1
-  ignoreListenerPause: 0
-  overrideIgnoreListenerPause: 0
-  ignoreListenerPauseOverride: 0
-  persistsBetweenScenes: 0
-  paused: 0
-  overridePaused: 0
-  pausedOverride: 0
-  StartDistance: 0
-  outOfRange: 0
-  scene:
-    m_Handle: 0
-  init: 0
-  OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnOutOfRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  callbacksFold: 0
-  usingLogRolloff: 0
 --- !u!4 &31966916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 804a3be0a79df4e22b918a347c3fe5c6,
@@ -2498,7 +2338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321058812}
-  m_LocalRotation: {x: 0.0000009170619, y: -0.99057025, z: 0.13700637, w: 0.00000012344236}
+  m_LocalRotation: {x: 0.00000092165203, y: -0.99057025, z: 0.13700634, w: 0.00000015662941}
   m_LocalPosition: {x: 1.9827576, y: 3.887748, z: 201.69263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4462,271 +4302,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1187061430}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &765519264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 765519265}
-  - component: {fileID: 765519266}
-  - component: {fileID: 765519267}
-  m_Layer: 0
-  m_Name: AmbianceAudioSource
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &765519265
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765519264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1884222086}
-  - {fileID: 26071918}
-  - {fileID: 2142485157}
-  m_Father: {fileID: 0}
-  m_RootOrder: 20
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &765519266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765519264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6214d9bea85c048448741528c759aa86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObject: {fileID: 11400000, guid: f6826114e12ac1b42a32df286062f959, type: 2}
-  defaultChannel: -1
-  masterVolume: 0.5
-  overrideMasterVolume: 0
-  masterVolumeOverride: 1
-  playUpdateMode: 1
-  overridePlayUpdateMode: 0
-  playUpdateModeOverride: 1
-  TargetToFollow: {fileID: 0}
-  Mute: 0
-  OverrideValues: 1
-  overrideRandomVolumeMultiplier: 0
-  randomVolumeMultiplier: 1
-  overrideRandomPitchMultiplier: 0
-  randomPitchMultiplier: 1
-  overrideAudioClip: 0
-  audioClipOverride: {fileID: 0}
-  overrideVolume: 0
-  volumeOverride: 1
-  overridePitch: 0
-  pitchOverride: 1
-  overrideSpatialMode: 1
-  spatialMode2DOverride: 1
-  overrideStereoPan: 0
-  stereoPanOverride: 0
-  overrideSpread: 0
-  spreadOverride: 0
-  overrideDopplerLevel: 0
-  dopplerLevelOverride: 0.25
-  overrideReverbZone: 0
-  reverbZoneMixOverride: 1
-  overrideDistance: 0
-  minDistanceOverride: 1
-  maxDistanceOverride: 20
-  overrideMixerGroup: 0
-  mixerGroupOverride: {fileID: 0}
-  occludeSound: 0
-  overrideOccludeSound: 0
-  occludeSoundOverride: 0
-  delay: 0
-  delayUpdateMode: 0
-  overrideDelayUpdateMode: 0
-  delayUpdateModeOverride: 0
-  overrideVolumeRolloff: 0
-  volumeRolloffOverride: 0
-  volumeRolloffCurveOverride:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  overrideSpatialize: 0
-  spatializeOverride: 0
-  playOnStart: 1
-  fadeInOnStart: 0
-  fadeInOnStartTime: 1
-  ignoreListenerPause: 0
-  overrideIgnoreListenerPause: 0
-  ignoreListenerPauseOverride: 0
-  persistsBetweenScenes: 0
-  paused: 0
-  overridePaused: 0
-  pausedOverride: 0
-  StartDistance: 0
-  outOfRange: 0
-  scene:
-    m_Handle: 0
-  init: 0
-  OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnOutOfRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  callbacksFold: 0
-  usingLogRolloff: 0
---- !u!114 &765519267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765519264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6214d9bea85c048448741528c759aa86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObject: {fileID: 11400000, guid: c9fbad6fa3754bd41bd36032a91f061b, type: 2}
-  defaultChannel: -1
-  masterVolume: 0.5
-  overrideMasterVolume: 0
-  masterVolumeOverride: 1
-  playUpdateMode: 1
-  overridePlayUpdateMode: 0
-  playUpdateModeOverride: 1
-  TargetToFollow: {fileID: 0}
-  Mute: 0
-  OverrideValues: 1
-  overrideRandomVolumeMultiplier: 0
-  randomVolumeMultiplier: 1
-  overrideRandomPitchMultiplier: 0
-  randomPitchMultiplier: 1
-  overrideAudioClip: 0
-  audioClipOverride: {fileID: 0}
-  overrideVolume: 0
-  volumeOverride: 1
-  overridePitch: 0
-  pitchOverride: 1
-  overrideSpatialMode: 1
-  spatialMode2DOverride: 1
-  overrideStereoPan: 0
-  stereoPanOverride: 0
-  overrideSpread: 0
-  spreadOverride: 0
-  overrideDopplerLevel: 0
-  dopplerLevelOverride: 0.25
-  overrideReverbZone: 0
-  reverbZoneMixOverride: 1
-  overrideDistance: 0
-  minDistanceOverride: 1
-  maxDistanceOverride: 20
-  overrideMixerGroup: 0
-  mixerGroupOverride: {fileID: 0}
-  occludeSound: 0
-  overrideOccludeSound: 0
-  occludeSoundOverride: 0
-  delay: 0
-  delayUpdateMode: 0
-  overrideDelayUpdateMode: 0
-  delayUpdateModeOverride: 0
-  overrideVolumeRolloff: 0
-  volumeRolloffOverride: 0
-  volumeRolloffCurveOverride:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  overrideSpatialize: 0
-  spatializeOverride: 0
-  playOnStart: 1
-  fadeInOnStart: 0
-  fadeInOnStartTime: 1
-  ignoreListenerPause: 0
-  overrideIgnoreListenerPause: 0
-  ignoreListenerPauseOverride: 0
-  persistsBetweenScenes: 0
-  paused: 0
-  overridePaused: 0
-  pausedOverride: 0
-  StartDistance: 0
-  outOfRange: 0
-  scene:
-    m_Handle: 0
-  init: 0
-  OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnOutOfRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  callbacksFold: 0
-  usingLogRolloff: 0
 --- !u!4 &769540448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2635945638774760929, guid: 3e20dff204fbcb54e90a22aac1c27920,
@@ -6005,7 +5580,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087124825}
-  m_LocalRotation: {x: 0.0000009170619, y: -0.99057025, z: 0.13700637, w: 0.00000012344236}
+  m_LocalRotation: {x: 0.00000092165203, y: -0.99057025, z: 0.13700634, w: 0.00000015662941}
   m_LocalPosition: {x: 87.11582, y: 2.8702545, z: 92.757774}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -10593,166 +10168,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883807763}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1884222085
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1884222086}
-  - component: {fileID: 1884222087}
-  - component: {fileID: 1884222088}
-  m_Layer: 0
-  m_Name: WhaleTrack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1884222086
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884222085}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 765519265}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1884222087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884222085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6214d9bea85c048448741528c759aa86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObject: {fileID: 11400000, guid: fceb14ec4831d8b4f9fd9deef92764db, type: 2}
-  defaultChannel: -1
-  masterVolume: 0.5
-  overrideMasterVolume: 0
-  masterVolumeOverride: 1
-  playUpdateMode: 1
-  overridePlayUpdateMode: 0
-  playUpdateModeOverride: 1
-  TargetToFollow: {fileID: 0}
-  Mute: 0
-  OverrideValues: 1
-  overrideRandomVolumeMultiplier: 0
-  randomVolumeMultiplier: 1
-  overrideRandomPitchMultiplier: 0
-  randomPitchMultiplier: 1
-  overrideAudioClip: 0
-  audioClipOverride: {fileID: 0}
-  overrideVolume: 0
-  volumeOverride: 1
-  overridePitch: 0
-  pitchOverride: 1
-  overrideSpatialMode: 1
-  spatialMode2DOverride: 1
-  overrideStereoPan: 0
-  stereoPanOverride: 0
-  overrideSpread: 0
-  spreadOverride: 0
-  overrideDopplerLevel: 0
-  dopplerLevelOverride: 0.25
-  overrideReverbZone: 0
-  reverbZoneMixOverride: 1
-  overrideDistance: 0
-  minDistanceOverride: 1
-  maxDistanceOverride: 20
-  overrideMixerGroup: 0
-  mixerGroupOverride: {fileID: 0}
-  occludeSound: 0
-  overrideOccludeSound: 0
-  occludeSoundOverride: 0
-  delay: 0
-  delayUpdateMode: 0
-  overrideDelayUpdateMode: 0
-  delayUpdateModeOverride: 0
-  overrideVolumeRolloff: 0
-  volumeRolloffOverride: 0
-  volumeRolloffCurveOverride:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  overrideSpatialize: 0
-  spatializeOverride: 0
-  playOnStart: 0
-  fadeInOnStart: 0
-  fadeInOnStartTime: 1
-  ignoreListenerPause: 0
-  overrideIgnoreListenerPause: 0
-  ignoreListenerPauseOverride: 0
-  persistsBetweenScenes: 0
-  paused: 0
-  overridePaused: 0
-  pausedOverride: 0
-  StartDistance: 0
-  outOfRange: 0
-  scene:
-    m_Handle: 0
-  init: 0
-  OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnOutOfRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  callbacksFold: 0
-  usingLogRolloff: 0
---- !u!114 &1884222088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884222085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982b73a98a35a34092e7dcf25584928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoundDelay: 15
 --- !u!1 &1921747685
 GameObject:
   m_ObjectHideFlags: 0
@@ -11681,166 +11096,75 @@ Transform:
   m_Father: {fileID: 1873122272}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: -40.843002, z: 0}
---- !u!1 &2142485156
-GameObject:
+--- !u!1001 &3888375063347167097
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2142485157}
-  - component: {fileID: 2142485159}
-  - component: {fileID: 2142485158}
-  m_Layer: 0
-  m_Name: WhaleTrack (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2142485157
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142485156}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 765519265}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2142485158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142485156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982b73a98a35a34092e7dcf25584928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoundDelay: 40
---- !u!114 &2142485159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142485156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6214d9bea85c048448741528c759aa86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObject: {fileID: 11400000, guid: fceb14ec4831d8b4f9fd9deef92764db, type: 2}
-  defaultChannel: -1
-  masterVolume: 0.5
-  overrideMasterVolume: 0
-  masterVolumeOverride: 1
-  playUpdateMode: 1
-  overridePlayUpdateMode: 0
-  playUpdateModeOverride: 1
-  TargetToFollow: {fileID: 0}
-  Mute: 0
-  OverrideValues: 1
-  overrideRandomVolumeMultiplier: 0
-  randomVolumeMultiplier: 1
-  overrideRandomPitchMultiplier: 0
-  randomPitchMultiplier: 1
-  overrideAudioClip: 0
-  audioClipOverride: {fileID: 0}
-  overrideVolume: 0
-  volumeOverride: 1
-  overridePitch: 0
-  pitchOverride: 1
-  overrideSpatialMode: 1
-  spatialMode2DOverride: 1
-  overrideStereoPan: 0
-  stereoPanOverride: 0
-  overrideSpread: 0
-  spreadOverride: 0
-  overrideDopplerLevel: 0
-  dopplerLevelOverride: 0.25
-  overrideReverbZone: 0
-  reverbZoneMixOverride: 1
-  overrideDistance: 0
-  minDistanceOverride: 1
-  maxDistanceOverride: 20
-  overrideMixerGroup: 0
-  mixerGroupOverride: {fileID: 0}
-  occludeSound: 0
-  overrideOccludeSound: 0
-  occludeSoundOverride: 0
-  delay: 0
-  delayUpdateMode: 0
-  overrideDelayUpdateMode: 0
-  delayUpdateModeOverride: 0
-  overrideVolumeRolloff: 0
-  volumeRolloffOverride: 0
-  volumeRolloffCurveOverride:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3888375063978416857, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_Name
+      value: AmbianceAudioSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  overrideSpatialize: 0
-  spatializeOverride: 0
-  playOnStart: 0
-  fadeInOnStart: 0
-  fadeInOnStartTime: 1
-  ignoreListenerPause: 0
-  overrideIgnoreListenerPause: 0
-  ignoreListenerPauseOverride: 0
-  persistsBetweenScenes: 0
-  paused: 0
-  overridePaused: 0
-  pausedOverride: 0
-  StartDistance: 0
-  outOfRange: 0
-  scene:
-    m_Handle: 0
-  init: 0
-  OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStop:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnOutOfRange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  callbacksFold: 0
-  usingLogRolloff: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888375063978416856, guid: 06f4df98721640749bf82e3924987d4d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 06f4df98721640749bf82e3924987d4d, type: 3}
 --- !u!1001 &4466058919497925858
 PrefabInstance:
   m_ObjectHideFlags: 0
