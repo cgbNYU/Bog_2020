@@ -127,6 +127,8 @@ MonoBehaviour:
   IsHeld: 0
   OutOfNest: 0
   IsSpawning: 0
+  inWhirlpool: 0
+  SplashSound: {fileID: 11400000, guid: e056e779d86635445a3b134f0dfcf60c, type: 2}
 --- !u!135 &5499860010322150666
 SphereCollider:
   m_ObjectHideFlags: 0

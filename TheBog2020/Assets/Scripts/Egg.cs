@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using UnityEngine;
 
 /// <summary>
@@ -17,4 +18,16 @@ public class Egg : MonoBehaviour
     public bool OutOfNest;
     public bool IsSpawning;
     public bool inWhirlpool;
+    
+    //Audio
+    public AudioObject SplashSound;
+    
+    //Play splash on contact with water
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.CompareTag("Water"))
+        {
+            MultiAudioManager.PlayAudioObject(SplashSound, transform.position);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +15,9 @@ public class WhirlpoolScript : MonoBehaviour
     
     //OverlapSphere Values
     public float WhirlpoolRange;
+    
+    //Egg destroying sound
+    public AudioObject EggDestroySound;
 
     // Update is called once per frame
     void Update()
@@ -44,6 +48,9 @@ public class WhirlpoolScript : MonoBehaviour
         {
             Egg egg = other.GetComponent<Egg>();
             GameManager.GM.DestroyEgg(egg.TeamID, egg);
+            
+            //Play sound
+            MultiAudioManager.PlayAudioObject(EggDestroySound, transform.position);
         }
         else if (other.gameObject.CompareTag("Player"))
         {

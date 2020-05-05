@@ -63,7 +63,7 @@ Material:
     - _DstBlend: 0
     - _FlapScalar: 0.2
     - _FlapTimeOffset: 0
-    - _Frequency: 10
+    - _Frequency: 50
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

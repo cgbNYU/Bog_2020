@@ -139,9 +139,11 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region AudioVariables
+    #region Audio Variables
     [Header("Audio Variables")]
     public AudioObject SpitSound;
+    public AudioObject DeathSound;
+    public AudioObject HitWallSound;
 
     #endregion
     
@@ -297,12 +299,22 @@ public class PlayerController : MonoBehaviour
         _lockButtonHeld = _rewiredPlayer.GetButton("Lock");
     }
 
-    //Called from external scripts that need the input vectors (TiltModel)
-    public Vector3 ReadInputs()
+    //Called from external scripts that need the heading vectors (TiltModel)
+    public Vector3 ReadHeading()
     {
         Vector3 inputVector = _leftStickHeadingVector + _rightStickHeadingVector;
 
         return inputVector;
+    }
+
+    public Vector3 ReadLeftInput()
+    {
+        return _leftStickVector;
+    }
+
+    public Vector3 ReadRightInput()
+    {
+        return _rightStickVector;
     }
 
     private void ResetInputs()
@@ -557,6 +569,9 @@ public class PlayerController : MonoBehaviour
             {
                 explodeModel.Explode();
             }
+            
+            //Play Death Sound
+            MultiAudioManager.PlayAudioObject(DeathSound, transform.position);
         }
     }
 
@@ -570,6 +585,19 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    #endregion
+
+    #region On Collision/Trigger
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //Make a sound when bumping into walls
+        if (other.transform.CompareTag("Wall"))
+        {
+            MultiAudioManager.PlayAudioObject(HitWallSound, transform.position);
+        }
+    }
+
     #endregion
 
     #region Archived Functions

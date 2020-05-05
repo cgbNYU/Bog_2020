@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +18,9 @@ public class Nest : MonoBehaviour
     //Egg list
     public List<Transform> SpawnLocations; //where the eggs spawn on the nest. Set in inspector
     private List<Egg> _eggList = new List<Egg>(); //holds reference to all of the eggs for this team
+    
+    //Audio
+    public AudioObject RespawnSound;
 
     private void OnDrawGizmos()
     {
@@ -122,6 +126,9 @@ public class Nest : MonoBehaviour
         
         //Update the remaining eggs UI
         GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);
+        
+        //Play the respawn sound
+        MultiAudioManager.PlayAudioObject(RespawnSound, pc.transform.position);
     }
 
     //Called from the GameManager, which is called from anything that destroys eggs that IS NOT RESPAWNING

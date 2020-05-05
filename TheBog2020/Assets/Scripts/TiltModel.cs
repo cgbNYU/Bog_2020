@@ -29,7 +29,7 @@ public class TiltModel : MonoBehaviour
         Vector3 newRot = Vector3.zero;
         
         //Place the whole input vector into newRot
-        newRot = _pc.ReadInputs();
+        newRot = _pc.ReadHeading();
         
         //Convert the side to side input into z rotation, and the forward backward into x
         //Leave the y rotation as it is
