@@ -153,6 +153,7 @@ MonoBehaviour:
   enemyMaterial: {fileID: 0}
   enemyHighlightMaterial: {fileID: 0}
   playerMaterial: {fileID: 0}
+  GlowPower: 2
 --- !u!114 &-7466616774296832130
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1197,6 +1197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6083685369385779781}
+  - component: {fileID: 3012652737409427421}
   m_Layer: 8
   m_Name: PlayerModel_P1Cam
   m_TagString: Untagged
@@ -1219,6 +1220,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3012652737409427421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572587557445911124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 7026782982798377420}
+  ModelPicker: 0
 --- !u!1 &1610324258742354104
 GameObject:
   m_ObjectHideFlags: 0
@@ -6351,6 +6366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8951345004705513717}
+  - component: {fileID: 3173459143357429077}
   m_Layer: 10
   m_Name: PlayerModel_P3Cam
   m_TagString: Untagged
@@ -6373,6 +6389,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3173459143357429077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951345004705513716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 7026782982798377420}
+  ModelPicker: 2
 --- !u!1 &8951345004708540236
 GameObject:
   m_ObjectHideFlags: 0
@@ -9552,6 +9582,20 @@ MonoBehaviour:
   - {fileID: 8951345006161934815}
   - {fileID: 8951345004705513717}
   - {fileID: 8951345005139344032}
+  Player1CamMeshRenderers:
+  - {fileID: 5645129180519892498}
+  - {fileID: 9131468994252033680}
+  - {fileID: 7813405011022564329}
+  - {fileID: 7813405011022564329}
+  - {fileID: 8861760782400806038}
+  - {fileID: 8247908308895215758}
+  - {fileID: 4089316906225060191}
+  - {fileID: 4348435995684657513}
+  - {fileID: 1106355485701401899}
+  - {fileID: 765697206125601400}
+  Player2CamMeshRenderers: []
+  Player3CamMeshRenderers: []
+  Player4CamMeshRenderers: []
 --- !u!114 &6518756296145026349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10518,6 +10562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8951345005139344032}
+  - component: {fileID: 8688475348611744872}
   m_Layer: 11
   m_Name: PlayerModel_P4Cam
   m_TagString: Untagged
@@ -10540,6 +10585,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8688475348611744872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951345005139344035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 7026782982798377420}
+  ModelPicker: 3
 --- !u!1 &8951345005140257034
 GameObject:
   m_ObjectHideFlags: 0
@@ -19211,6 +19270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8951345006161934815}
+  - component: {fileID: 5019569549136725711}
   m_Layer: 9
   m_Name: PlayerModel_P2Cam
   m_TagString: Untagged
@@ -19233,6 +19293,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5019569549136725711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951345006161934814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 7026782982798377420}
+  ModelPicker: 1
 --- !u!1 &8951345006169718765
 GameObject:
   m_ObjectHideFlags: 0

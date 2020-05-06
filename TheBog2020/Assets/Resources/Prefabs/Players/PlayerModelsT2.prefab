@@ -3971,6 +3971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6083685369385779781}
+  - component: {fileID: 6608027590301411571}
   m_Layer: 8
   m_Name: PlayerModel_P1Cam
   m_TagString: Untagged
@@ -3993,6 +3994,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6608027590301411571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572587557445911124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 4930545982570284727}
+  ModelPicker: 0
 --- !u!1 &1585619926037805301
 GameObject:
   m_ObjectHideFlags: 0
@@ -6093,6 +6108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5440706368857703797}
+  - component: {fileID: 4437492194898382242}
   m_Layer: 9
   m_Name: PlayerModel_P2Cam
   m_TagString: Untagged
@@ -6115,6 +6131,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4437492194898382242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2430514628499670821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 4930545982570284727}
+  ModelPicker: 1
 --- !u!1 &2434834136164176541
 GameObject:
   m_ObjectHideFlags: 0
@@ -17499,6 +17529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8234446923036769327}
+  - component: {fileID: 1473928253704240961}
   m_Layer: 11
   m_Name: PlayerModel_P4Cam
   m_TagString: Untagged
@@ -17521,6 +17552,20 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473928253704240961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568570554106170342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 4930545982570284727}
+  ModelPicker: 3
 --- !u!1 &6593728725340327861
 GameObject:
   m_ObjectHideFlags: 0
@@ -24428,6 +24473,10 @@ MonoBehaviour:
   - {fileID: 5440706368857703797}
   - {fileID: 8363736122732158120}
   - {fileID: 8234446923036769327}
+  Player1CamMeshRenderers: []
+  Player2CamMeshRenderers: []
+  Player3CamMeshRenderers: []
+  Player4CamMeshRenderers: []
 --- !u!114 &1773432248073256163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25741,6 +25790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8363736122732158120}
+  - component: {fileID: 738750034378015349}
   m_Layer: 10
   m_Name: PlayerModel_P3Cam
   m_TagString: Untagged
@@ -25763,3 +25813,17 @@ Transform:
   m_Father: {fileID: 8951345005091745251}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &738750034378015349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194339872451871557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09610ac923e3bc54187fc6675beac909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModelIndex: {fileID: 4930545982570284727}
+  ModelPicker: 2
