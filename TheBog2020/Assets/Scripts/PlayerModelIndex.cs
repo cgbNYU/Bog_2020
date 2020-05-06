@@ -6,4 +6,6 @@ public class PlayerModelIndex : MonoBehaviour
 {
    public Transform bugTailRef;
    public Transform[] playerModelsByPlayerCam;
+
+   public MeshRenderer[] HighLightRenderers;
 }
