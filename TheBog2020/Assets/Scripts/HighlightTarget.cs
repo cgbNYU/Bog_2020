@@ -90,7 +90,7 @@ public class HighlightTarget : MonoBehaviour
     {
         foreach (MeshRenderer meshRenderer in meshRenderers)
         {
-            if (!meshRenderer.gameObject.CompareTag("SpitSac")) //dont highlight the spit sac
+            if (!meshRenderer.gameObject.CompareTag("SpitSacs")) //dont highlight the spit sac
             {
                 meshRenderer.material.SetFloat("_MKGlowPower", glowPower);
             }

@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private PlayerEggHolder _eggHolder;
     private PlayerModelSpawner _modelSpawner;
     private HighlightTarget _highlightTarget;
+    private PlayerSpitSacs _spitSacs;
     
     #endregion
 
@@ -186,6 +187,10 @@ public class PlayerController : MonoBehaviour
         
         //Initialize Target Highlighter
         _highlightTarget = GetComponent<HighlightTarget>();
+        
+        //Initialize Spit Sacs
+        _spitSacs = GetComponent<PlayerSpitSacs>();
+        _spitSacs.GetSpitSacsReference();
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
@@ -529,6 +534,11 @@ public class PlayerController : MonoBehaviour
             spit.transform.rotation = Spitter.rotation;
             spit.GetComponent<SpitHitBox>().TeamID = TeamID;
             spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
+            
+            //Empty the spit sacs
+            _spitSacs.EmptySacs();
+            //Refill the spit sacs
+            _spitSacs.RefillSacs();
             
             //Play Sound
             MultiAudioManager.PlayAudioObject(SpitSound, transform.position);

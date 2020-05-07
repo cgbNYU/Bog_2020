@@ -16,9 +16,9 @@ public class PlayerModelIndex : MonoBehaviour
    public List<MeshRenderer> Player4CamMeshRenderers = new List<MeshRenderer>();
 
    [Header("Spit Sacs")] 
-   public List<MeshRenderer> spitSacs1;
-   public List<MeshRenderer> spitSacs2;
-   public List<MeshRenderer> spitSacs3;
-   public List<MeshRenderer> spitSacs4;
-   public List<MeshRenderer> spitSacs5;
+   public List<MeshRenderer> spitSacs1 = new List<MeshRenderer>();
+   public List<MeshRenderer> spitSacs2 = new List<MeshRenderer>();
+   public List<MeshRenderer> spitSacs3 = new List<MeshRenderer>();
+   public List<MeshRenderer> spitSacs4 = new List<MeshRenderer>();
+   public List<MeshRenderer> spitSacs5 = new List<MeshRenderer>();
 }
