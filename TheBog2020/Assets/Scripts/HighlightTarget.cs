@@ -10,7 +10,11 @@ public class HighlightTarget : MonoBehaviour
     public Material playerMaterial;
 
     private Transform enemyModel;
+    private List<MeshRenderer> enemyMeshRenderers = new List<MeshRenderer>();
+    private List<MeshRenderer> myMeshRenderers = new List<MeshRenderer>();
     private int _playerID;
+
+    public float GlowPower;
     
     
     void Start()
@@ -24,8 +28,8 @@ public class HighlightTarget : MonoBehaviour
     {
         if (enemyTransform != null)
         {
-            enemyModel = enemyTransform.GetComponentInChildren<PlayerModelIndex>().playerModelsByPlayerCam[_playerID];
-            SetMaterial(enemyModel, enemyHighlightMaterial);
+            GetMeshRenderersFromIndex(enemyTransform);
+            SetShaderGlowValue(enemyMeshRenderers, GlowPower);
         }
     }
     
@@ -34,14 +38,20 @@ public class HighlightTarget : MonoBehaviour
     {
         if (enemyTransform != null && enemyTransform.GetComponentInChildren<PlayerModelIndex>() != null)
         {
-            enemyModel = enemyTransform.GetComponentInChildren<PlayerModelIndex>().playerModelsByPlayerCam[_playerID];
-            SetMaterial(enemyModel, enemyMaterial);
+            GetMeshRenderersFromIndex(enemyTransform);
+            SetShaderGlowValue(enemyMeshRenderers, 0);
         }
     }
 
     public void UnhighlightPlayer()
     {
-        SetMaterial(transform, playerMaterial);
+        //Get Player's meshes
+        myMeshRenderers.Clear();
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player1CamMeshRenderers);
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player2CamMeshRenderers);
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player3CamMeshRenderers);
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player4CamMeshRenderers);
+        SetShaderGlowValue(myMeshRenderers, 0);
     }
 
     //Recursively set the material on all the children of a GameObject 
@@ -53,6 +63,37 @@ public class HighlightTarget : MonoBehaviour
             if (child.GetComponent<Renderer>() != null)
                 if (!child.CompareTag("Eyes") && !child.CompareTag("Wings")) 
                     child.GetComponent<Renderer>().material = material;
+        }
+    }
+
+    private void GetMeshRenderersFromIndex(Transform enemyTransform)
+    {
+        if (_playerID == 0)
+        {
+            enemyMeshRenderers = enemyTransform.GetComponentInChildren<PlayerModelIndex>().Player1CamMeshRenderers;
+        }
+        else if (_playerID == 1)
+        {
+            enemyMeshRenderers = enemyTransform.GetComponentInChildren<PlayerModelIndex>().Player2CamMeshRenderers;
+        }
+        else if (_playerID == 2)
+        {
+            enemyMeshRenderers = enemyTransform.GetComponentInChildren<PlayerModelIndex>().Player3CamMeshRenderers;
+        }
+        else if (_playerID == 3)
+        {
+            enemyMeshRenderers = enemyTransform.GetComponentInChildren<PlayerModelIndex>().Player4CamMeshRenderers;
+        }
+    }
+
+    private void SetShaderGlowValue(List<MeshRenderer> meshRenderers, float glowPower)
+    {
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+        {
+            if (!meshRenderer.gameObject.CompareTag("SpitSacs")) //dont highlight the spit sac
+            {
+                meshRenderer.material.SetFloat("_MKGlowPower", glowPower);
+            }
         }
     }
 }

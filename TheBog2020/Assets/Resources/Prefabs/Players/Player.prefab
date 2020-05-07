@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4224120734551867767}
   - component: {fileID: 2635945638774760941}
   - component: {fileID: 5178546524985351168}
+  - component: {fileID: 5279977493556011307}
   - component: {fileID: -7466616774296832130}
   m_Layer: 0
   m_Name: Player
@@ -153,6 +154,19 @@ MonoBehaviour:
   enemyMaterial: {fileID: 0}
   enemyHighlightMaterial: {fileID: 0}
   playerMaterial: {fileID: 0}
+  GlowPower: 2
+--- !u!114 &5279977493556011307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635945638774760930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ae3999db29e4276842dd51d334cae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-7466616774296832130
 MonoBehaviour:
   m_ObjectHideFlags: 0
