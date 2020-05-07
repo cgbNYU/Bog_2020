@@ -46,23 +46,11 @@ public class HighlightTarget : MonoBehaviour
     public void UnhighlightPlayer()
     {
         //Get Player's meshes
-        if (_playerID == 0)
-        {
-            myMeshRenderers = GetComponentInChildren<PlayerModelIndex>().Player1CamMeshRenderers;
-        }
-        else if (_playerID == 1)
-        {
-            myMeshRenderers = GetComponentInChildren<PlayerModelIndex>().Player2CamMeshRenderers;
-        }
-        else if (_playerID == 2)
-        {
-            myMeshRenderers = GetComponentInChildren<PlayerModelIndex>().Player3CamMeshRenderers;
-        }
-        else if (_playerID == 3)
-        {
-            myMeshRenderers = GetComponentInChildren<PlayerModelIndex>().Player4CamMeshRenderers;
-        }
-        
+        myMeshRenderers.Clear();
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player1CamMeshRenderers);
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player2CamMeshRenderers);
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player3CamMeshRenderers);
+        myMeshRenderers.AddRange(GetComponentInChildren<PlayerModelIndex>().Player4CamMeshRenderers);
         SetShaderGlowValue(myMeshRenderers, 0);
     }
 
