@@ -14,6 +14,7 @@ TagManager:
   - Spit
   - Water
   - Wall
+  - SpitSacs
   layers:
   - Default
   - TransparentFX

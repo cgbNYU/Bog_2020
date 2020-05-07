@@ -113,6 +113,9 @@ public class Nest : MonoBehaviour
         
         //Give the Egg Holder the ref to the Tail
         pc.GetComponent<PlayerEggHolder>().GetTailReference();
+        
+        //Give the Player Spit Sacs script reference to the spit sacs
+        pc.GetComponent<PlayerSpitSacs>().GetSpitSacsReference();
 
         //Set player controller to active state
         pc.StateTransition(PlayerController.MoveState.Invulnerable, pc.InvulnerableTime);
