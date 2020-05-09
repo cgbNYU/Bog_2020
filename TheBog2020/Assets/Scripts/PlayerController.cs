@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     public int TeamID; //0 = red, 1 = blue
     public Transform Spitter;
     public float InvulnerableTime;
+    public MeshRenderer ShieldMeshRenderer;
     
     //Private
     private Vector3 _leftStickVector;
@@ -126,6 +127,11 @@ public class PlayerController : MonoBehaviour
         if (newState == MoveState.Neutral)
         {
             _stateTimer = 0;
+            ShieldMeshRenderer.enabled = false;
+        }
+        else if (newState == MoveState.Invulnerable)
+        {
+            ShieldMeshRenderer.enabled = true;
         }
         else if (newState == MoveState.Dead)
         {
@@ -172,6 +178,7 @@ public class PlayerController : MonoBehaviour
         StateTransition(MoveState.Inactive, 0);
         _stateTimer = 0;
         _spitTimer = 0;
+        ShieldMeshRenderer.enabled = false;
 
         //Initialize PC tuning variables
         //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
@@ -392,7 +399,6 @@ public class PlayerController : MonoBehaviour
         _stateTimer -= Time.deltaTime;
         if (_stateTimer <= 0)
         {
-            
             _moveState = MoveState.Neutral;
         }
     }
@@ -560,14 +566,13 @@ public class PlayerController : MonoBehaviour
     #region Death
 
     public void KillPlayer()
-    {
-        _highlightTarget.UnhighlightPlayer();
-        _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
-        
-        Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
-        
+    { 
         if (CheckState() != MoveState.Invulnerable)
         {
+            _highlightTarget.UnhighlightPlayer();
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
+            Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
+            
             _rb.velocity = Vector3.zero;
             _stateTimer = DeathTime;
             _moveState = MoveState.Dead;
