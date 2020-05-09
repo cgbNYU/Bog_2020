@@ -399,7 +399,7 @@ public class PlayerController : MonoBehaviour
         _stateTimer -= Time.deltaTime;
         if (_stateTimer <= 0)
         {
-            _moveState = MoveState.Neutral;
+            StateTransition(MoveState.Neutral, 0);
         }
     }
 
