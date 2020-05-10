@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     public int TeamID; //0 = red, 1 = blue
     public Transform Spitter;
     public float InvulnerableTime;
+    public float HatchTime;
     public MeshRenderer ShieldMeshRenderer;
     
     //Private
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
     private PlayerModelSpawner _modelSpawner;
     private HighlightTarget _highlightTarget;
     private PlayerSpitSacs _spitSacs;
+    private PlayerModelIndex _playerModelIndex;
     
     #endregion
 
@@ -107,10 +109,11 @@ public class PlayerController : MonoBehaviour
         Airborne,
         Bouncing,
         Dead,
-        Inactive
+        Inactive,
+        Hatching
     }
 
-    private MoveState _moveState;
+    public MoveState _moveState;
 
     private float _stateTimer;
     
@@ -132,6 +135,13 @@ public class PlayerController : MonoBehaviour
         else if (newState == MoveState.Invulnerable)
         {
             ShieldMeshRenderer.enabled = true;
+        }
+        else if (newState == MoveState.Hatching)
+        {
+            //Get the new model index
+            _playerModelIndex = GetComponentInChildren<PlayerModelIndex>();
+            //Activate egg tween
+            _playerModelIndex.ScaleAnimation.DOPlay();
         }
         else if (newState == MoveState.Dead)
         {
@@ -273,6 +283,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case MoveState.Inactive:
                 break;
+            case MoveState.Hatching:
+                ReturnToInvulCountdown();
+                break;
             default:
                 Debug.Log("state machine broke: " + PlayerID);
                 break;
@@ -400,6 +413,15 @@ public class PlayerController : MonoBehaviour
         if (_stateTimer <= 0)
         {
             StateTransition(MoveState.Neutral, 0);
+        }
+    }
+
+    private void ReturnToInvulCountdown()
+    {
+        _stateTimer -= Time.deltaTime;
+        if (_stateTimer <= 0)
+        {
+            StateTransition(MoveState.Invulnerable, InvulnerableTime);
         }
     }
 

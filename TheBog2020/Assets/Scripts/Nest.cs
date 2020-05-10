@@ -118,7 +118,7 @@ public class Nest : MonoBehaviour
         pc.GetComponent<PlayerSpitSacs>().GetSpitSacsReference();
 
         //Set player controller to active state
-        pc.StateTransition(PlayerController.MoveState.Invulnerable, pc.InvulnerableTime);
+        pc.StateTransition(PlayerController.MoveState.Hatching, pc.HatchTime);
 
         //Pop the egg out of the egglist
         Egg removedEgg = _eggList[eggID];
