@@ -181,6 +181,12 @@ public class PlayerController : MonoBehaviour
         //Initialize animator
         _animator = GetComponentInChildren<Animator>();
         
+        //Initialize spit sacs
+        _spitSacs = GetComponent<PlayerSpitSacs>();
+        
+        //Initialize egg holder
+        _eggHolder = GetComponent<PlayerEggHolder>();
+        
         //Initialize inputs
         ResetInputs();
         
