@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     //Tuning
     public PlayerControllerTuning NewTune;
     
+    //Caameras
+    private GameObject _playerCams;
+    private GameObject _followCams;
+    private GameObject _endGameCam;
+    
     //State Machine
     private enum GameState
     {
@@ -46,6 +51,11 @@ public class GameManager : MonoBehaviour
         }
         //Initialize State
         _gameState = GameState.AttractScreen;
+        
+        //Get camera references
+        _playerCams = GameObject.Find("Cameras");
+        _followCams = GameObject.Find("FollowCams");
+        _endGameCam = GameObject.Find("EndGameCam");
     }
 
     private float loadingTimer = 0;
@@ -100,6 +110,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.MatchEnd:
+                KillCamera();
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
                     //TODO: Reset the game. temp: reloading scene
@@ -166,6 +177,16 @@ public class GameManager : MonoBehaviour
         UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
     
+    
+    public void KillCamera()
+    {
+        foreach (Transform child  in _endGameCam.transform)
+        {
+          child.gameObject.SetActive(true);
+        }
+        _followCams.SetActive(false);
+        _playerCams.SetActive(false);
+    }
     
 
     #endregion
