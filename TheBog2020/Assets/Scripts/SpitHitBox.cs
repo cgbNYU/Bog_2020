@@ -9,17 +9,6 @@ public class SpitHitBox : MonoBehaviour
     public float KnockBackForce;
     public int TeamID;
 
-    private void Start()
-    {
-        StartCoroutine(destroySelfAfterLifeTime(spitLifeTime));
-    }
-
-    IEnumerator destroySelfAfterLifeTime(float t)
-    {
-        yield return new WaitForSeconds(t);
-        Destroy(gameObject);
-    }
-
     private void OnCollisionEnter(Collision other)
     {
         // Don't destroy the spit when it collides with these objects 
