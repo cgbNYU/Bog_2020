@@ -194,20 +194,10 @@ public class PlayerController : MonoBehaviour
         //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
         
-        //SpawnModels
-        _modelSpawner = GetComponent<PlayerModelSpawner>();
-        _modelSpawner.SpawnModels();
-        
-        //Initialize egg holder
-        _eggHolder = GetComponent<PlayerEggHolder>();
-        _eggHolder.GetTailReference();
-        
         //Initialize Target Highlighter
         _highlightTarget = GetComponent<HighlightTarget>();
         
-        //Initialize Spit Sacs
-        _spitSacs = GetComponent<PlayerSpitSacs>();
-        _spitSacs.GetSpitSacsReference();
+
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
@@ -596,8 +586,6 @@ public class PlayerController : MonoBehaviour
             Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
             
             _rb.velocity = Vector3.zero;
-            _stateTimer = DeathTime;
-            _moveState = MoveState.Dead;
             _eggHolder.DropEgg();
 
             //Explode the model
@@ -609,6 +597,9 @@ public class PlayerController : MonoBehaviour
             
             //Play Death Sound
             MultiAudioManager.PlayAudioObject(DeathSound, transform.position);
+            
+            //Transition state
+            StateTransition(MoveState.Dead, DeathTime);
         }
     }
 
