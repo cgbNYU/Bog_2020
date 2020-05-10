@@ -22,12 +22,29 @@ public class Egg : MonoBehaviour
     //Audio
     public AudioObject SplashSound;
     
+    //Timer
+    private float _timer;
+
+    private void Start()
+    {
+        _timer = 5f;
+    }
+
     //Play splash on contact with water
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.CompareTag("Water"))
         {
             MultiAudioManager.PlayAudioObject(SplashSound, transform.position);
+        }
+    }
+
+    public void DestroyEgg()
+    {
+        _timer -= Time.deltaTime;
+        if (_timer <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
