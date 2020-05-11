@@ -98,7 +98,7 @@ public class PlayerEggHolder : MonoBehaviour
             EggHolder.GetComponent<Rigidbody>().isKinematic = true;
             EggHolder.GetComponent<Collider>().isTrigger = true;
             
-            //EggHolder.transform.SetParent(BugTail.transform);
+            //Move the egg to the player tail
             EggHolder.transform.parent = BugTail.transform;
             EggHolder.transform.localPosition = new Vector3(0,0,-0.4f);
         }
