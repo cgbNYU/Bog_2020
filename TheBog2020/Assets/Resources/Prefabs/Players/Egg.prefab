@@ -129,6 +129,8 @@ MonoBehaviour:
   IsSpawning: 0
   inWhirlpool: 0
   SplashSound: {fileID: 11400000, guid: e056e779d86635445a3b134f0dfcf60c, type: 2}
+  EggParticle: {fileID: 6990746951083385352, guid: 94aa7c1374fec37438b1379ce7a08382,
+    type: 3}
 --- !u!135 &5499860010322150666
 SphereCollider:
   m_ObjectHideFlags: 0

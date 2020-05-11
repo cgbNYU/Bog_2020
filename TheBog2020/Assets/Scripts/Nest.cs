@@ -118,14 +118,14 @@ public class Nest : MonoBehaviour
         pc.GetComponent<PlayerSpitSacs>().GetSpitSacsReference();
 
         //Set player controller to active state
-        pc.StateTransition(PlayerController.MoveState.Invulnerable, pc.InvulnerableTime);
+        pc.StateTransition(PlayerController.MoveState.Hatching, pc.HatchTime);
 
         //Pop the egg out of the egglist
         Egg removedEgg = _eggList[eggID];
         _eggList.RemoveAt(eggID);
 
         //Destroy the egg
-        Destroy(removedEgg.gameObject);
+        removedEgg.DestroyEgg();
         
         //Update the remaining eggs UI
         GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);
@@ -139,7 +139,7 @@ public class Nest : MonoBehaviour
     public void DestroyEgg(Egg egg)
     {
         _eggList.Remove(egg);
-        Destroy(egg.gameObject);
+        egg.DestroyEgg();
         
         //Update the remaining Eggs UI
         GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);

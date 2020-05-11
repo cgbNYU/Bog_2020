@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour
     public int TeamID; //0 = red, 1 = blue
     public Transform Spitter;
     public float InvulnerableTime;
+    public float HatchTime;
+    public MeshRenderer ShieldMeshRenderer;
     
     //Private
     private Vector3 _leftStickVector;
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour
     private PlayerModelSpawner _modelSpawner;
     private HighlightTarget _highlightTarget;
     private PlayerSpitSacs _spitSacs;
+    private PlayerModelIndex _playerModelIndex;
     
     #endregion
 
@@ -106,10 +109,11 @@ public class PlayerController : MonoBehaviour
         Airborne,
         Bouncing,
         Dead,
-        Inactive
+        Inactive,
+        Hatching
     }
 
-    private MoveState _moveState;
+    public MoveState _moveState;
 
     private float _stateTimer;
     
@@ -126,6 +130,18 @@ public class PlayerController : MonoBehaviour
         if (newState == MoveState.Neutral)
         {
             _stateTimer = 0;
+            ShieldMeshRenderer.enabled = false;
+        }
+        else if (newState == MoveState.Invulnerable)
+        {
+            ShieldMeshRenderer.enabled = true;
+        }
+        else if (newState == MoveState.Hatching)
+        {
+            //Get the new model index
+            _playerModelIndex = GetComponentInChildren<PlayerModelIndex>();
+            //Activate egg tween
+            _playerModelIndex.ScaleAnimation.DOPlay();
         }
         else if (newState == MoveState.Dead)
         {
@@ -165,6 +181,12 @@ public class PlayerController : MonoBehaviour
         //Initialize animator
         _animator = GetComponentInChildren<Animator>();
         
+        //Initialize spit sacs
+        _spitSacs = GetComponent<PlayerSpitSacs>();
+        
+        //Initialize egg holder
+        _eggHolder = GetComponent<PlayerEggHolder>();
+        
         //Initialize inputs
         ResetInputs();
         
@@ -172,25 +194,16 @@ public class PlayerController : MonoBehaviour
         StateTransition(MoveState.Inactive, 0);
         _stateTimer = 0;
         _spitTimer = 0;
+        ShieldMeshRenderer.enabled = false;
 
         //Initialize PC tuning variables
         //Debug.Assert(_pcTune == null, "Please assign a PC tuning to the player controller.");
         InitializePCTuning(_pcTune);
         
-        //SpawnModels
-        _modelSpawner = GetComponent<PlayerModelSpawner>();
-        _modelSpawner.SpawnModels();
-        
-        //Initialize egg holder
-        _eggHolder = GetComponent<PlayerEggHolder>();
-        _eggHolder.GetTailReference();
-        
         //Initialize Target Highlighter
         _highlightTarget = GetComponent<HighlightTarget>();
         
-        //Initialize Spit Sacs
-        _spitSacs = GetComponent<PlayerSpitSacs>();
-        _spitSacs.GetSpitSacsReference();
+
     }
     
     // This function initializes all the tuning variables from the scriptable PC tuning object attached to this player.
@@ -265,6 +278,9 @@ public class PlayerController : MonoBehaviour
                 DeathState();
                 break;
             case MoveState.Inactive:
+                break;
+            case MoveState.Hatching:
+                ReturnToInvulCountdown();
                 break;
             default:
                 Debug.Log("state machine broke: " + PlayerID);
@@ -392,8 +408,16 @@ public class PlayerController : MonoBehaviour
         _stateTimer -= Time.deltaTime;
         if (_stateTimer <= 0)
         {
-            
-            _moveState = MoveState.Neutral;
+            StateTransition(MoveState.Neutral, 0);
+        }
+    }
+
+    private void ReturnToInvulCountdown()
+    {
+        _stateTimer -= Time.deltaTime;
+        if (_stateTimer <= 0)
+        {
+            StateTransition(MoveState.Invulnerable, InvulnerableTime);
         }
     }
 
@@ -533,6 +557,7 @@ public class PlayerController : MonoBehaviour
             spit.transform.position = Spitter.position;
             spit.transform.rotation = Spitter.rotation;
             spit.GetComponent<SpitHitBox>().TeamID = TeamID;
+            spit.GetComponent<SpitHitBox>().PlayerID = PlayerID;
             spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
             
             //Empty the spit sacs
@@ -560,17 +585,20 @@ public class PlayerController : MonoBehaviour
     #region Death
 
     public void KillPlayer()
-    {
-        _highlightTarget.UnhighlightPlayer();
-        _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
-        
-        Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
-        
-        if (CheckState() != MoveState.Invulnerable)
+    { 
+        if (CheckState() != MoveState.Invulnerable && CheckState() != MoveState.Dead && CheckState() != MoveState.Hatching)
         {
+            //Turn on screen shake 
+            StartCoroutine(GameManager.GM.CameraShake(PlayerID, GameManager.GM.playerDeathScreenShakeTime));
+            
+            //Turn off target highlighting on self and enemy target
+            _highlightTarget.UnhighlightPlayer();
+            _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
+            
+            //Destroy the old player model index
+            Destroy(GetComponentInChildren<PlayerModelIndex>());
+            
             _rb.velocity = Vector3.zero;
-            _stateTimer = DeathTime;
-            _moveState = MoveState.Dead;
             _eggHolder.DropEgg();
 
             //Explode the model
@@ -582,6 +610,9 @@ public class PlayerController : MonoBehaviour
             
             //Play Death Sound
             MultiAudioManager.PlayAudioObject(DeathSound, transform.position);
+            
+            //Transition state
+            StateTransition(MoveState.Dead, DeathTime);
         }
     }
 

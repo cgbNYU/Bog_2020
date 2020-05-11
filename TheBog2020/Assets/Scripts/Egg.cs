@@ -22,6 +22,12 @@ public class Egg : MonoBehaviour
     //Audio
     public AudioObject SplashSound;
     
+    //Particle
+    public GameObject EggParticle;
+    
+    //Colliders
+    private Collider[] _colliders;
+
     //Play splash on contact with water
     private void OnCollisionEnter(Collision other)
     {
@@ -29,5 +35,11 @@ public class Egg : MonoBehaviour
         {
             MultiAudioManager.PlayAudioObject(SplashSound, transform.position);
         }
+    }
+
+    public void DestroyEgg()
+    {
+        Instantiate(EggParticle, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

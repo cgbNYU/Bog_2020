@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +21,11 @@ public class GameManager : MonoBehaviour
     
     //Tuning
     public PlayerControllerTuning NewTune;
+    
+    //Cameras
+    private GameObject _playerCams;
+    public GameObject _followCams;
+    private GameObject _endGameCam;
     
     //State Machine
     private enum GameState
@@ -46,6 +53,11 @@ public class GameManager : MonoBehaviour
         }
         //Initialize State
         _gameState = GameState.AttractScreen;
+        
+        //Get camera references
+        _playerCams = GameObject.Find("Cameras");
+        _followCams = GameObject.Find("FollowCams");
+        _endGameCam = GameObject.Find("EndGameCam");
     }
 
     private float loadingTimer = 0;
@@ -68,7 +80,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 break;
-            case GameState.Title:
+            case GameState.Title: //Tutorial popups
                 if (UIManager.UM.AllPlayersReady())
                 {
                     InitializeArrays();
@@ -78,7 +90,7 @@ public class GameManager : MonoBehaviour
                     _gameState = GameState.MatchInProgress;
                     foreach (PlayerController pc in PlayerControllers)
                     {
-                        pc.StateTransition(PlayerController.MoveState.Neutral, 0);
+                        pc.StateTransition(PlayerController.MoveState.Dead, 0);
                     }
                 }
                 break;
@@ -158,6 +170,7 @@ public class GameManager : MonoBehaviour
     public void EndGame(int losingTeamId)
     {
         UIManager.UM.DisplayEndGameUI(losingTeamId);
+        KillCamera();
         _gameState = GameState.MatchEnd;
     }
 
@@ -165,12 +178,56 @@ public class GameManager : MonoBehaviour
     {
         UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
-    
-    
 
     #endregion
 
-    #region Inspector
+    #region Camera
+    
+    private int lastKillerPlayerID;
+    public float killCamDuration = 10f;
+    public float playerDeathScreenShakeIntensity = 5f;
+    public float playerDeathScreenShakeTime = .3f;
+
+    public void GetLastKillerPlayerID(int playerID)
+    {
+        lastKillerPlayerID = playerID;
+        Debug.Log(lastKillerPlayerID);
+    }
+
+    public void KillCamera()
+    {
+        //set all the virtual cams inactive
+        _followCams.SetActive(false);
+        
+        //set all cam brains, except the last player who made a kill, to inactive 
+        for (int i = 0; i < _playerCams.transform.childCount; i++)
+        {
+            if(i != lastKillerPlayerID) _playerCams.transform.GetChild(i).gameObject.SetActive(false);
+            else
+            {
+                //lerp the winning players camera to full screen
+                _playerCams.transform.GetChild(i).GetComponent<Camera>().DORect(new Rect(0, 0, 1, 1), killCamDuration);
+            }
+        }
+
+        //set all end game camera objects to active
+        foreach (Transform child  in _endGameCam.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+    
+    //Coroutine that adds perlin noise screen shake to a players cam for a specified duration of time
+    public IEnumerator CameraShake(int playerCam, float time)
+    {
+        CinemachineBasicMultiChannelPerlin _perlin = _followCams.transform.GetChild(playerCam)
+            .GetComponent<CinemachineVirtualCamera>()
+            .GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _perlin.m_AmplitudeGain = playerDeathScreenShakeIntensity;
+        yield return new WaitForSeconds(time);
+        _perlin.m_AmplitudeGain = 0;
+    }
+    
 
     #endregion
 }
