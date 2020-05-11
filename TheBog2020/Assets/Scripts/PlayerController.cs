@@ -588,9 +588,15 @@ public class PlayerController : MonoBehaviour
     { 
         if (CheckState() != MoveState.Invulnerable && CheckState() != MoveState.Dead && CheckState() != MoveState.Hatching)
         {
+            //Turn on screen shake 
+            StartCoroutine(GameManager.GM.CameraShake(PlayerID, GameManager.GM.playerDeathScreenShakeTime));
+            
+            //Turn off target highlighting on self and enemy target
             _highlightTarget.UnhighlightPlayer();
             _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
-            Destroy(GetComponentInChildren<PlayerModelIndex>()); // Destroys old player model index
+            
+            //Destroy the old player model index
+            Destroy(GetComponentInChildren<PlayerModelIndex>());
             
             _rb.velocity = Vector3.zero;
             _eggHolder.DropEgg();
