@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerModelIndex : MonoBehaviour
@@ -21,4 +22,7 @@ public class PlayerModelIndex : MonoBehaviour
    public List<MeshRenderer> spitSacs3 = new List<MeshRenderer>();
    public List<MeshRenderer> spitSacs4 = new List<MeshRenderer>();
    public List<MeshRenderer> spitSacs5 = new List<MeshRenderer>();
+
+   [Header("DoTween Animations")] 
+   public DOTweenAnimation ScaleAnimation;
 }

@@ -7,12 +7,10 @@ public class SpitHitBox : MonoBehaviour
 {
     public float spitLifeTime;
     public float KnockBackForce;
+    public Collider Col;
+    public MeshRenderer MR;
+    public ParticleSystem Particles;
     public int TeamID;
-
-    private void Start()
-    {
-        StartCoroutine(destroySelfAfterLifeTime(spitLifeTime));
-    }
 
     IEnumerator destroySelfAfterLifeTime(float t)
     {
@@ -39,20 +37,28 @@ public class SpitHitBox : MonoBehaviour
             if (otherPlayer.TeamID != TeamID)
             {
                 KillPlayer(otherPlayer);
-                Destroy(gameObject);
+                DeactivateSpit();
             }
         }
         // Don't destroy the spit when it collides with these objects 
         if (!other.gameObject.CompareTag("Nest") && !other.gameObject.CompareTag("DropTrigger") &&
             !other.gameObject.CompareTag("Spit") && !other.gameObject.CompareTag("Egg"))
         {
-            Destroy(gameObject);
+            DeactivateSpit();
         }
     }
 
     private void KillPlayer(PlayerController pc)
     {
         pc.KillPlayer();
+    }
+
+    private void DeactivateSpit()
+    {
+        Col.enabled = false;
+        MR.enabled = false;
+        Particles.Play();
+        StartCoroutine(destroySelfAfterLifeTime(spitLifeTime));
     }
     
     private void KnockBackPlayer(Collider other)

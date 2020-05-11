@@ -9,6 +9,6 @@ public class PlayerModelSpawner : MonoBehaviour
     public void SpawnModels()
     {
         GameObject newModels = Instantiate(ModelsPrefab, transform.position, transform.rotation);
-        newModels.transform.SetParent(gameObject.transform);
+        newModels.transform.SetParent(gameObject.transform, true);
     }
 }

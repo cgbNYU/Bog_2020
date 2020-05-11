@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 break;
-            case GameState.Title:
+            case GameState.Title: //Tutorial popups
                 if (UIManager.UM.AllPlayersReady())
                 {
                     InitializeArrays();
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                     _gameState = GameState.MatchInProgress;
                     foreach (PlayerController pc in PlayerControllers)
                     {
-                        pc.StateTransition(PlayerController.MoveState.Neutral, 0);
+                        pc.StateTransition(PlayerController.MoveState.Dead, 0);
                     }
                 }
                 break;
