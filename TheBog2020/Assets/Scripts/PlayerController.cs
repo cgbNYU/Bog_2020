@@ -557,6 +557,7 @@ public class PlayerController : MonoBehaviour
             spit.transform.position = Spitter.position;
             spit.transform.rotation = Spitter.rotation;
             spit.GetComponent<SpitHitBox>().TeamID = TeamID;
+            spit.GetComponent<SpitHitBox>().PlayerID = PlayerID;
             spit.GetComponent<Rigidbody>().AddForce(transform.forward * SpitForce);
             
             //Empty the spit sacs
@@ -585,7 +586,7 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     { 
-        if (CheckState() != MoveState.Invulnerable)
+        if (CheckState() != MoveState.Invulnerable && CheckState() != MoveState.Dead && CheckState() != MoveState.Hatching)
         {
             _highlightTarget.UnhighlightPlayer();
             _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
