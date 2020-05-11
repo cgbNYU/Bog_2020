@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     
     //Cameras
     private GameObject _playerCams;
-    private GameObject _followCams;
+    public GameObject _followCams;
     private GameObject _endGameCam;
     
     //State Machine
@@ -178,9 +179,15 @@ public class GameManager : MonoBehaviour
         UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
 
+    #endregion
+
+    #region Camera
+    
     private int lastKillerPlayerID;
     public float killCamDuration = 10f;
-    
+    public float playerDeathScreenShakeIntensity = 5f;
+    public float playerDeathScreenShakeTime = .3f;
+
     public void GetLastKillerPlayerID(int playerID)
     {
         lastKillerPlayerID = playerID;
@@ -210,10 +217,17 @@ public class GameManager : MonoBehaviour
         }
     }
     
-
-    #endregion
-
-    #region Inspector
+    //Coroutine that adds perlin noise screen shake to a players cam for a specified duration of time
+    public IEnumerator CameraShake(int playerCam, float time)
+    {
+        CinemachineBasicMultiChannelPerlin _perlin = _followCams.transform.GetChild(playerCam)
+            .GetComponent<CinemachineVirtualCamera>()
+            .GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _perlin.m_AmplitudeGain = playerDeathScreenShakeIntensity;
+        yield return new WaitForSeconds(time);
+        _perlin.m_AmplitudeGain = 0;
+    }
+    
 
     #endregion
 }
