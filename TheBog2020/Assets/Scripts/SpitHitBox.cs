@@ -11,6 +11,7 @@ public class SpitHitBox : MonoBehaviour
     public MeshRenderer MR;
     public ParticleSystem Particles;
     public int TeamID;
+    public int PlayerID;
 
     IEnumerator destroySelfAfterLifeTime(float t)
     {
@@ -37,6 +38,7 @@ public class SpitHitBox : MonoBehaviour
             if (otherPlayer.TeamID != TeamID)
             {
                 KillPlayer(otherPlayer);
+                GameManager.GM.GetLastKillerPlayerID(PlayerID);
                 DeactivateSpit();
             }
         }

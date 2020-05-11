@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     //Tuning
     public PlayerControllerTuning NewTune;
     
-    //Caameras
+    //Cameras
     private GameObject _playerCams;
     private GameObject _followCams;
     private GameObject _endGameCam;
@@ -110,7 +111,6 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.MatchEnd:
-                KillCamera();
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
                     //TODO: Reset the game. temp: reloading scene
@@ -169,6 +169,7 @@ public class GameManager : MonoBehaviour
     public void EndGame(int losingTeamId)
     {
         UIManager.UM.DisplayEndGameUI(losingTeamId);
+        KillCamera();
         _gameState = GameState.MatchEnd;
     }
 
@@ -176,16 +177,37 @@ public class GameManager : MonoBehaviour
     {
         UIManager.UM.UpdateEggsRemainingUI(teamID,eggsRemaining);
     }
+
+    private int lastKillerPlayerID;
+    public float killCamDuration = 10f;
     
-    
+    public void GetLastKillerPlayerID(int playerID)
+    {
+        lastKillerPlayerID = playerID;
+        Debug.Log(lastKillerPlayerID);
+    }
+
     public void KillCamera()
     {
+        //set all the virtual cams inactive
+        _followCams.SetActive(false);
+        
+        //set all cam brains, except the last player who made a kill, to inactive 
+        for (int i = 0; i < _playerCams.transform.childCount; i++)
+        {
+            if(i != lastKillerPlayerID) _playerCams.transform.GetChild(i).gameObject.SetActive(false);
+            else
+            {
+                //lerp the winning players camera to full screen
+                _playerCams.transform.GetChild(i).GetComponent<Camera>().DORect(new Rect(0, 0, 1, 1), killCamDuration);
+            }
+        }
+
+        //set all end game camera objects to active
         foreach (Transform child  in _endGameCam.transform)
         {
-          child.gameObject.SetActive(true);
+            child.gameObject.SetActive(true);
         }
-        _followCams.SetActive(false);
-        _playerCams.SetActive(false);
     }
     
 
