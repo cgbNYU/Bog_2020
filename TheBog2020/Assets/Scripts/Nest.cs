@@ -125,9 +125,7 @@ public class Nest : MonoBehaviour
         _eggList.RemoveAt(eggID);
 
         //Destroy the egg
-        removedEgg.GetComponentInChildren<ParticleSystem>().Play();
-        removedEgg.GetComponent<MeshRenderer>().enabled = false;
-        removedEgg.GetComponent<Egg>().DestroyEgg();
+        removedEgg.DestroyEgg();
         
         //Update the remaining eggs UI
         GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);
@@ -141,7 +139,7 @@ public class Nest : MonoBehaviour
     public void DestroyEgg(Egg egg)
     {
         _eggList.Remove(egg);
-        Destroy(egg.gameObject);
+        egg.DestroyEgg();
         
         //Update the remaining Eggs UI
         GameManager.GM.UpdateEggsRemainingUI(TeamID,_eggList.Count);
