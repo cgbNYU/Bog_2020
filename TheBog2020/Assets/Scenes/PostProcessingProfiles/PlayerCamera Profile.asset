@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34fa72bd4185749832024e9c8010bf, type: 3}
   m_Name: ScreenSpaceReflections
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   preset:
-    overrideState: 0
+    overrideState: 1
     value: 2
   maximumIterationCount:
     overrideState: 0
@@ -58,10 +58,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.74
+    value: 0.34
   color:
-    overrideState: 0
-    value: {r: 0, g: 0, b: 0, a: 1}
+    overrideState: 1
+    value: {r: 0.5830684, g: 0, b: 1, a: 1}
   ambientOnly:
     overrideState: 0
     value: 1
@@ -156,8 +156,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 1.02
   contrast:
     overrideState: 0
     value: 0

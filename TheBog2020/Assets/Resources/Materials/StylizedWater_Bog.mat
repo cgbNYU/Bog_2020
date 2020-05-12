@@ -118,7 +118,7 @@ Material:
     - _WaveHeight: 0.011
     - _WaveSize: 0.1
     - _Wavefoam: 1
-    - _Wavesspeed: 0.75
+    - _Wavesspeed: 0.5
     - _Wavesstrength: 0.268
     - _Wavetint: 0.29
     - _Worldspacetiling: 0
