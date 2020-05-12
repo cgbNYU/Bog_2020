@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c55f8cd4d7a38e4981759f49ce5b527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pcTune: {fileID: 11400000, guid: 43175ea7469c142f28291f7393df5945, type: 2}
+  _pcTune: {fileID: 11400000, guid: d513e1afe5d9faa4f8a65d1d87de5955, type: 2}
   ForceIncrease: 0.2
   ForceDecrease: 0.04
   MaxForce: 100
