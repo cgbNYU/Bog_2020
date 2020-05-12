@@ -21,6 +21,11 @@ public class FlyingCamera : MonoBehaviour
 
     float rotationY = 0F;
 
+    private void Start()
+    {
+        Display.displays[1].Activate();
+    }
+
     // Update is called once per frame
     void Update()
     {
