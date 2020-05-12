@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using AlmenaraGames;
 using UnityEngine;
 using Rewired;
-using UnityEditor.SceneManagement;
 
 /// <summary>
 /// Takes the player input and manages the positions, states, and current stats of each player
