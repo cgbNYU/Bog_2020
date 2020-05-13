@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using UnityEngine;
 
 public class SpitterScript : MonoBehaviour
@@ -32,14 +33,22 @@ public class SpitterScript : MonoBehaviour
     public GameObject AutoSpit;
     public GameObject SpreadSpit;
     public GameObject SniperSpit;
+    public AudioObject SpitSound;
 
     private SpitState _spitState;
+
+    private int _playerID;
+
+    private int _teamID;
     // Start is called before the first frame update
     void Start()
     {
         _spitState = SpitState.Normal;
         _timer = 0;
         _canShoot = true;
+        PlayerController pc = GetComponentInParent<PlayerController>();
+        _playerID = pc.PlayerID;
+        _teamID = pc.TeamID;
     }
 
     // Update is called once per frame
@@ -49,23 +58,6 @@ public class SpitterScript : MonoBehaviour
         if (_timer <= 0)
         {
             _canShoot = true;
-            switch (_spitState)
-            {
-                case SpitState.Normal:
-                    _timer = NormalTime;
-                    break;
-                case SpitState.Auto:
-                    _timer = AutoTime;
-                    break;
-                case SpitState.Spread:
-                    _timer = SpreadTime;
-                    break;
-                case SpitState.Sniper:
-                    _timer = SniperTime;
-                    break;
-                default:
-                    break;
-            }
         }
     }
 
@@ -75,14 +67,20 @@ public class SpitterScript : MonoBehaviour
         {
             _canShoot = false;
             _ammo--;
+            //Play Sound
+            MultiAudioManager.PlayAudioObject(SpitSound, transform.position);
             switch (_spitState)
             {
                 case SpitState.Normal:
-                    Instantiate(NormalSpit, transform.position, transform.rotation);
+                    GameObject spit = Instantiate(NormalSpit, transform.position, transform.rotation);
+                    spit.GetComponent<SpitHitBox>().PlayerID = _playerID;
+                    spit.GetComponent<SpitHitBox>().TeamID = _teamID;
                     _timer = NormalTime;
                     break;
                 case SpitState.Auto:
-                    Instantiate(AutoSpit, transform.position, transform.rotation);
+                    GameObject autoSpit = Instantiate(AutoSpit, transform.position, transform.rotation);
+                    autoSpit.GetComponent<SpitHitBox>().PlayerID = _playerID;
+                    autoSpit.GetComponent<SpitHitBox>().TeamID = _teamID;
                     _timer = AutoTime;
                     if (_ammo <= 0)
                     {
@@ -90,7 +88,9 @@ public class SpitterScript : MonoBehaviour
                     }
                     break;
                 case SpitState.Spread:
-                    Instantiate(SpreadSpit, transform.position, transform.rotation);
+                    GameObject spreadSpit = Instantiate(NormalSpit, transform.position, transform.rotation);
+                    spreadSpit.GetComponent<SpitHitBox>().PlayerID = _playerID;
+                    spreadSpit.GetComponent<SpitHitBox>().TeamID = _teamID;
                     _timer = SpreadTime;
                     if (_ammo <= 0)
                     {
@@ -98,7 +98,9 @@ public class SpitterScript : MonoBehaviour
                     }
                     break;
                 case SpitState.Sniper:
-                    Instantiate(SniperSpit, transform.position, transform.rotation);
+                    GameObject sniperSpit = Instantiate(NormalSpit, transform.position, transform.rotation);
+                    sniperSpit.GetComponent<SpitHitBox>().PlayerID = _playerID;
+                    sniperSpit.GetComponent<SpitHitBox>().TeamID = _teamID;
                     _timer = SniperTime;
                     if (_ammo <= 0)
                     {
@@ -108,6 +110,7 @@ public class SpitterScript : MonoBehaviour
                 default:
                     break;
             }
+
         }
     }
 

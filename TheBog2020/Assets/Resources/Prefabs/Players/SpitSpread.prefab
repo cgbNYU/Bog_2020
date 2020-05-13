@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2354649736042526540}
   - component: {fileID: 8127354536776367035}
   m_Layer: 0
-  m_Name: Spit
+  m_Name: SpitSpread
   m_TagString: Spit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0160bf509e7ae4cd8a522e4370e5749b, type: 2}
+  - {fileID: 2100000, guid: e6bd61d0400f93f4a820e1a90262826b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,7 +151,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0160bf509e7ae4cd8a522e4370e5749b, type: 2}
+  - {fileID: 2100000, guid: e6bd61d0400f93f4a820e1a90262826b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -428,7 +428,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.21568629, g: 0.8235295, b: 0.16078432, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

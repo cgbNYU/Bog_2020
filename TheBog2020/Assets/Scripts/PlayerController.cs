@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
     public int PlayerID;
     public int TeamID; //0 = red, 1 = blue
     public Transform Spitter;
+    private SpitterScript _spitterScript;
     public float InvulnerableTime;
     public float HatchTime;
     public MeshRenderer ShieldMeshRenderer;
@@ -186,6 +187,9 @@ public class PlayerController : MonoBehaviour
         //Initialize egg holder
         _eggHolder = GetComponent<PlayerEggHolder>();
         
+        //Initialize Spitter
+        _spitterScript = GetComponentInChildren<SpitterScript>();
+        
         //Initialize inputs
         ResetInputs();
         
@@ -248,13 +252,13 @@ public class PlayerController : MonoBehaviour
                 //AntennaeRadar();
                 LockOnCheck();
                 Move();
-                Spit();
+                TestSpit();
                 break;
             case MoveState.Invulnerable:
                 //AntennaeRadar();
                 LockOnCheck();
                 Move();
-                Spit();
+                TestSpit();
                 ReturnToNeutralCountdown();
                 break;
             case MoveState.Lunging:
@@ -267,7 +271,7 @@ public class PlayerController : MonoBehaviour
                 LockReleaseCheck();
                 LockState();
                 Move();
-                Spit();
+                TestSpit();
                 break;
             case MoveState.Airborne:
                 break;
@@ -540,6 +544,30 @@ public class PlayerController : MonoBehaviour
             _highlightTarget.UnHighlightEnemy(_lockTargetTransform);
             StateTransition(MoveState.Neutral, 0);
             
+        }
+    }
+
+    private void TestSpit()
+    {
+        if (_spitButton)
+        {
+            _spitterScript.Spit();
+        }
+    }
+
+    private void Powerup(Transform powerup)
+    {
+        if (powerup.CompareTag("Auto"))
+        {
+            _spitterScript.ChangeState(SpitterScript.SpitState.Auto);
+        }
+        else if (powerup.CompareTag("Spread"))
+        {
+            _spitterScript.ChangeState(SpitterScript.SpitState.Spread);
+        }
+        else if (powerup.CompareTag("Sniper"))
+        {
+            _spitterScript.ChangeState(SpitterScript.SpitState.Sniper);
         }
     }
 

@@ -200,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6451971753822252130}
+  - component: {fileID: 764307768935636796}
   m_Layer: 0
   m_Name: Spitter
   m_TagString: Untagged
@@ -215,12 +216,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6414582220045466299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.336, z: 1.086}
+  m_LocalPosition: {x: 0, y: 1.336, z: 1.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2635945638774760929}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764307768935636796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414582220045466299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4018d88a4d0631a4d9aebf3dd8f8f0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalTime: 0.56
+  AutoTime: 0.2
+  SpreadTime: 0.65
+  SniperTime: 0.75
+  AutoAmmo: 15
+  SpreadAmmo: 5
+  SniperAmmo: 3
+  NormalSpit: {fileID: 1910221028500178644, guid: 03ce355548790e0498ffc1d9a5df5c59,
+    type: 3}
+  AutoSpit: {fileID: 1910221028500178644, guid: abeb78ce05be2ac49b0fff45ef83c79c,
+    type: 3}
+  SpreadSpit: {fileID: 2424799797635915391, guid: f5d37cbd76153b042abad9c8c7228bb4,
+    type: 3}
+  SniperSpit: {fileID: 1910221028500178644, guid: 98b8f086f23298045a12ad3adbb7fd56,
+    type: 3}
+  SpitSound: {fileID: 11400000, guid: c263a8ee588aee548a13deef52284878, type: 2}
 --- !u!1001 &6552319901560350102
 PrefabInstance:
   m_ObjectHideFlags: 0
