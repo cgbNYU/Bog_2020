@@ -13716,12 +13716,12 @@ PrefabInstance:
     - target: {fileID: 5900153746542120732, guid: dfa8bf1f122f340ac9952e90feea1120,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000000979843
+      value: 0.000000028043589
       objectReference: {fileID: 0}
     - target: {fileID: 5900153746542120732, guid: dfa8bf1f122f340ac9952e90feea1120,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000007084361
+      value: -0.00000007336711
       objectReference: {fileID: 0}
     - target: {fileID: 5900153746542120732, guid: dfa8bf1f122f340ac9952e90feea1120,
         type: 3}
@@ -24921,12 +24921,12 @@ PrefabInstance:
     - target: {fileID: 6258254031019188126, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000000979843
+      value: 0.000000028043589
       objectReference: {fileID: 0}
     - target: {fileID: 6258254031019188126, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000007084361
+      value: -0.00000007336711
       objectReference: {fileID: 0}
     - target: {fileID: 6258254031019188126, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
@@ -25153,22 +25153,22 @@ PrefabInstance:
     - target: {fileID: 3417620916682459150, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3417620916682459150, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3417620916682459150, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3417620916682459150, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}
       propertyPath: m_Depth
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6258254030820143852, guid: 3bcfbe808fd7b40128f7ef48cc718140,
         type: 3}

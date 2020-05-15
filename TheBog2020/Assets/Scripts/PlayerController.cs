@@ -252,13 +252,13 @@ public class PlayerController : MonoBehaviour
                 //AntennaeRadar();
                 LockOnCheck();
                 Move();
-                TestSpit();
+                Spit();
                 break;
             case MoveState.Invulnerable:
                 //AntennaeRadar();
                 LockOnCheck();
                 Move();
-                TestSpit();
+                Spit();
                 ReturnToNeutralCountdown();
                 break;
             case MoveState.Lunging:
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
                 LockReleaseCheck();
                 LockState();
                 Move();
-                TestSpit();
+                Spit();
                 break;
             case MoveState.Airborne:
                 break;
