@@ -126,11 +126,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spitLifeTime: 2
-  KnockBackForce: 5000
+  Damage: 1
+  ShotForce: 5000
   Col: {fileID: 1910221028500178645}
   MR: {fileID: 1910221028500178646}
   Particles: {fileID: 2354649736042526540}
   TeamID: 0
+  PlayerID: 0
 --- !u!96 &5155996524170927867
 TrailRenderer:
   serializedVersion: 2

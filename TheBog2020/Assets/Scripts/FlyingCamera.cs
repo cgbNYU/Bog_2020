@@ -21,6 +21,11 @@ public class FlyingCamera : MonoBehaviour
 
     float rotationY = 0F;
 
+    private void Start()
+    {
+        Display.displays[1].Activate();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -51,6 +56,15 @@ public class FlyingCamera : MonoBehaviour
         transform.position += _moveVector * Speed * Time.deltaTime;
 
         _moveVector = Vector3.zero;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Speed++;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Speed--;
+        }
         
         //Looking
         if (axes == RotationAxes.MouseXAndY)

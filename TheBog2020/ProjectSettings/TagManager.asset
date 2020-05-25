@@ -15,6 +15,9 @@ TagManager:
   - Water
   - Wall
   - SpitSacs
+  - Auto
+  - Spread
+  - Sniper
   layers:
   - Default
   - TransparentFX

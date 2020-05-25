@@ -6,7 +6,8 @@ using UnityEngine;
 public class SpitHitBox : MonoBehaviour
 {
     public float spitLifeTime;
-    public float KnockBackForce;
+    public int Damage;
+    public float ShotForce;
     public Collider Col;
     public MeshRenderer MR;
     public ParticleSystem Particles;
@@ -17,6 +18,11 @@ public class SpitHitBox : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        GetComponent<Rigidbody>().AddForce(transform.forward * ShotForce);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -43,7 +49,7 @@ public class SpitHitBox : MonoBehaviour
             }
         }
         // Don't destroy the spit when it collides with these objects 
-        if (!other.gameObject.CompareTag("Nest") && !other.gameObject.CompareTag("DropTrigger") &&
+        else if (!other.gameObject.CompareTag("Nest") && !other.gameObject.CompareTag("DropTrigger") &&
             !other.gameObject.CompareTag("Spit") && !other.gameObject.CompareTag("Egg"))
         {
             DeactivateSpit();
@@ -61,13 +67,5 @@ public class SpitHitBox : MonoBehaviour
         MR.enabled = false;
         Particles.Play();
         StartCoroutine(destroySelfAfterLifeTime(spitLifeTime));
-    }
-    
-    private void KnockBackPlayer(Collider other)
-    {
-        Vector3 knockBackDir = transform.position - other.transform.position;
-        knockBackDir = new Vector3(knockBackDir.x, 0, knockBackDir.z);
-        knockBackDir.Normalize();
-        other.GetComponent<Rigidbody>().AddForce(knockBackDir * KnockBackForce);
     }
 }

@@ -41,10 +41,9 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        //Singleton
+        //Pseudo-Singleton
         if (GM == null)
         {
-            DontDestroyOnLoad(gameObject);
             GM = this;
         }
         else
